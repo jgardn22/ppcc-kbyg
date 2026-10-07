@@ -80,7 +80,7 @@ window.KBYG = {
     title: "Healthcare & Life Sciences panel",
     subtitle: "Reimagine Healthcare and Life Sciences with Low Code & AI Agents",
     when: "Wednesday, Oct 28",
-    time: "Expected in the morning · time to be announced",
+    time: "Time to be announced",
     blurb: "Peers from across healthcare and life sciences share how AI agents and low-code solutions are reducing friction and improving outcomes. Expect opening remarks, a panel discussion, audience Q&A and a wrap-up. Providers, payers and life sciences are usually all in the room, and it is often standing room only, so plan to arrive early."
   },
 
@@ -118,14 +118,15 @@ window.KBYG = {
     { id: "video", group: "plan", title: "Watch the Know Before You Go video",
       detail: "41 minutes from the Power HUG team. Use the chapters to jump to what matters most to you.", action: "video" },
 
-    { id: "whova", group: "plan", title: "Join Whova when your invite arrives", due: "2026-10-13", soft: true, dueLabel: "Expected mid-October",
-      detail: "Whova is the conference app. The full schedule, with sessions, times and rooms, is published there about two weeks before the event. Your invite is tied to your registration, and a login from past years still works. Building your agenda in a browser gives you more screen space." },
+    { id: "whova", group: "plan", title: "Get the Whova app and join", due: "2026-10-15", soft: true, dueLabel: "Sessions load mid-October", code: "LasVegas26",
+      detail: "Whova is the conference app, and it is available now. Download it, then join the event with the invitation code below. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda. A login from past years still works, and building your agenda in a browser gives you more screen space.",
+      links: [{ label: "App Store", href: "https://apps.apple.com/us/app/whova-event-conference-app/id716979741" }, { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.whova.event&hl=en-US&pli=1" }] },
 
     { id: "sessions", group: "plan", title: "Pick sessions, then pick backups",
       detail: "With 200+ sessions, filter by topic and experience level. Double-book yourself and stay flexible. Rooms on the upper floors are smaller and popular sessions can fill up, so keep a backup in mind." },
 
-    { id: "roundtable", group: "plan", title: "Put the healthcare panel on your calendar",
-      detail: "Wednesday, Oct 28, expected in the morning, with the exact time to be announced. It is one of the few sessions built for healthcare and life sciences, with a panel discussion and audience Q&A, and it is often standing room only, so plan to arrive early." },
+    { id: "roundtable", group: "plan", title: "Plan for the healthcare panel",
+      detail: "Wednesday, Oct 28. The time has not been announced yet, and we will add it here as soon as it is confirmed. It is one of the few sessions built for healthcare and life sciences, with a panel discussion and audience Q&A. It is often standing room only, so plan to arrive early." },
 
     { id: "evenings", group: "plan", title: "RSVP for one or two evening events",
       detail: "Most partner events need advance registration and fill quickly. Many check names at the door. It is fine to register for more than one.", action: "tab:evenings" },
@@ -185,7 +186,7 @@ window.KBYG = {
         { time: "4:30 to 6:30 PM",    text: "Expo and Makers Market, plus conference T-shirt pick-up" },
         { time: "8:00 to 10:00 PM",   text: "Pitbull live in the MGM Grand Garden Arena", key: true }
       ],
-      hls: { time: "Expected morning · time to be announced", text: "Healthcare & Life Sciences panel" },
+      hls: { time: "Time to be announced", text: "Healthcare & Life Sciences panel" },
       evening: "Partner dinners wrap up around the time Pitbull starts, and the arena line is long. Plan your timing."
     },
     {
@@ -296,16 +297,18 @@ window.KBYG = {
       regNote: "Want to reserve a space for a customer meeting? Your Microsoft account team can contact Root16." },
 
     { id: "visionet", day: "2026-10-28", start: "16:00", end: "19:00",
-      title: "Evening Event at Hard Rock Cafe", host: "Visionet", hostUrl: "https://www.visionet.com",
-      venue: "Hard Rock Cafe (off-site)", kind: "Evening event", audience: "open", access: "ask",
-      summary: "An off-site event for anyone who wants to get away from the casino for a few hours.",
-      regNote: "Registration details were shared in the Know Before You Go session. Your Microsoft account team can send you the link." },
+      title: "Where Technology Leaders Connect", host: "Visionet", hostUrl: "https://www.visionet.com",
+      venue: "Hard Rock Cafe Las Vegas (off-site)", address: "3771 Las Vegas Blvd S, #120, Las Vegas, NV 89109", kind: "Evening event", audience: "open", access: "register",
+      summary: "An evening with Visionet and Microsoft away from the conference floor: crafted cocktails, bites and relaxed conversation with technology and business leaders.",
+      reg: { url: "https://info.visionet.com/microsoft-happyhours", label: "Request a spot" },
+      regNote: "Space is limited. Complete the form to request your spot." },
 
     { id: "ttec", day: "2026-10-28", start: "18:00", end: "20:00",
-      title: "Frontier Dinner for the Stars", host: "TTEC Digital", hostUrl: "https://www.ttecdigital.com",
-      venue: "Luchini’s, MGM Grand", kind: "Dinner", audience: "open", access: "ask",
-      summary: "A private dining experience for customers and Microsoft teams. Seating is very limited.",
-      regNote: "Seating is very limited. An RSVP link was shared in the Know Before You Go session, and your Microsoft account team can send it to you." },
+      title: "Connections & Conversations: A Private Dining Experience", host: "TTEC Digital", hostUrl: "https://www.ttecdigital.com",
+      venue: "Luchini’s, MGM Grand", kind: "Dinner", audience: "open", access: "register",
+      summary: "Dinner and drinks with TTEC Digital and Microsoft at Luchini’s before Pitbull: curated dining, good conversation and time to network with industry leaders and peers after the day’s sessions.",
+      reg: { url: "https://events.ttecdigital.com/microsoft-power-platform-community-conference-dinner/", label: "RSVP" },
+      regNote: "Seating is very limited, so RSVP early." },
 
     { id: "engineerup-wed", day: "2026-10-28", start: "18:30", end: "20:30",
       title: "Customer Dinner at Hakkasan", host: "Engineer Up", hostUrl: "https://www.engineerup.com",
@@ -411,13 +414,17 @@ window.KBYG = {
       a: "Business casual at most, and plenty of people dress casually. Comfortable shoes matter more than anything else." },
     { q: "Can I bring a guest to the Pitbull concert?",
       a: "Entry requires a PPCC badge. Guest passes are not available." },
+    { q: "How do I get the Whova app?",
+      a: "Whova is the conference app, and it is available now on the App Store and Google Play. Download it and join the event with the invitation code LasVegas26. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda.",
+      code: "LasVegas26",
+      links: [{ label: "App Store", href: "https://apps.apple.com/us/app/whova-event-conference-app/id716979741" }, { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.whova.event&hl=en-US&pli=1" }] },
     { q: "Who can I ask for help onsite?",
       a: "Anyone in a Microsoft lanyard. The Microsoft booth is staffed by engineers rather than salespeople, and you can message the Microsoft team in Whova." },
     { q: "How do I get time to meet with Microsoft product group leaders?",
       a: "Ask your Microsoft account team. They can help request one-to-one time with Microsoft product group leaders during the conference, based on what you want to discuss. Availability is limited and not guaranteed, so ask early.",
       action: "meet" },
     { q: "What is Women in Power?",
-      a: "Women in Power is a set of four sessions that are open to everyone, allies included, and free with your pass: a networking luncheon on Tuesday (12:30 to 2:00 PM), a Night Market meetup on Tuesday evening, a panel on Wednesday at 2:00 PM, and a small-group roundtable on Thursday (time to be announced). Registration is required, and you sign up in the Whova app once it is live." },
+      a: "Women in Power is a set of four sessions that are open to everyone, allies included, and free with your pass: a networking luncheon on Tuesday (12:30 to 2:00 PM), a Night Market meetup on Tuesday evening, a panel on Wednesday at 2:00 PM, and a small-group roundtable on Thursday (time to be announced). Registration is required, and you sign up in the Whova app." },
     { q: "Where can I find a map of the venue?",
       a: "Open the maps on the On the Ground tab. They cover where the MGM Grand is, the walking route from the front desk and the Las Vegas Boulevard entrance to the Conference Center, the walkway to the Grand Garden Arena and Expo Hall, and floor plans for all three Conference Center floors.",
       action: "maps" }

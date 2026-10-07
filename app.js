@@ -51,6 +51,42 @@
     h('a', { class: cls || null, href, target: '_blank', rel: 'noopener noreferrer' },
       label, ' ', icon('ext', 13), h('span', { class: 'sr-only' }, ' (opens in a new tab)'));
 
+  function copyPlain(text) {
+    const legacy = () => new Promise((resolve, reject) => {
+      const prev = document.activeElement;
+      const ta = h('textarea', { 'aria-hidden': 'true', readonly: true, style: 'position:fixed;left:-9999px;top:0;opacity:0' });
+      ta.value = text;
+      document.body.append(ta);
+      ta.focus({ preventScroll: true });
+      ta.select();
+      ta.setSelectionRange(0, text.length);
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+      ta.remove();
+      if (prev && prev.focus) prev.focus({ preventScroll: true });
+      if (ok) resolve(); else reject(new Error('copy failed'));
+    });
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).catch(legacy);
+    return legacy();
+  }
+
+  // the code stays visible and selectable even when copying is blocked
+  function codeChip(code) {
+    const status = h('span', { class: 'sr-only', role: 'status' });
+    const btn = h('button', { class: 'codechip-btn', type: 'button', 'aria-label': `Copy invitation code ${code}` }, 'Copy');
+    let timer;
+    btn.addEventListener('click', () => {
+      copyPlain(code).then(
+        () => { btn.textContent = 'Copied'; status.textContent = 'Invitation code copied.'; },
+        () => { btn.textContent = 'Select code'; status.textContent = 'Copying was blocked. Select the code to copy it.'; });
+      clearTimeout(timer);
+      timer = setTimeout(() => { btn.textContent = 'Copy'; status.textContent = ''; }, 2400);
+    });
+    return h('span', { class: 'codewrap' },
+      h('span', { class: 'codechip' }, h('span', { class: 'codechip-k' }, 'Invitation code'), h('b', { class: 'codechip-v' }, code), btn),
+      status);
+  }
+
   /* ---------- dates and times (Pacific / Las Vegas) ---------- */
   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -388,6 +424,7 @@
     (it.links || []).forEach(l => {
       links.push(l.href.startsWith('mailto:') ? h('a', { href: l.href }, l.label) : extLink(l.label, l.href));
     });
+    if (it.code) links.push(codeChip(it.code));
     const actions = [].concat(it.action || []);
     if (actions.includes('video')) links.push(h('button', { type: 'button', on: { click: () => goToVideo(0) } }, 'Play the video'));
     if (actions.includes('tab:evenings')) links.push(h('a', { href: '#evenings' }, 'See the evening events'));
@@ -781,7 +818,7 @@
       const end = e.end || addMin(e.start, 120);
       const desc = [e.summary, e.reg && e.reg.url ? 'Register: ' + e.reg.url : null, e.endNote ? e.endNote + '.' : null, 'Partner event details can change. Confirm with the host.'].filter(Boolean).join('\n');
       lines.push('BEGIN:VEVENT', `UID:${e.id}@ppcc26-kbyg`, `DTSTAMP:${now}`, `DTSTART:${stamp(e.day, e.start)}`, `DTEND:${stamp(e.day, end)}`,
-        `SUMMARY:${icsText(e.host + ': ' + e.title)}`, `LOCATION:${icsText(e.venue + ', MGM Grand area, Las Vegas')}`, `DESCRIPTION:${icsText(desc)}`, 'END:VEVENT');
+        `SUMMARY:${icsText(e.host + ': ' + e.title)}`, `LOCATION:${icsText(e.address ? e.venue + ', ' + e.address : e.venue + (/MGM Grand/.test(e.venue) ? ', Las Vegas' : ', MGM Grand area, Las Vegas'))}`, `DESCRIPTION:${icsText(desc)}`, 'END:VEVENT');
     });
     lines.push('END:VCALENDAR');
     const blob = new Blob([lines.map(fold).join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' });
@@ -848,6 +885,7 @@
       h('summary', {}, f.q),
       h('div', { class: 'ans' },
         h('p', {}, f.a),
+        (f.code || f.links) ? h('div', { class: 'ans-cta ans-links' }, (f.links || []).map(l => extLink(l.label, l.href, 'btn ghost sm')), f.code ? codeChip(f.code) : null) : null,
         f.action === 'meet' ? h('div', { class: 'ans-cta' }, h('button', { class: 'btn primary sm', type: 'button', on: { click: (e) => openMeet(e.currentTarget) } }, 'Draft the request email')) : null,
         f.action === 'maps' ? h('div', { class: 'ans-cta' }, h('a', { class: 'btn primary sm', href: '#ground/maps' }, 'Open the maps')) : null))));
     $('#faq-search').addEventListener('input', (e) => {
