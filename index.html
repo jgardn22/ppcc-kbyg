@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Know Before You Go · PPCC 2026 for Healthcare &amp; Life Sciences</title>
+  <meta name="description" content="A healthcare-focused Know Before You Go guide for the Power Platform Community Conference, Oct 27 to 29, 2026, at the MGM Grand in Las Vegas.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#090d1b">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/montserrat-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="#start" aria-label="PPCC 2026 Know Before You Go, back to Start Here">
+        <img src="assets/img/ppcc-logo.svg" width="176" height="29" alt="Power Platform Community Conference">
+      </a>
+      <p class="header-tag"><span>Know Before You Go</span><b>Healthcare &amp; Life Sciences</b></p>
+    </div>
+    <div class="wrap">
+      <div class="tabs" id="tablist" role="tablist" aria-label="Guide sections"></div>
+    </div>
+  </header>
+
+  <noscript>
+    <div class="wrap"><p class="noscript">This guide uses JavaScript for its tabs and planner. Please enable it, or visit <a href="https://powerplatformconf.com">powerplatformconf.com</a> for the official details.</p></div>
+  </noscript>
+
+  <main id="main">
+
+    <!-- ============ START HERE ============ -->
+    <section id="panel-start" class="panel" role="tabpanel" aria-labelledby="tab-start" tabindex="-1" hidden>
+      <div class="wrap hero">
+        <div class="hero-copy">
+          <figure class="logo-tile">
+            <img src="assets/img/healthcare-logo.jpg" width="800" height="800" alt="Microsoft Healthcare AI Business Process Solutions. Intelligent agents, automated processes, better outcomes.">
+          </figure>
+          <p class="eyebrow"><i class="cross" aria-hidden="true"></i>Healthcare &amp; Life Sciences edition</p>
+          <h1>Know <em>Before</em><br>You Go</h1>
+          <p class="lede">Everything healthcare teams need before landing in Las Vegas for the Power Platform Community Conference.</p>
+          <dl class="facts">
+            <div><dt>When</dt><dd>Oct 27–29, 2026</dd></div>
+            <div><dt>Where</dt><dd>MGM Grand, Las Vegas</dd></div>
+            <div><dt id="countdown-label">Countdown</dt><dd id="countdown" class="countdown">–</dd></div>
+          </dl>
+          <div class="cta-row">
+            <button class="btn primary" type="button" data-action="play-video">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg>
+              Watch the guide <span class="btn-sub">41 min</span>
+            </button>
+            <a class="btn ghost" href="#evenings">Plan your evenings</a>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <div class="video-frame" id="video-frame">
+            <button class="video-facade" id="video-facade" type="button" aria-label="Play video: Power HUG Session 32, Power Platform Community Conference Know Before You Go">
+              <img src="assets/img/yt-maxresdefault.jpg" width="1280" height="720" alt="">
+              <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></span>
+              <span class="video-badge">Power HUG Session #32 · 41 min</span>
+            </button>
+          </div>
+          <p class="video-caption" id="video-caption"></p>
+          <div class="chapters" aria-labelledby="chapters-h">
+            <h2 id="chapters-h" class="chapters-title">Jump to a topic</h2>
+            <ol class="chapter-list" id="chapters"></ol>
+          </div>
+        </div>
+      </div>
+
+      <section class="wrap band" id="due-band" aria-labelledby="due-h" hidden>
+        <div class="band-head">
+          <h2 id="due-h">Do these soon</h2>
+          <a class="textlink" href="#before">Full checklist</a>
+        </div>
+        <ol class="due-strip" id="due-strip"></ol>
+      </section>
+
+      <section class="wrap split" aria-label="Highlights for healthcare attendees">
+        <article class="feature feature-hls" id="feature-roundtable"></article>
+        <article class="feature feature-eve" id="feature-evening"></article>
+      </section>
+
+      <section class="wrap guide" aria-labelledby="guide-h">
+        <h2 id="guide-h" class="section-title">In this guide</h2>
+        <ol class="guide-index" id="guide-index"></ol>
+      </section>
+    </section>
+
+    <!-- ============ BEFORE YOU GO ============ -->
+    <section id="panel-before" class="panel" role="tabpanel" aria-labelledby="tab-before" tabindex="-1" hidden>
+      <div class="wrap page-head">
+        <p class="eyebrow"><i class="cross" aria-hidden="true"></i>Before you go</p>
+        <h2 class="page-title">Your pre-trip checklist</h2>
+        <p class="lede">Check things off as you go. Deadlines count down automatically, and your progress is saved in this browser only.</p>
+        <div class="progress" id="progress"></div>
+      </div>
+      <div class="wrap" id="checklist"></div>
+    </section>
+
+    <!-- ============ ON THE GROUND ============ -->
+    <section id="panel-ground" class="panel" role="tabpanel" aria-labelledby="tab-ground" tabindex="-1" hidden>
+      <div class="wrap page-head">
+        <p class="eyebrow"><i class="cross" aria-hidden="true"></i>On the ground</p>
+        <h2 class="page-title">Find your way around the MGM Grand</h2>
+        <p class="lede">The venue is big. Start with the one morning that matters most, then use the notes below to save time and steps.</p>
+      </div>
+
+      <section class="wrap route" aria-labelledby="route-h">
+        <div class="route-head">
+          <h3 id="route-h">Keynote morning</h3>
+          <p>Tuesday, Oct 27 · Opening Keynote at 8:30 AM · MGM Grand Garden Arena</p>
+        </div>
+        <ol class="route-steps">
+          <li>
+            <span class="step-time">Opens 6:30 AM</span>
+            <h4>Pick up your badge</h4>
+            <p>Conference Check-In is on the first floor of the MGM Grand Conference Center. You can’t enter the arena without your badge, so do this first. Even better, collect it on Monday.</p>
+          </li>
+          <li>
+            <span class="step-time">Allow extra time</span>
+            <h4>Walk to the arena</h4>
+            <p>The Conference Center and the Grand Garden Arena are not close to each other.</p>
+            <dl class="directions">
+              <div><dt>From the Conference Center</dt><dd>Head back toward the MGM Grand Hotel and take the escalators up toward “The District.” The arena is on your right, just before Blizz.</dd></div>
+              <div><dt>From the hotel front desk</dt><dd>Walk through the casino toward the MGM Grand Box Office, then turn right toward The District, past Morimoto and the Food Court. The arena is on your left, after Blizz.</dd></div>
+            </dl>
+          </li>
+          <li>
+            <span class="step-time">Doors 8:00 AM</span>
+            <h4>Get a seat early</h4>
+            <p>Aim to be seated 30 to 45 minutes before the start. Breakfast is typically served outside the arena. Once it fills, you can’t stand in the corridors.</p>
+          </li>
+          <li>
+            <span class="step-time">Starts 8:30 AM</span>
+            <h4>Opening Keynote</h4>
+            <p>Charles Lamanna and Ryan Cunningham on where the platform is headed. The biggest announcements usually land here.</p>
+          </li>
+        </ol>
+      </section>
+
+      <div class="wrap notes">
+        <div class="notes-main">
+          <section aria-labelledby="n-there">
+            <h3 id="n-there">Getting there</h3>
+            <p>Harry Reid International Airport (LAS) is about 3 miles from the MGM Grand, roughly a 10-minute ride by taxi or rideshare. The hotel doesn’t run an airport shuttle. For a limo or other options, contact the MGM Grand concierge.</p>
+            <p class="address">MGM Grand · 3799 S. Las Vegas Blvd., Las Vegas, NV 89109</p>
+          </section>
+
+          <section aria-labelledby="n-around">
+            <h3 id="n-around">Getting around</h3>
+            <ul class="tips">
+              <li><b>Expect to walk.</b> Plan on 10,000+ steps a day, and more if you’re bouncing between events. Comfortable shoes beat dress shoes every time.</li>
+              <li><b>Mind the escalator.</b> From the casino floor, an escalator leads down to the Conference Center. It can bottleneck at busy times, so leave a few extra minutes.</li>
+              <li><b>Coffee strategy.</b> The Starbucks in the middle of the casino has long lines, especially on keynote morning. Try the one near the front desk, almost straight across from the Grand elevators and just before Losers Bar. Order ahead with the Starbucks app. Guests in the Towers have their own Starbucks.</li>
+              <li><b>Rooms vary.</b> Session rooms on the upper floors are smaller, so keep a backup for popular sessions. Once the schedule is live in Whova, check room locations before you walk.</li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="n-food">
+            <h3 id="n-food">Meals</h3>
+            <ul class="tips">
+              <li><b>Lunch is included</b> Tuesday through Thursday. In past years, lanyard color pointed to your lunch location, so ask at check-in and confirm yours before the first lunch.</li>
+              <li><b>Special diets</b> need to be requested ahead. See the checklist for the deadline and who to email.</li>
+              <li><b>Evenings are on your own,</b> but many partner events include food and drinks.</li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="n-wear">
+            <h3 id="n-wear">What to wear and bring</h3>
+            <ul class="tips">
+              <li><b>Business casual at most.</b> Plenty of people dress casually. Comfortable shoes matter most.</li>
+              <li><b>Bring layers.</b> The casino and session rooms run cold, and you’ll move between warm hallways and chilly rooms.</li>
+              <li><b>Bring a charger.</b> Whova and constant networking drain batteries fast.</li>
+              <li><b>Pace yourself.</b> The MGM has a pool if you find a gap. A little sunshine goes a long way.</li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="n-ms">
+            <h3 id="n-ms">Meet the Microsoft team</h3>
+            <ul class="tips">
+              <li><b>Stop by the Microsoft booth.</b> It’s staffed by engineers, not salespeople, so bring your hardest questions. Demos and tips run on a rolling schedule behind the booth.</li>
+              <li><b>Look for a Microsoft lanyard.</b> Anyone wearing one is happy to help, and speakers are glad to chat in the hallway.</li>
+              <li><b>Message the team in Whova</b> to set up a meeting or ask where something is.</li>
+            </ul>
+          </section>
+        </div>
+
+        <aside class="notes-side" aria-label="Badge pickup hours">
+          <div class="sidecard">
+            <h3>Badge pickup hours</h3>
+            <p class="small">Conference Check-In · 1st floor, MGM Grand Conference Center. From The District, take the escalators down toward the Pool and Conference Center.</p>
+            <table class="hours">
+              <caption class="sr-only">Badge pickup hours by day</caption>
+              <tbody id="badge-hours"></tbody>
+            </table>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ EVENING EVENTS ============ -->
+    <section id="panel-evenings" class="panel" role="tabpanel" aria-labelledby="tab-evenings" tabindex="-1" hidden>
+      <div class="wrap page-head">
+        <p class="eyebrow"><i class="cross" aria-hidden="true"></i>Evening events</p>
+        <h2 class="page-title">Where to be after the sessions end</h2>
+        <p class="lede">Healthcare and life sciences gatherings first, then every industry-agnostic event we know about. Most need advance registration, and event-hopping is fine.</p>
+      </div>
+
+      <div class="wrap" id="featured-event"></div>
+
+      <div class="wrap events-layout">
+        <div class="events-main">
+          <div class="controls" id="controls"></div>
+          <p class="insight" id="events-insight" role="status"></p>
+          <div id="events-list"></div>
+          <div id="events-timeline" hidden></div>
+        </div>
+        <aside class="plan" id="plan" aria-labelledby="plan-h"></aside>
+      </div>
+
+      <div class="wrap fineprint">
+        <p>Partner event details come from the hosts and can change. Confirm with each host before you go. Times are Pacific (Las Vegas).</p>
+      </div>
+    </section>
+
+    <!-- ============ 3 PERFECT DAYS ============ -->
+    <section id="panel-days" class="panel" role="tabpanel" aria-labelledby="tab-days" tabindex="-1" hidden>
+      <div class="wrap page-head days-head">
+        <div>
+          <p class="eyebrow"><i class="cross" aria-hidden="true"></i>Healthcare game plan</p>
+          <h2 class="page-title">3 Perfect Days at PPCC</h2>
+          <p class="lede">Our recommended sessions for healthcare and life sciences, one day at a time. We’ll publish the picks as soon as the full agenda is live in Whova.</p>
+        </div>
+        <p class="soon-badge"><span class="dot" aria-hidden="true"></span>Coming soon</p>
+      </div>
+      <div class="wrap days-grid" id="days-grid"></div>
+      <div class="wrap fineprint">
+        <p>Agenda items shown here come from the official conference schedule as of <span id="days-updated"></span>. Times and sessions can change, so check Whova for the latest.</p>
+      </div>
+    </section>
+
+    <!-- ============ FAQ & LINKS ============ -->
+    <section id="panel-faq" class="panel" role="tabpanel" aria-labelledby="tab-faq" tabindex="-1" hidden>
+      <div class="wrap page-head">
+        <p class="eyebrow"><i class="cross" aria-hidden="true"></i>FAQ &amp; links</p>
+        <h2 class="page-title">Quick answers and the links worth bookmarking</h2>
+        <p class="lede">Answers are drawn from the official conference FAQ, your welcome letter and the Know Before You Go session.</p>
+      </div>
+      <div class="wrap faq-layout">
+        <div class="faq-main">
+          <label class="search" for="faq-search"><span class="sr-only">Search the FAQ</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 1 0 4.55 13.46l4.25 4.25 1.41-1.42-4.24-4.24A7.5 7.5 0 0 0 10.5 3zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z" fill="currentColor"/></svg>
+            <input id="faq-search" type="search" placeholder="Search questions" autocomplete="off">
+          </label>
+          <div id="faq-list"></div>
+          <p class="empty" id="faq-empty" hidden>No matching questions. Try a different word, or ask your Microsoft healthcare team.</p>
+        </div>
+        <aside class="faq-side" id="links-side" aria-label="Helpful links"></aside>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="help-band" aria-labelledby="help-h">
+    <div class="wrap help-row">
+      <div>
+        <h2 id="help-h">Questions before you go?</h2>
+        <p>Your Microsoft healthcare team can help with introductions, evening-event invitations and time with Microsoft leaders.</p>
+      </div>
+      <a class="btn primary" id="help-cta" href="#">Email your Microsoft team</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap foot-row">
+      <div class="foot-logos">
+        <img src="assets/img/ppcc-logo.svg" width="150" height="25" alt="Power Platform Community Conference">
+        <span class="foot-tile"><img src="assets/img/healthcare-logo.jpg" width="800" height="800" alt="Microsoft Healthcare AI Business Process Solutions"></span>
+      </div>
+      <p>An unofficial companion guide from Microsoft Healthcare AI Business Process Solutions for healthcare customers attending PPCC 2026. Details come from powerplatformconf.com, partner invitations and the Power HUG session. Partner events can change, so confirm with each host. Last updated <time id="updated"></time>. Conference questions: <a href="mailto:info@powerplatformconf.com">info@powerplatformconf.com</a>.</p>
+    </div>
+  </footer>
+
+  <script src="data.js" charset="utf-8"></script>
+  <script src="app.js" charset="utf-8"></script>
+</body>
+</html>
