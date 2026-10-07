@@ -367,9 +367,11 @@
       h('span', { class: 'kicker' }, 'Don’t miss'),
       h('h3', {}, r.title),
       r.subtitle ? h('p', { class: 'feature-sub' }, r.subtitle) : null,
-      h('div', { class: 'meta' }, h('span', { class: 'chip' }, r.when), h('span', { class: 'chip' }, r.time)),
+      h('div', { class: 'meta' }, h('span', { class: 'chip' }, r.when), h('span', { class: 'chip' }, r.time), r.room ? h('span', { class: 'chip' }, r.room) : null),
       h('p', {}, r.blurb),
-      h('a', { class: 'btn ghost sm', href: '#days' }, 'See Wednesday’s plan'));
+      h('div', { class: 'feature-links' },
+        h('a', { class: 'btn ghost sm', href: '#days' }, 'See Wednesday’s plan'),
+        r.mapId ? h('a', { class: 'textlink', href: '#ground/map-' + r.mapId }, 'Find the room on the map') : null));
     const e = featuredEvent();
     $('#feature-evening').append(
       h('span', { class: 'kicker' }, 'Tuesday night'),
@@ -430,6 +432,7 @@
     if (actions.includes('tab:evenings')) links.push(h('a', { href: '#evenings' }, 'See the evening events'));
     if (actions.includes('tab:ground')) links.push(h('a', { href: '#ground' }, 'See badge pickup hours'));
     if (actions.includes('maps')) links.push(h('a', { href: '#ground/maps' }, 'Open the maps'));
+    actions.filter(a => a.startsWith('map:')).forEach(a => links.push(h('a', { href: '#ground/map-' + a.slice(4) }, 'Find the room on the map')));
     if (actions.includes('meet')) links.push(h('button', { class: 'btn primary sm', type: 'button', on: { click: (e) => openMeet(e.currentTarget) } }, 'Draft the request email'));
     const id = 'chk-' + it.id;
     return h('li', { class: 'cl-item' + (isDone ? ' done' : ''), dataset: { id: it.id } },
@@ -887,7 +890,8 @@
         h('p', {}, f.a),
         (f.code || f.links) ? h('div', { class: 'ans-cta ans-links' }, (f.links || []).map(l => extLink(l.label, l.href, 'btn ghost sm')), f.code ? codeChip(f.code) : null) : null,
         f.action === 'meet' ? h('div', { class: 'ans-cta' }, h('button', { class: 'btn primary sm', type: 'button', on: { click: (e) => openMeet(e.currentTarget) } }, 'Draft the request email')) : null,
-        f.action === 'maps' ? h('div', { class: 'ans-cta' }, h('a', { class: 'btn primary sm', href: '#ground/maps' }, 'Open the maps')) : null))));
+        f.action === 'maps' ? h('div', { class: 'ans-cta' }, h('a', { class: 'btn primary sm', href: '#ground/maps' }, 'Open the maps')) : null,
+        f.mapId ? h('div', { class: 'ans-cta' }, h('a', { class: 'btn primary sm', href: '#ground/map-' + f.mapId }, 'Find the room on the map')) : null))));
     $('#faq-search').addEventListener('input', (e) => {
       const q = e.target.value.trim().toLowerCase();
       let n = 0;

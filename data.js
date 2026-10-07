@@ -80,8 +80,10 @@ window.KBYG = {
     title: "Healthcare & Life Sciences panel",
     subtitle: "Reimagine Healthcare and Life Sciences with Low Code & AI Agents",
     when: "Wednesday, Oct 28",
-    time: "Time to be announced",
-    blurb: "Peers from across healthcare and life sciences share how AI agents and low-code solutions are reducing friction and improving outcomes. Expect opening remarks, a panel discussion, audience Q&A and a wrap-up. Providers, payers and life sciences are usually all in the room, and it is often standing room only, so plan to arrive early."
+    time: "8:00 AM",
+    room: "Roundtable Room 353",
+    mapId: "floor3",
+    blurb: "Peers from across healthcare and life sciences share how AI agents and low-code solutions are reducing friction and improving outcomes. The panelists are hands-on practitioners from health systems. Expect opening remarks, a panel discussion, audience Q&A and a wrap-up. Providers, payers and life sciences are usually all in the room, and it is often standing room only, so plan to arrive early."
   },
 
   /* ---------- Checklist ---------- */
@@ -125,8 +127,9 @@ window.KBYG = {
     { id: "sessions", group: "plan", title: "Pick sessions, then pick backups",
       detail: "With 200+ sessions, filter by topic and experience level. Double-book yourself and stay flexible. Rooms on the upper floors are smaller and popular sessions can fill up, so keep a backup in mind." },
 
-    { id: "roundtable", group: "plan", title: "Plan for the healthcare panel",
-      detail: "Wednesday, Oct 28. The time has not been announced yet, and we will add it here as soon as it is confirmed. It is one of the few sessions built for healthcare and life sciences, with a panel discussion and audience Q&A. It is often standing room only, so plan to arrive early." },
+    { id: "roundtable", group: "plan", title: "Put the healthcare panel on your calendar",
+      detail: "Wednesday, Oct 28 at 8:00 AM in Roundtable Room 353, on the third floor of the Conference Center. It is one of the few sessions built for healthcare and life sciences, with a panel discussion and audience Q&A. It is often standing room only, so plan to arrive early. Rooms can change, so check Whova for the latest.",
+      action: "map:floor3" },
 
     { id: "evenings", group: "plan", title: "RSVP for one or two evening events",
       detail: "Most partner events need advance registration and fill quickly. Many check names at the door. It is fine to register for more than one.", action: "tab:evenings" },
@@ -186,7 +189,7 @@ window.KBYG = {
         { time: "4:30 to 6:30 PM",    text: "Expo and Makers Market, plus conference T-shirt pick-up" },
         { time: "8:00 to 10:00 PM",   text: "Pitbull live in the MGM Grand Garden Arena", key: true }
       ],
-      hls: { time: "Time to be announced", text: "Healthcare & Life Sciences panel" },
+      hls: { time: "8:00 AM · Roundtable Room 353", text: "Healthcare & Life Sciences panel" },
       evening: "Partner dinners wrap up around the time Pitbull starts, and the arena line is long. Plan your timing."
     },
     {
@@ -404,6 +407,9 @@ window.KBYG = {
       a: "No. The conference is in person only." },
     { q: "Who is speaking?",
       a: "Microsoft product leaders, MVPs and experienced practitioners. Headliners include Charles Lamanna, Ryan Cunningham, Nirav Shah, Leon Welicki and Kim Manis. The full list is on the speakers page." },
+    { q: "When and where is the Healthcare & Life Sciences panel?",
+      a: "Wednesday, Oct 28 at 8:00 AM in Roundtable Room 353, on the third floor of the Conference Center. The session is “Reimagine Healthcare and Life Sciences with Low Code & AI Agents.” Rooms can change, so check Whova for the latest.",
+      mapId: "floor3" },
     { q: "Will there be certifications?",
       a: "The conference is offering AI and agent certifications on site, a first this year. Check the conference website for the latest details." },
     { q: "How early should I get to the Opening Keynote?",
@@ -482,9 +488,10 @@ window.KBYG = {
         alt: "Second-floor plan of the Conference Center. Vista Ballroom (rooms 206 to 211) runs along the bottom, Cedar Ballroom (rooms 250 to 255) is at the lower right, and meeting rooms 201 to 205 and 256 to 264 sit between them. Escalators to the first and third floors are at both ends of the lower corridor." },
 
       { id: "floor3", title: "Convention Center, 3rd floor",
-        blurb: "Premier and Chairman’s ballrooms and the Community Lounge.",
+        blurb: "Premier and Chairman’s ballrooms, the Community Lounge and Room 353, home of the healthcare panel.",
         src: "assets/img/maps/floor3.webp", thumb: "assets/img/maps/floor3-thumb.webp", w: 1585, h: 792, tw: 640, th: 320, videoAt: 1138,
-        alt: "Third-floor plan of the Conference Center. Premier Ballroom (rooms 309 to 320) is in the center and Chairman’s Ballroom (rooms 355 to 370) is on the right, with rooms 301 to 308 and 350 to 354 and the Community Lounge at the bottom center. Elevators lead to the first and second floors." }
+        note: "The Healthcare & Life Sciences panel is in Roundtable Room 353 on Wednesday at 8:00 AM. Look for the 350 to 354 block at the lower right, just past the Community Lounge.",
+        alt: "Third-floor plan of the Conference Center. Premier Ballroom (rooms 309 to 320) is in the center and Chairman’s Ballroom (rooms 355 to 370) is on the right, with rooms 301 to 308 and 350 to 354 and the Community Lounge at the bottom center. Room 353, where the healthcare panel is held, is in the 350 to 354 block at the lower right. Elevators lead to the first and second floors." }
     ]
   },
 
