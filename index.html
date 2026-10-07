@@ -9,9 +9,20 @@
   <meta name="theme-color" content="#090d1b">
   <meta name="color-scheme" content="dark">
   <meta name="format-detection" content="telephone=no">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Know Before You Go · PPCC 2026">
+  <meta property="og:title" content="Know Before You Go: PPCC 2026 for Healthcare &amp; Life Sciences">
+  <meta property="og:description" content="Video guide, venue maps, evening events and a checklist with deadlines for the Power Platform Community Conference, Oct 27 to 29 in Las Vegas.">
+  <meta property="og:url" content="https://jgardn22.github.io/ppcc-kbyg/">
+  <meta property="og:image" content="https://jgardn22.github.io/ppcc-kbyg/assets/img/og-card.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Know Before You Go: Power Platform Community Conference 2026, Healthcare and Life Sciences edition">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/montserrat-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=3a1f2721fc">
+  <link rel="stylesheet" href="styles.css?v=caa6eaef70">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -41,6 +52,7 @@
   </noscript>
 
   <main id="main">
+    <h1 class="sr-only" id="doc-h1" hidden></h1>
 
     <!-- ============ START HERE ============ -->
     <section id="panel-start" class="panel" role="tabpanel" aria-labelledby="tab-start" tabindex="-1" hidden>
@@ -53,9 +65,9 @@
           <h1>Know <em>Before</em><br>You Go</h1>
           <p class="lede">Everything healthcare teams need before landing in Las Vegas for the Power Platform Community Conference.</p>
           <dl class="facts">
-            <div><dt>When</dt><dd>Oct 27–29, 2026</dd></div>
+            <div><dt>When</dt><dd>Oct 27 to 29, 2026</dd></div>
             <div><dt>Where</dt><dd>MGM Grand, Las Vegas</dd></div>
-            <div><dt id="countdown-label">Countdown</dt><dd id="countdown" class="countdown">–</dd></div>
+            <div><dt id="countdown-label">Countdown</dt><dd id="countdown" class="countdown">Oct 27</dd></div>
           </dl>
           <div class="cta-row">
             <button class="btn primary" type="button" data-action="play-video">
@@ -230,7 +242,7 @@
       <div class="wrap page-head">
         <p class="eyebrow"><i class="cross" aria-hidden="true"></i>Evening events</p>
         <h2 class="page-title">Where to be after the sessions end</h2>
-        <p class="lede">Healthcare and life sciences gatherings first, then every industry-agnostic event we know about. Most need advance registration, and event-hopping is fine.</p>
+        <p class="lede">Healthcare and life sciences gatherings first, then every industry-agnostic event we know about, including a few daytime lunches and lounges. Most need advance registration, and event-hopping is fine.</p>
       </div>
 
       <div class="wrap" id="featured-event"></div>
@@ -342,7 +354,7 @@
             <div class="opts" id="m-topics"></div>
           </fieldset>
 
-          <label class="field" for="m-details"><span>Anything specific to cover? <small>optional</small></span>
+          <label class="field" for="m-details"><span>Anything specific to cover? <small id="m-details-opt">optional</small></span>
             <textarea id="m-details" rows="4" maxlength="600" placeholder="A challenge you are facing, a decision coming up, or a question you want answered"></textarea></label>
           <label class="field" for="m-outcome"><span>What would make the meeting worthwhile? <small>optional</small></span>
             <textarea id="m-outcome" rows="2" maxlength="300" placeholder="For example, a clear next step or a roadmap view for your team"></textarea></label>
@@ -364,7 +376,7 @@
       <footer class="dlg-foot">
         <p class="dlg-msg" id="meet-msg" role="status" aria-live="polite"></p>
         <div class="dlg-actions">
-          <a class="btn primary" id="meet-send" href="#" role="button" aria-disabled="true">Open email draft</a>
+          <a class="btn primary" id="meet-send" href="#" aria-disabled="true">Open email draft</a>
           <button class="btn ghost" id="meet-copy" type="button">Copy email text</button>
         </div>
         <p class="dlg-alt">No email app set up? Try
@@ -415,7 +427,7 @@
     </div>
   </dialog>
 
-  <script src="data.js?v=a69170b7fc" charset="utf-8"></script>
-  <script src="app.js?v=a0222904b5" charset="utf-8"></script>
+  <script src="data.js?v=490922f7b4" charset="utf-8"></script>
+  <script src="app.js?v=66e6522a8a" charset="utf-8"></script>
 </body>
 </html>

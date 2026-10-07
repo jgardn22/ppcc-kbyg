@@ -162,6 +162,10 @@
     });
     const label = D.tabs.find(t => t.id === id).label;
     $('#menu-current').textContent = label;
+    // every tab needs one page heading; Start Here already has its visible h1
+    const docH1 = $('#doc-h1');
+    docH1.hidden = id === 'start';
+    docH1.textContent = `${label}: Know Before You Go for healthcare customers at PPCC 2026`;
     $$('.nav-item', navMenu).forEach(a => {
       if (a.dataset.tab === id) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
@@ -178,6 +182,7 @@
   let maps = null, meet = null, pushedOverlay = false, pendingOpener = null;
 
   function syncOverlays(tab, sub, initial) {
+    const hadOverlay = maps.isOpen() || meet.isOpen();
     const mapId = tab === 'ground' && sub.startsWith('map-') ? sub.slice(4) : null;
     if (mapId && D.maps.items.some(m => m.id === mapId)) {
       if (!maps.isOpen() || maps.currentId() !== mapId) maps.open(mapId, pendingOpener);
@@ -185,7 +190,10 @@
     if (sub === 'meet') { if (!meet.isOpen()) meet.open(pendingOpener); }
     else if (meet.isOpen()) meet.close();
     if (!maps.isOpen() && !meet.isOpen()) { pushedOverlay = false; pendingOpener = null; }
-    if (tab === 'ground' && sub === 'maps') requestAnimationFrame(() => $('#maps').scrollIntoView({ block: 'start', behavior: initial ? 'auto' : undefined }));
+    // only scroll when arriving at the maps; closing a viewer or dialog must leave the page where it was
+    if (tab === 'ground' && sub === 'maps' && !hadOverlay) {
+      requestAnimationFrame(() => $('#maps').scrollIntoView({ block: 'start', behavior: (initial || reduceMotion) ? 'instant' : 'smooth' }));
+    }
   }
 
   function route(initial) {
@@ -322,6 +330,7 @@
     $('#feature-roundtable').append(
       h('span', { class: 'kicker' }, 'Don’t miss'),
       h('h3', {}, r.title),
+      r.subtitle ? h('p', { class: 'feature-sub' }, r.subtitle) : null,
       h('div', { class: 'meta' }, h('span', { class: 'chip' }, r.when), h('span', { class: 'chip' }, r.time)),
       h('p', {}, r.blurb),
       h('a', { class: 'btn ghost sm', href: '#days' }, 'See Wednesday’s plan'));
@@ -497,7 +506,8 @@
   function busiestDay() {
     let best = null;
     D.eventDays.forEach(d => {
-      const n = D.events.filter(e => e.day === d.date && timed(e)).length;
+      const p = peakFor(d.date, D.events);
+      const n = p ? p.n : 0;
       if (!best || n > best.n) best = { date: d.date, n };
     });
     return best && best.date;
@@ -628,6 +638,14 @@
   }
 
   /* ----- timeline ----- */
+  const shortTime = (t) => fmtTime(t).replace(':00', '');
+  function barText(e) {
+    const a = shortTime(e.start);
+    if (!e.end) return a;
+    const b = shortTime(e.end);
+    const sameHalf = a.slice(-2) === b.slice(-2);
+    return `${sameHalf ? a.slice(0, -3) : a} to ${b}`;
+  }
   function renderTimeline() {
     const root = $('#events-timeline');
     root.textContent = '';
@@ -657,7 +675,7 @@
         title: `${label} · ${fmtTime(e.start)}${e.end ? ' to ' + fmtTime(e.end) : ''}`,
         'aria-label': `${label}, ${fmtTime(e.start)}${e.end ? ' to ' + fmtTime(e.end) : ''}. Show details.`,
         on: { click: () => jumpTo(e.id) }
-      }, `${fmtTime(e.start).replace(':00', '')}${e.end ? '–' + fmtTime(e.end).replace(':00', '') : ''}`);
+      }, barText(e));
       body.append(h('div', { class: 'tl-row' },
         h('div', { class: 'tl-label' }, h('b', {}, e.host), h('span', {}, e.title)),
         h('div', { class: 'tl-track' }, bar)));
@@ -866,6 +884,7 @@
     wire(dlg, onClose) {
       let downOnBackdrop = false;
       dlg.addEventListener('cancel', (e) => { e.preventDefault(); onClose(); });
+      dlg.addEventListener('close', () => { if (!$('dialog[open]')) document.documentElement.classList.remove('dlg-open'); });
       dlg.addEventListener('pointerdown', (e) => { downOnBackdrop = e.target === dlg; });
       dlg.addEventListener('click', (e) => { if (e.target === dlg && downOnBackdrop) onClose(); });
     }
@@ -909,8 +928,9 @@
     }
     function apply() {
       img.style.transform = `translate3d(${v.tx.toFixed(2)}px, ${v.ty.toFixed(2)}px, 0) scale(${v.s.toFixed(4)})`;
-      $('#zoom-out').disabled = v.s <= v.min * 1.001;
-      $('#zoom-in').disabled = v.s >= v.max * 0.999;
+      // aria-disabled keeps keyboard focus on the button when a zoom limit is reached
+      $('#zoom-out').setAttribute('aria-disabled', String(v.s <= v.min * 1.001));
+      $('#zoom-in').setAttribute('aria-disabled', String(v.s >= v.max * 0.999));
     }
     function limits() {
       const { w, h: sh } = size(), m = cur();
@@ -936,7 +956,7 @@
       body.append(h('p', {}, m.blurb));
       if (m.note) body.append(h('p', { class: 'mv-note' }, m.note));
       (m.directions || []).forEach(d => body.append(h('div', { class: 'dirs' },
-        h('h4', {}, d.from), h('ol', {}, d.steps.map(s => h('li', {}, s))))));
+        h('h3', {}, d.from), h('ol', {}, d.steps.map(s => h('li', {}, s))))));
       body.append(h('div', { class: 'mv-links' },
         extLink('Open the image full size', m.src),
         extLink(`Hear it explained (${mmss(m.videoAt)})`, `${D.video.watchUrl}&t=${m.videoAt}s`),
@@ -950,8 +970,11 @@
       img.alt = m.alt;
       img.style.width = m.w + 'px';
       img.style.height = m.h + 'px';
-      img.style.background = `#fff url("${m.thumb}") center / 100% 100% no-repeat`;
-      img.src = m.src;
+      // show the cached thumbnail at once, then swap in the sharp image when it has loaded
+      img.src = m.thumb;
+      const full = new Image();
+      full.onload = () => { if (cur() === m && dlgs.isOpen(dlg)) img.src = m.src; };
+      full.src = m.src;
       fillInfo(m);
       reset();
     }
@@ -1007,11 +1030,13 @@
       if (!p) return;
       v.pointers.delete(e.pointerId);
       if (e.type === 'pointerup' && !v.multi && Math.hypot(e.clientX - p.x0, e.clientY - p.y0) < 8 && performance.now() - p.t0 < 350) tap(e);
-      if (v.pointers.size < 2) v.pinch = null;
+      if (v.pointers.size === 2) startPinch(); else if (v.pointers.size < 2) v.pinch = null;
       if (!v.pointers.size) { v.multi = false; stage.classList.remove('grabbing'); }
     };
     stage.addEventListener('pointerup', endPointer);
     stage.addEventListener('pointercancel', endPointer);
+    // Safari reports pinches as gesture events whose default action zooms the whole page
+    ['gesturestart', 'gesturechange', 'gestureend'].forEach(t => stage.addEventListener(t, (e) => e.preventDefault()));
     stage.addEventListener('wheel', (e) => {
       e.preventDefault();
       const dy = e.deltaMode === 1 ? e.deltaY * 33 : e.deltaMode === 2 ? e.deltaY * 400 : e.deltaY;
@@ -1058,6 +1083,8 @@
       open(id, opener) {
         dlgs.show(dlg, opener);
         info.open = wide.matches;
+        v.pointers.clear(); v.pinch = null; v.multi = false; v.lastTap = null;
+        stage.classList.remove('grabbing');
         show(Math.max(0, items.findIndex(m => m.id === id)));
         stage.focus({ preventScroll: true });
       },
@@ -1134,18 +1161,27 @@
       $('#meet-outlook').href = `https://outlook.office.com/mail/deeplink/compose?to=${enc(to)}&subject=${enc(c.subject)}&body=${enc(body)}`;
       $('#meet-gmail').href = `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(to)}&su=${enc(c.subject)}&body=${enc(body)}`;
       send.setAttribute('aria-disabled', String(problems().length > 0));
+      // the details box becomes required when "something else" is the only topic picked
+      $('#m-details-opt').textContent = (c.topics.length === 1 && c.topics[0] === OTHER) ? 'required' : 'optional';
     }
 
     function copyText(text) {
-      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
-      return new Promise((resolve, reject) => {
+      const legacyCopy = () => new Promise((resolve, reject) => {
+        const prev = document.activeElement;
         const ta = h('textarea', { 'aria-hidden': 'true', readonly: true, style: 'position:fixed;left:-9999px;top:0;opacity:0' });
         ta.value = text;
-        document.body.append(ta);
+        dlg.append(ta); // inside the open modal, so the browser will let it take focus
+        ta.focus({ preventScroll: true });
         ta.select();
         ta.setSelectionRange(0, text.length);
-        try { document.execCommand('copy') ? resolve() : reject(new Error('copy failed')); } catch (err) { reject(err); } finally { ta.remove(); }
+        let ok = false;
+        try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+        ta.remove();
+        if (prev && prev.focus) prev.focus({ preventScroll: true });
+        if (ok) resolve(); else reject(new Error('copy failed'));
       });
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).catch(legacyCopy);
+      return legacyCopy();
     }
     const fullText = () => `To: ${D.contact.email}\nSubject: ${composed.subject}\n\n${composed.body}`;
 

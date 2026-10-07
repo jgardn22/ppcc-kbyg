@@ -77,10 +77,11 @@ window.KBYG = {
 
   /* ---------- Healthcare roundtable (featured) ---------- */
   roundtable: {
-    title: "Healthcare & Life Sciences roundtable",
+    title: "Healthcare & Life Sciences panel",
+    subtitle: "Reimagine Healthcare and Life Sciences with Low Code & AI Agents",
     when: "Wednesday, Oct 28",
-    time: "Time to be announced",
-    blurb: "Peers who have already built on the platform walk through their journey, and you can ask questions live. Providers, payers and life sciences are usually all in the room. It is often standing room only, so plan to arrive early."
+    time: "Expected in the morning · time to be announced",
+    blurb: "Peers from across healthcare and life sciences share how AI agents and low-code solutions are reducing friction and improving outcomes. Expect opening remarks, a panel discussion, audience Q&A and a wrap-up. Providers, payers and life sciences are usually all in the room, and it is often standing room only, so plan to arrive early."
   },
 
   /* ---------- Checklist ---------- */
@@ -92,7 +93,7 @@ window.KBYG = {
 
   checklist: [
     { id: "registration", group: "essentials", title: "Confirm your registration",
-      detail: "Look for your confirmation email and welcome letter from the conference team. Not registered yet? Sign up on the official site.",
+      detail: "Look for your confirmation email and welcome letter from the conference team. Not registered yet? Sign up on the official site, where group pricing for two or more attendees runs through Oct 9.",
       links: [{ label: "Register", href: "https://powerplatformconf.com/register" }] },
 
     { id: "accessibility", group: "essentials", title: "Share accessibility needs", due: "2026-10-02",
@@ -123,14 +124,14 @@ window.KBYG = {
     { id: "sessions", group: "plan", title: "Pick sessions, then pick backups",
       detail: "With 200+ sessions, filter by topic and experience level. Double-book yourself and stay flexible. Rooms on the upper floors are smaller and popular sessions can fill up, so keep a backup in mind." },
 
-    { id: "roundtable", group: "plan", title: "Put the healthcare roundtable on your calendar",
-      detail: "Wednesday, Oct 28, time to be announced. It is one of the few sessions built for healthcare and life sciences and it is often standing room only, so plan to arrive early." },
+    { id: "roundtable", group: "plan", title: "Put the healthcare panel on your calendar",
+      detail: "Wednesday, Oct 28, expected in the morning, with the exact time to be announced. It is one of the few sessions built for healthcare and life sciences, with a panel discussion and audience Q&A, and it is often standing room only, so plan to arrive early." },
 
     { id: "evenings", group: "plan", title: "RSVP for one or two evening events",
       detail: "Most partner events need advance registration and fill quickly. Many check names at the door. It is fine to register for more than one.", action: "tab:evenings" },
 
     { id: "leaders", group: "plan", title: "Ask about time to meet with Microsoft product group leaders",
-      detail: "Product group leaders are on site, and your Microsoft account team can help request time with them. Tell us what you want to discuss and we will draft the email for you. Governance, scale and roadmap questions are common topics. Availability is limited and not guaranteed, so ask early.",
+      detail: "Product group leaders are on site, and your Microsoft account team can help request time with them. One-to-one meetings are held Tuesday through Thursday. Tell us what you want to discuss and we will draft the email for you. Governance, scale and roadmap questions are common topics. Availability is limited and not guaranteed, so ask early.",
       action: "meet" },
 
     { id: "badge", group: "pack", title: "Plan an early badge pickup",
@@ -145,11 +146,11 @@ window.KBYG = {
 
   /* ---------- Venue: badge hours ---------- */
   badgeHours: [
-    { day: "Sunday, Oct 25",     date: "2026-10-25", hours: "7:30 AM – 2:00 PM" },
-    { day: "Monday, Oct 26",     date: "2026-10-26", hours: "7:30 AM – 5:00 PM", tip: "Best day to pick up" },
-    { day: "Tuesday, Oct 27",    date: "2026-10-27", hours: "6:30 AM – 5:00 PM", tip: "Keynote rush" },
-    { day: "Wednesday, Oct 28",  date: "2026-10-28", hours: "7:00 AM – 4:00 PM" },
-    { day: "Thursday, Oct 29",   date: "2026-10-29", hours: "7:00 AM – 4:00 PM" }
+    { day: "Sunday, Oct 25",     date: "2026-10-25", hours: "7:30 AM to 2:00 PM" },
+    { day: "Monday, Oct 26",     date: "2026-10-26", hours: "7:30 AM to 5:00 PM", tip: "Best day to pick up" },
+    { day: "Tuesday, Oct 27",    date: "2026-10-27", hours: "6:30 AM to 5:00 PM", tip: "Keynote rush" },
+    { day: "Wednesday, Oct 28",  date: "2026-10-28", hours: "7:00 AM to 4:00 PM" },
+    { day: "Thursday, Oct 29",   date: "2026-10-29", hours: "7:00 AM to 4:00 PM" }
   ],
 
   /* ---------- 3 Perfect Days (official agenda anchors) ---------- */
@@ -160,13 +161,13 @@ window.KBYG = {
       agenda: [
         { time: "6:30 AM",           text: "Check-in opens at the Conference Center" },
         { time: "8:00 AM",           text: "Arena doors open" },
-        { time: "8:30 – 10:00 AM",   text: "Opening Keynote", who: "Charles Lamanna and Ryan Cunningham", key: true },
+        { time: "8:30 to 10:00 AM",   text: "Opening Keynote", who: "Charles Lamanna and Ryan Cunningham", key: true },
         { time: "10:00 AM",          text: "Expo Hall and Makers Market open" },
-        { time: "11:30 AM – 12:30 PM", text: "What’s New with Power BI & Fabric", who: "Kim Manis" },
-        { time: "12:30 – 2:00 PM",   text: "Lunch", note: "Women in Power Welcome Luncheon runs at the same time" },
-        { time: "2:00 – 3:00 PM",    text: "What’s New with Copilot Studio", who: "Bryan Goode and Jason Moore" },
-        { time: "4:00 – 5:00 PM",    text: "What’s New with Power Apps", who: "Leon Welicki and Tiffany Treacy" },
-        { time: "5:00 – 7:30 PM",    text: "Night Market: Opening Reception", note: "Expo and Makers Market" }
+        { time: "11:30 AM to 12:30 PM", text: "What’s New with Power BI & Fabric", who: "Kim Manis" },
+        { time: "12:30 to 2:00 PM",   text: "Lunch", note: "The Women in Power Networking Luncheon runs at the same time in its own lunch hall. Sign up in Whova" },
+        { time: "2:00 to 3:00 PM",    text: "What’s New with Copilot Studio", who: "Bryan Goode and Jason Moore" },
+        { time: "4:00 to 5:00 PM",    text: "What’s New with Power Apps", who: "Leon Welicki and Tiffany Treacy" },
+        { time: "5:00 to 7:30 PM",    text: "Night Market: Opening Reception", note: "Expo and Makers Market. Women in Power hosts a meetup here too" }
       ],
       evening: "Busiest night for partner events. Hummingbird’s Healthcare & Life Sciences Happy Hour starts at 5:00 PM."
     },
@@ -174,30 +175,31 @@ window.KBYG = {
       id: "wed", date: "2026-10-28", label: "Wednesday", short: "Oct 28", n: 2, theme: "Build",
       line: "Go deep on agents, and meet your healthcare peers.",
       agenda: [
-        { time: "8:00 – 9:00 AM",    text: "Building End to End Agents with Copilot Studio", who: "Jason Moore and Soufiane Loukili" },
+        { time: "8:00 to 9:00 AM",    text: "Building End to End Agents with Copilot Studio", who: "Jason Moore and Soufiane Loukili" },
         { time: "9:00 AM",           text: "Expo Hall and Makers Market open" },
-        { time: "10:00 – 11:00 AM",  text: "The Future of Agent Apps", who: "Clay Wesener" },
-        { time: "11:30 AM – 12:30 PM", text: "From Work IQ to Agent 365: Building and Managing the Agentic Enterprise", who: "Nirav Shah" },
+        { time: "10:00 to 11:00 AM",  text: "The Future of Agent Apps", who: "Clay Wesener" },
+        { time: "11:30 AM to 12:30 PM", text: "From Work IQ to Agent 365: Building and Managing the Agentic Enterprise", who: "Nirav Shah" },
         { time: "12:30 PM",          text: "Lunch" },
-        { time: "2:00 – 3:00 PM",    text: "Sessions", note: "Titles to be announced" },
-        { time: "3:30 – 4:30 PM",    text: "Sessions", note: "Titles to be announced" },
-        { time: "4:30 – 6:30 PM",    text: "Expo and Makers Market, plus conference T-shirt pick-up" },
-        { time: "8:00 PM",           text: "Pitbull live in the MGM Grand Garden Arena", key: true }
+        { time: "2:00 to 3:00 PM",    text: "Sessions", note: "Titles to be announced. Includes the Women in Power Panel, open to everyone" },
+        { time: "3:30 to 4:30 PM",    text: "Sessions", note: "Titles to be announced" },
+        { time: "4:30 to 6:30 PM",    text: "Expo and Makers Market, plus conference T-shirt pick-up" },
+        { time: "8:00 to 10:00 PM",   text: "Pitbull live in the MGM Grand Garden Arena", key: true }
       ],
-      hls: { time: "Time to be announced", text: "Healthcare & Life Sciences roundtable" },
+      hls: { time: "Expected morning · time to be announced", text: "Healthcare & Life Sciences panel" },
       evening: "Partner dinners wrap up around the time Pitbull starts, and the arena line is long. Plan your timing."
     },
     {
       id: "thu", date: "2026-10-29", label: "Thursday", short: "Oct 29", n: 3, theme: "Make it real",
       line: "A fireside chat, a last round of sessions, then home with a plan.",
       agenda: [
-        { time: "9:00 – 10:00 AM",   text: "Keynote and fireside chat", key: true },
+        { time: "9:00 to 10:00 AM",   text: "Keynote and fireside chat", key: true },
         { time: "10:00 AM",          text: "Expo Hall and Makers Market open" },
-        { time: "10:45 – 11:45 AM",  text: "Sessions", note: "Titles to be announced" },
-        { time: "12:00 – 1:00 PM",   text: "Sessions", note: "Titles to be announced" },
-        { time: "1:00 – 2:30 PM",    text: "Lunch" },
+        { time: "10:45 to 11:45 AM",  text: "Sessions", note: "Titles to be announced" },
+        { time: "12:00 to 1:00 PM",   text: "Sessions", note: "Titles to be announced" },
+        { time: "1:00 to 2:30 PM",    text: "Lunch" },
         { time: "2:30 PM",           text: "Expo Hall and Makers Market close" },
-        { time: "2:30 – 3:30 PM",    text: "Sessions", note: "Titles to be announced" }
+        { time: "2:30 to 3:30 PM",    text: "Sessions", note: "Titles to be announced" },
+        { time: "Time to be announced", text: "Women in Power roundtable: Your Network Is Your Net Worth", note: "Small group, 60 minutes, open to everyone. Sign up in Whova" }
       ],
       evening: "The conference wraps mid-afternoon, so there are no evening events listed."
     }
@@ -250,7 +252,7 @@ window.KBYG = {
       summary: "EY, a Platinum sponsor of PPCC 2026, invites customers, prospects and Microsoft colleagues to a Tuesday reception.",
       reg: null, regNote: "Registration is required and EY’s link is coming soon. Ask your Microsoft account team for the invitation." },
 
-    { id: "congruentx-tue", day: "2026-10-27", start: null, end: null, timeNote: "Evening · time confirmed at registration",
+    { id: "congruentx-tue", day: "2026-10-27", start: "16:30", end: "18:30",
       title: "Customer Happy Hour", host: "congruentX", hostUrl: "https://congruentx.com",
       venue: "congruentX MGM Suite", kind: "Happy hour", audience: "open", access: "register",
       summary: "Cocktails, light bites and conversation after a full day at the conference. No presentation and no sales pitch, plus a giveaway of two pairs of custom Nike Dunks.",
@@ -281,11 +283,17 @@ window.KBYG = {
       summary: "The conference’s official opening reception in the Expo and Makers Market. A natural first stop before a partner event." },
 
     /* ---- Wednesday ---- */
-    { id: "quisitive-hls", day: "2026-10-28", start: null, end: null, sortAt: "12:00", timeNote: "Midday · time to be announced",
-      title: "Healthcare & Life Sciences Suite", host: "Quisitive", hostUrl: "https://quisitive.com",
-      venue: "Quisitive suite (Booth 120 in the expo)", kind: "Suite and lunch", audience: "hls", access: "ask",
-      summary: "A come-and-go suite with snacks and a catered lunch, a quiet break from the crowds. Details are coming from Quisitive.",
-      regNote: "Details are still being finalized. Your Microsoft account team can connect you with Quisitive." },
+    { id: "quisitive-hls", day: "2026-10-28", start: "11:30", end: "13:30",
+      title: "Healthcare & Life Sciences Lunch", host: "Quisitive", hostUrl: "https://quisitive.com",
+      venue: "Quisitive suite", kind: "Lunch", audience: "hls", access: "ask",
+      summary: "A catered, healthcare-focused lunch hosted with Microsoft in the Quisitive suite. Come and go during the window, and take a quiet break from the crowds.",
+      regNote: "Space is limited. Your Microsoft account team can connect you with Quisitive for an invitation." },
+
+    { id: "root16-lounge", day: "2026-10-28", start: "09:00", end: "16:00",
+      title: "Hospitality Lounge at Emeril’s", host: "Root16 (a Reply company)", hostUrl: "https://www.reply.com/root16-reply/en",
+      venue: "Emeril’s New Orleans Fish House, MGM Grand", kind: "Hospitality lounge", audience: "open", access: "ask",
+      summary: "A daytime lounge for customers, prospects and Microsoft teams. Drop in between sessions. No RSVP is needed to stop by.",
+      regNote: "Want to reserve a space for a customer meeting? Your Microsoft account team can contact Root16." },
 
     { id: "visionet", day: "2026-10-28", start: "16:00", end: "19:00",
       title: "Evening Event at Hard Rock Cafe", host: "Visionet", hostUrl: "https://www.visionet.com",
@@ -297,7 +305,7 @@ window.KBYG = {
       title: "Frontier Dinner for the Stars", host: "TTEC Digital", hostUrl: "https://www.ttecdigital.com",
       venue: "Luchini’s, MGM Grand", kind: "Dinner", audience: "open", access: "ask",
       summary: "A private dining experience for customers and Microsoft teams. Seating is very limited.",
-      regNote: "Seating is very limited. Your Microsoft account team can request a seat." },
+      regNote: "Seating is very limited. An RSVP link was shared in the Know Before You Go session, and your Microsoft account team can send it to you." },
 
     { id: "engineerup-wed", day: "2026-10-28", start: "18:30", end: "20:30",
       title: "Customer Dinner at Hakkasan", host: "Engineer Up", hostUrl: "https://www.engineerup.com",
@@ -322,10 +330,10 @@ window.KBYG = {
       venue: "Expo and Makers Market", kind: "Expo", audience: "official", access: "badge",
       summary: "The last evening window to browse partner booths and collect your conference T-shirt." },
 
-    { id: "pitbull", day: "2026-10-28", start: "20:00", end: null, endNote: "End time not published",
+    { id: "pitbull", day: "2026-10-28", start: "20:00", end: "22:00",
       title: "Pitbull Live", host: "Power Platform Community Conference", hostUrl: "https://powerplatformconf.com",
       venue: "MGM Grand Garden Arena", kind: "Concert", audience: "official", access: "badge",
-      summary: "An exclusive evening for full conference attendees: live music, drinks and networking. Expect a long line to get in, and bring your badge because it is required for entry." },
+      summary: "An exclusive evening for full conference attendees: live music, drinks and networking, scheduled from 8:00 to 10:00 PM. Expect a long line to get in, and bring your badge because it is required for entry.       Guests and plus-ones are not allowed." },
 
     /* ---- Monday: hosted dinners ---- */
     { id: "root16-dinner-mon", day: "2026-10-26", start: "19:00", end: "21:00",
@@ -408,6 +416,8 @@ window.KBYG = {
     { q: "How do I get time to meet with Microsoft product group leaders?",
       a: "Ask your Microsoft account team. They can help request one-to-one time with Microsoft product group leaders during the conference, based on what you want to discuss. Availability is limited and not guaranteed, so ask early.",
       action: "meet" },
+    { q: "What is Women in Power?",
+      a: "Women in Power is a set of four sessions that are open to everyone, allies included, and free with your pass: a networking luncheon on Tuesday (12:30 to 2:00 PM), a Night Market meetup on Tuesday evening, a panel on Wednesday at 2:00 PM, and a small-group roundtable on Thursday (time to be announced). Registration is required, and you sign up in the Whova app once it is live." },
     { q: "Where can I find a map of the venue?",
       a: "Open the maps on the On the Ground tab. They cover where the MGM Grand is, the walking route from the front desk and the Las Vegas Boulevard entrance to the Conference Center, the walkway to the Grand Garden Arena and Expo Hall, and floor plans for all three Conference Center floors.",
       action: "maps" }
