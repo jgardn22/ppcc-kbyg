@@ -5,7 +5,7 @@
    Times are Pacific (Las Vegas). Dates are ISO (YYYY-MM-DD).
    ============================================================ */
 window.KBYG = {
-  updated: "2026-10-06",
+  updated: "2026-10-07",
 
   conference: {
     name: "Power Platform Community Conference",
@@ -22,6 +22,23 @@ window.KBYG = {
     team: "Microsoft · AI Apps & Agents · Healthcare",
     email: "jakegardner@microsoft.com",
     subject: "PPCC 2026 Know Before You Go"
+  },
+
+  /* ---------- Product group meeting request (checklist CTA + FAQ) ---------- */
+  meet: {
+    title: "Meet with Microsoft product group leaders",
+    subject: "PPCC 2026: request to meet with Microsoft product group leaders",
+    topics: [
+      "Governing Power Platform apps, automation and Copilot agents at scale",
+      "Roadmap for agents, Copilot Studio and Power Platform",
+      "Security, privacy and compliance for regulated healthcare data",
+      "Moving from pilot to enterprise scale (environments, ALM, Dataverse)",
+      "Managing cost and licensing as usage grows",
+      "Connecting to core healthcare systems and data (EHR, claims, CRM)",
+      "AI agents and automation for clinical, member or provider workflows",
+      "Something else (I will describe it below)"
+    ],
+    days: ["Tuesday, Oct 27", "Wednesday, Oct 28", "Thursday, Oct 29", "Any day works"]
   },
 
   tabs: [
@@ -112,11 +129,12 @@ window.KBYG = {
     { id: "evenings", group: "plan", title: "RSVP for one or two evening events",
       detail: "Most partner events need advance registration and fill quickly. Many check names at the door. It is fine to register for more than one.", action: "tab:evenings" },
 
-    { id: "leaders", group: "plan", title: "Ask about time with Microsoft leaders",
-      detail: "Your Microsoft account team can help arrange conversations with Microsoft product and industry leaders during the conference. Governance, scale and roadmap questions are common topics." },
+    { id: "leaders", group: "plan", title: "Ask about time to meet with Microsoft product group leaders",
+      detail: "Product group leaders are on site, and your Microsoft account team can help request time with them. Tell us what you want to discuss and we will draft the email for you. Governance, scale and roadmap questions are common topics. Availability is limited and not guaranteed, so ask early.",
+      action: "meet" },
 
     { id: "badge", group: "pack", title: "Plan an early badge pickup",
-      detail: "Check-in is on the first floor of the MGM Grand Conference Center. Picking up your badge on Monday (7:30 AM to 5:00 PM) keeps Tuesday morning simple. You need your badge to enter the Opening Keynote.", action: "tab:ground" },
+      detail: "Check-in is on the first floor of the MGM Grand Conference Center. Picking up your badge on Monday (7:30 AM to 5:00 PM) keeps Tuesday morning simple. You need your badge to enter the Opening Keynote.", action: ["tab:ground", "maps"] },
 
     { id: "shoes", group: "pack", title: "Pack comfortable shoes and layers",
       detail: "Expect 10,000+ steps a day. The casino and session rooms run cold, so bring something light you can take on and off." },
@@ -387,9 +405,71 @@ window.KBYG = {
       a: "Entry requires a PPCC badge. Guest passes are not available." },
     { q: "Who can I ask for help onsite?",
       a: "Anyone in a Microsoft lanyard. The Microsoft booth is staffed by engineers rather than salespeople, and you can message the Microsoft team in Whova." },
-    { q: "How do I get time with Microsoft product leaders?",
-      a: "Ask your Microsoft account team. They can help arrange one-to-one conversations with Microsoft product and industry leaders during the conference." }
+    { q: "How do I get time to meet with Microsoft product group leaders?",
+      a: "Ask your Microsoft account team. They can help request one-to-one time with Microsoft product group leaders during the conference, based on what you want to discuss. Availability is limited and not guaranteed, so ask early.",
+      action: "meet" },
+    { q: "Where can I find a map of the venue?",
+      a: "Open the maps on the On the Ground tab. They cover where the MGM Grand is, the walking route from the front desk and the Las Vegas Boulevard entrance to the Conference Center, the walkway to the Grand Garden Arena and Expo Hall, and floor plans for all three Conference Center floors.",
+      action: "maps" }
   ],
+
+  /* ---------- Venue maps (from the Power HUG Know Before You Go session) ---------- */
+  maps: {
+    official: {
+      label: "Official MGM Grand property map (PDF)",
+      href: "https://assets.contentstack.io/v3/assets/bltc6ce635bc4868eb2/blt67c0bdb5f16b8094/mgm-grand-property-map.pdf"
+    },
+    items: [
+      { id: "venue", title: "Where the MGM Grand is",
+        blurb: "On the Las Vegas Strip, about a 10-minute drive from Harry Reid International Airport.",
+        src: "assets/img/maps/venue.webp", thumb: "assets/img/maps/venue-thumb.webp", w: 989, h: 861, tw: 640, th: 557, videoAt: 946,
+        alt: "Street map of the Las Vegas Strip area. Pink stars mark the MGM Grand, just north of Tropicana Avenue, and Harry Reid International Airport to the southeast." },
+
+      { id: "resort", title: "MGM Grand resort map and walking directions",
+        blurb: "The full property, with the walking route to the Convention Center traced in teal.",
+        src: "assets/img/maps/resort.webp", thumb: "assets/img/maps/resort-thumb.webp", w: 1315, h: 920, tw: 640, th: 448, videoAt: 970,
+        alt: "MGM Grand resort floor plan with lists of restaurants, nightlife, shopping, gaming and amenities. A teal line traces the walking route from the front desk and from the Las Vegas Boulevard entrance, through the casino and The District past the Grand Garden Arena, to the Convention Center. Pink stars mark key stops.",
+        directions: [
+          { from: "From the hotel front desk", steps: [
+            "Walk into the casino and pass the Lobby Bar.",
+            "Turn right and walk toward the KA Box Office.",
+            "Just past Wolfgang Puck, turn right into The District.",
+            "Continue through The District, past Craftsteak, International Smoke and the Grand Garden Arena.",
+            "At the Spa Mezzanine, take the escalators down toward the pool.",
+            "At the pool entrance, turn right and follow the hall to the Convention Center."
+          ] },
+          { from: "From the Las Vegas Blvd entrance", steps: [
+            "Walk through the casino past Hakkasan, TAP and the Jabbawockeez Theater.",
+            "Keep going past Avenue Cafe toward CRUSH.",
+            "Turn right when you reach L’atelier and head toward The District.",
+            "Walk through The District, past Craftsteak, International Smoke and the Grand Garden Arena.",
+            "At the Spa Mezzanine, take the escalators down toward the pool.",
+            "At the pool entrance, turn right and follow the hall to the Convention Center."
+          ] }
+        ] },
+
+      { id: "walkway", title: "Hotel to Convention Center walkway",
+        blurb: "How the Grand Garden Arena, the Conference Center and the Expo Hall connect.",
+        src: "assets/img/maps/walkway.webp", thumb: "assets/img/maps/walkway-thumb.webp", w: 1285, h: 808, tw: 640, th: 402, videoAt: 1054,
+        alt: "Simplified map of the MGM Grand. The Grand Garden Arena (upper left, blue) and the MGM Grand Conference Center (upper right, salmon) are joined by the Conference Walkway, with the Marquee Ballroom, which holds the Expo Hall, below the walkway. The arena box office, escalators, Grand Spa and Monorail entrance are labeled along the way." },
+
+      { id: "floor1", title: "Convention Center, 1st floor",
+        blurb: "Conference Check-In, the Grand Ballroom and the way out to the Expo Hall.",
+        src: "assets/img/maps/floor1.webp", thumb: "assets/img/maps/floor1-thumb.webp", w: 1450, h: 859, tw: 640, th: 379, videoAt: 1090,
+        note: "Don’t miss the Expo. It is outside, through the courtyard next to the Marquee Ballroom. The pink arrow on the map points the way.",
+        alt: "First-floor plan of the MGM Grand Conference Center. The Grand Ballroom, Boulevard Ballroom, Terrace Ballroom and rooms 101 to 110 are labeled. Conference Registration is outlined in pink near the escalators to the second floor, and the Expo Hall in the Marquee Ballroom is at the lower right." },
+
+      { id: "floor2", title: "Convention Center, 2nd floor",
+        blurb: "Vista and Cedar ballrooms plus meeting rooms 201 to 264.",
+        src: "assets/img/maps/floor2.webp", thumb: "assets/img/maps/floor2-thumb.webp", w: 1615, h: 773, tw: 640, th: 306, videoAt: 1134,
+        alt: "Second-floor plan of the Conference Center. Vista Ballroom (rooms 206 to 211) runs along the bottom, Cedar Ballroom (rooms 250 to 255) is at the lower right, and meeting rooms 201 to 205 and 256 to 264 sit between them. Escalators to the first and third floors are at both ends of the lower corridor." },
+
+      { id: "floor3", title: "Convention Center, 3rd floor",
+        blurb: "Premier and Chairman’s ballrooms and the Community Lounge.",
+        src: "assets/img/maps/floor3.webp", thumb: "assets/img/maps/floor3-thumb.webp", w: 1585, h: 792, tw: 640, th: 320, videoAt: 1138,
+        alt: "Third-floor plan of the Conference Center. Premier Ballroom (rooms 309 to 320) is in the center and Chairman’s Ballroom (rooms 355 to 370) is on the right, with rooms 301 to 308 and 350 to 354 and the Community Lounge at the bottom center. Elevators lead to the first and second floors." }
+    ]
+  },
 
   /* ---------- Links ---------- */
   links: [
@@ -400,6 +480,7 @@ window.KBYG = {
       { label: "Speakers",         href: "https://powerplatformconf.com/speakers",   note: "Who is on stage" },
       { label: "Workshops",        href: "https://powerplatformconf.com/workshops",  note: "Pre- and post-conference" },
       { label: "Hotel and travel", href: "https://powerplatformconf.com/book-hotel", note: "MGM Grand and getting there" },
+      { label: "MGM Grand property map", href: "https://assets.contentstack.io/v3/assets/bltc6ce635bc4868eb2/blt67c0bdb5f16b8094/mgm-grand-property-map.pdf", note: "Official PDF map of the resort" },
       { label: "Conference FAQ",   href: "https://powerplatformconf.com/faq",        note: "Official answers" }
     ]},
     { group: "Healthcare community", items: [

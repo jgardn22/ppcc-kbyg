@@ -35,7 +35,9 @@
     clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm.75 5v5.2l4 2.4-.75 1.25-4.75-2.85V7h1.5z"/></svg>',
     users: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm7 .5a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM9 13c-3.3 0-6 1.8-6 4v2h12v-2c0-2.2-2.7-4-6-4zm7 .5c-.6 0-1.2.1-1.7.2 1.1.9 1.7 2.1 1.7 3.3v2h5v-1.5c0-2-2.2-4-5-4z"/></svg>',
     ext: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg>',
-    arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2l-4.6-4.6L13 5z"/></svg>'
+    arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2l-4.6-4.6L13 5z"/></svg>',
+    chev: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+    zoom: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M10.5 7.5v6M7.5 10.5h6"/></svg>'
   };
   const icon = (name, size) => {
     const t = document.createElement('template');
@@ -105,12 +107,48 @@
     });
   }
 
+  const parseHash = () => {
+    const [tab, sub] = location.hash.replace(/^#/, '').split('/');
+    return { tab, sub: sub || '' };
+  };
   const hashTab = () => {
-    const id = location.hash.replace(/^#/, '').split('/')[0];
-    return tabIds.includes(id) ? id : null;
+    const { tab } = parseHash();
+    return tabIds.includes(tab) ? tab : null;
   };
   let active = null;
   const currentTab = () => active || hashTab() || 'start';
+
+  /* ----- hamburger menu (phones and small tablets) ----- */
+  const menuBtn = $('#menu-btn'), navMenu = $('#nav-menu'), navScrim = $('#nav-scrim');
+  const phoneNav = matchMedia('(max-width: 900px)');
+
+  function setMenu(open, returnFocus) {
+    if (open === !navMenu.hidden) return;
+    navMenu.hidden = !open;
+    navScrim.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', String(open));
+    document.documentElement.classList.toggle('menu-open', open);
+    if (open) ($('.nav-item[aria-current="page"]', navMenu) || $('.nav-item', navMenu)).focus({ preventScroll: true });
+    else if (returnFocus) menuBtn.focus({ preventScroll: true });
+  }
+
+  function buildMenu() {
+    D.tabs.forEach(t => navMenu.append(h('a', { class: 'nav-item', href: '#' + t.id, dataset: { tab: t.id } },
+      h('span', { class: 'nav-label' }, t.label),
+      t.id === 'days' ? h('span', { class: 'mini-soon' }, 'Coming soon') : null,
+      icon('arrow', 18))));
+    menuBtn.addEventListener('click', () => setMenu(navMenu.hidden));
+    navScrim.addEventListener('click', () => setMenu(false, true));
+    navMenu.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+    // keyboard users tabbing past the last item should not be left behind an open menu
+    navMenu.addEventListener('focusout', (e) => {
+      if (!navMenu.hidden && e.relatedTarget && !navMenu.contains(e.relatedTarget) && e.relatedTarget !== menuBtn) setMenu(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !navMenu.hidden) { e.preventDefault(); setMenu(false, true); }
+    });
+    phoneNav.addEventListener('change', () => { if (!phoneNav.matches) setMenu(false); });
+  }
 
   function activate(id, userLink) {
     if (id === active) return;
@@ -123,6 +161,10 @@
       $('#panel-' + t).hidden = !sel;
     });
     const label = D.tabs.find(t => t.id === id).label;
+    $('#menu-current').textContent = label;
+    $$('.nav-item', navMenu).forEach(a => {
+      if (a.dataset.tab === id) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
     document.title = id === 'start'
       ? 'Know Before You Go · PPCC 2026 for Healthcare & Life Sciences'
       : `${label} · Know Before You Go · PPCC 2026`;
@@ -132,7 +174,41 @@
     if (userLink) $('#panel-' + id).focus({ preventScroll: true });
     updateFab();
   }
-  window.addEventListener('hashchange', () => { const t = hashTab(); if (t) activate(t, true); });
+  /* ----- routing: #tab, plus #ground/maps, #ground/map-<id> and #<tab>/meet ----- */
+  let maps = null, meet = null, pushedOverlay = false, pendingOpener = null;
+
+  function syncOverlays(tab, sub, initial) {
+    const mapId = tab === 'ground' && sub.startsWith('map-') ? sub.slice(4) : null;
+    if (mapId && D.maps.items.some(m => m.id === mapId)) {
+      if (!maps.isOpen() || maps.currentId() !== mapId) maps.open(mapId, pendingOpener);
+    } else if (maps.isOpen()) maps.close();
+    if (sub === 'meet') { if (!meet.isOpen()) meet.open(pendingOpener); }
+    else if (meet.isOpen()) meet.close();
+    if (!maps.isOpen() && !meet.isOpen()) { pushedOverlay = false; pendingOpener = null; }
+    if (tab === 'ground' && sub === 'maps') requestAnimationFrame(() => $('#maps').scrollIntoView({ block: 'start', behavior: initial ? 'auto' : undefined }));
+  }
+
+  function route(initial) {
+    const { sub } = parseHash();
+    const t = hashTab() || (initial ? 'start' : null);
+    if (t) activate(t, !initial);
+    syncOverlays(t, sub, initial);
+  }
+
+  function pushOverlay(hash, opener) {
+    pendingOpener = opener || null;
+    pushedOverlay = true;
+    location.hash = hash;
+  }
+  function popOverlay() {
+    if (pushedOverlay) { pushedOverlay = false; history.back(); return; }
+    history.replaceState(null, '', location.pathname + location.search + '#' + currentTab());
+    syncOverlays(currentTab(), '', false);
+  }
+  const openMeet = (opener) => pushOverlay('#' + currentTab() + '/meet', opener);
+  const openMap = (id, opener) => pushOverlay('#ground/map-' + id, opener);
+
+  window.addEventListener('hashchange', () => { setMenu(false); route(false); });
 
   /* ============================================================
      Start Here
@@ -194,6 +270,18 @@
     $('#video-caption').append(
       `Presented by the Power HUG team: ${D.video.presenters}. `,
       extLink('Watch on YouTube', D.video.watchUrl), ' · ', extLink('Open the deck', D.video.deckUrl));
+
+    const chap = $('.chapters');
+    const more = h('button', { class: 'chapters-more', type: 'button', 'aria-expanded': 'false' });
+    const moreLabel = () => {
+      const open = chap.classList.contains('open');
+      more.setAttribute('aria-expanded', String(open));
+      more.textContent = '';
+      more.append(open ? 'Show fewer topics' : `Show all ${D.video.chapters.length} topics`, icon('chev', 16));
+    };
+    more.addEventListener('click', () => { chap.classList.toggle('open'); moreLabel(); });
+    moreLabel();
+    chap.append(more);
   }
 
   /* ----- due soon ----- */
@@ -252,8 +340,8 @@
   }
 
   const GUIDE_DESC = {
-    before: 'A checklist with live deadlines. Your progress saves on this device.',
-    ground: 'Badge pickup, the keynote-morning route and tips for getting around the MGM Grand.',
+    before: 'A checklist with live deadlines, plus a way to request time with product group leaders. Your progress saves on this device.',
+    ground: 'Venue maps you can zoom, badge pickup, the keynote-morning route and tips for getting around the MGM Grand.',
     evenings: 'Healthcare happy hours first, then every open event, with a Tuesday overlap timeline.',
     days: 'Our recommended sessions, one day at a time.',
     faq: 'Official answers and the links worth bookmarking.'
@@ -291,9 +379,12 @@
     (it.links || []).forEach(l => {
       links.push(l.href.startsWith('mailto:') ? h('a', { href: l.href }, l.label) : extLink(l.label, l.href));
     });
-    if (it.action === 'video') links.push(h('button', { type: 'button', on: { click: () => goToVideo(0) } }, 'Play the video'));
-    if (it.action === 'tab:evenings') links.push(h('a', { href: '#evenings' }, 'See the evening events'));
-    if (it.action === 'tab:ground') links.push(h('a', { href: '#ground' }, 'See badge pickup hours'));
+    const actions = [].concat(it.action || []);
+    if (actions.includes('video')) links.push(h('button', { type: 'button', on: { click: () => goToVideo(0) } }, 'Play the video'));
+    if (actions.includes('tab:evenings')) links.push(h('a', { href: '#evenings' }, 'See the evening events'));
+    if (actions.includes('tab:ground')) links.push(h('a', { href: '#ground' }, 'See badge pickup hours'));
+    if (actions.includes('maps')) links.push(h('a', { href: '#ground/maps' }, 'Open the maps'));
+    if (actions.includes('meet')) links.push(h('button', { class: 'btn primary sm', type: 'button', on: { click: (e) => openMeet(e.currentTarget) } }, 'Draft the request email'));
     const id = 'chk-' + it.id;
     return h('li', { class: 'cl-item' + (isDone ? ' done' : ''), dataset: { id: it.id } },
       h('input', { class: 'check', type: 'checkbox', id, checked: isDone, on: { change: (e) => toggleDone(it, e.target.checked) } }),
@@ -325,10 +416,12 @@
     const n = D.checklist.filter(i => done[i.id]).length;
     const root = $('#progress');
     root.textContent = '';
-    root.append(
+    const kids = [
       h('div', { class: 'meter', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': String(total), 'aria-valuenow': String(n), 'aria-label': 'Checklist progress' }, h('i', { style: `width:${Math.round(n / total * 100)}%` })),
-      h('span', { class: 'progress-text' }, n === total ? 'All done. See you in Las Vegas.' : `${n} of ${total} done`),
-      n ? h('button', { class: 'linkbtn', type: 'button', on: { click: () => { store.set('done', {}); renderChecklist(); renderDue(); } } }, 'Reset') : null);
+      h('span', { class: 'progress-text' }, n === total ? 'All done. See you in Las Vegas.' : `${n} of ${total} done`)
+    ];
+    if (n) kids.push(h('button', { class: 'linkbtn', type: 'button', on: { click: () => { store.set('done', {}); renderChecklist(); renderDue(); } } }, 'Reset'));
+    root.append(...kids);
   }
 
   /* ============================================================
@@ -506,7 +599,7 @@
     const root = $('#controls');
     const chips = (label, key, opts) => h('div', { class: 'chipgroup', role: 'group', 'aria-label': label },
       h('span', { class: 'lbl' }, label),
-      opts.map(([val, text]) => h('button', { class: 'chipbtn', type: 'button', dataset: { key, val }, 'aria-pressed': 'false', on: { click: () => setFilter(key, val) } }, text)));
+      h('div', { class: 'chips' }, opts.map(([val, text]) => h('button', { class: 'chipbtn', type: 'button', dataset: { key, val }, 'aria-pressed': 'false', on: { click: () => setFilter(key, val) } }, text))));
     root.append(
       chips('Day', 'day', [['all', 'All'], ...D.eventDays.map(d => [d.date, `${d.short} ${d.n.replace('Oct ', '')}`])]),
       chips('Show', 'aud', [['all', 'Everything'], ['hls', 'Healthcare'], ['open', 'All industries'], ['exec', 'Executive'], ['official', 'Official PPCC']]),
@@ -570,11 +663,19 @@
         h('div', { class: 'tl-track' }, bar)));
     });
     if (peak) body.append(h('div', { class: 'tl-peak', style: `--l:${((peak.from - START) / SPAN).toFixed(4)};--w:${((peak.to - peak.from) / SPAN).toFixed(4)}`, 'aria-hidden': 'true' }));
-    const foot = [];
+    const foot = [h('p', { class: 'tl-hint' }, 'Swipe sideways to see the whole evening.')];
     if (peak) foot.push(h('p', { class: 'tl-foot' }, `Shaded: the busiest window, ${fmtMins(peak.from)} to ${fmtMins(peak.to)}, with ${peak.n} events at once. Select any bar for details.`));
     foot.push(h('div', { class: 'tl-legend' }, ['hls', 'open', 'official'].map(tagEl)));
     foot.push(h('p', { class: 'tl-foot' }, 'Executive experiences and events without published times are not shown here. Switch to List to see them.'));
     root.append(h('div', { class: 'tl' }, h('div', { class: 'tl-inner' }, hours, body, foot)));
+    // on phones the track scrolls sideways, so start at the first event instead of an empty noon
+    requestAnimationFrame(() => {
+      const tl = $('.tl', root);
+      if (!tl || tl.scrollWidth <= tl.clientWidth + 2) return;
+      const lw = parseFloat(getComputedStyle(tl).getPropertyValue('--lw')) || 0;
+      const x = Math.min(...$$('.tl-bar', tl).map(b => b.getBoundingClientRect().left - tl.getBoundingClientRect().left + tl.scrollLeft));
+      tl.scrollLeft = Math.max(0, x - lw - 18);
+    });
   }
 
   function jumpTo(id) {
@@ -678,7 +779,7 @@
   function updateFab() {
     if (!fab) {
       fab = h('button', { class: 'plan-fab', type: 'button', hidden: true, on: { click: () => $('#plan').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }) } });
-      $('#panel-evenings').append(fab);
+      document.body.append(fab);
     }
     const n = planEvents().length;
     fab.textContent = `My plan (${n})`;
@@ -726,7 +827,11 @@
   function renderFaq() {
     const list = $('#faq-list');
     D.faq.forEach(f => list.append(h('details', { class: 'q', dataset: { text: (f.q + ' ' + f.a).toLowerCase() } },
-      h('summary', {}, f.q), h('p', { class: 'ans' }, f.a))));
+      h('summary', {}, f.q),
+      h('div', { class: 'ans' },
+        h('p', {}, f.a),
+        f.action === 'meet' ? h('div', { class: 'ans-cta' }, h('button', { class: 'btn primary sm', type: 'button', on: { click: (e) => openMeet(e.currentTarget) } }, 'Draft the request email')) : null,
+        f.action === 'maps' ? h('div', { class: 'ans-cta' }, h('a', { class: 'btn primary sm', href: '#ground/maps' }, 'Open the maps')) : null))));
     $('#faq-search').addEventListener('input', (e) => {
       const q = e.target.value.trim().toLowerCase();
       let n = 0;
@@ -740,10 +845,364 @@
   }
 
   /* ============================================================
+     Dialog helpers
+     ============================================================ */
+  const dlgs = {
+    isOpen: (dlg) => dlg.hasAttribute('open'),
+    show(dlg, opener) {
+      dlg._opener = opener && document.contains(opener) ? opener : document.activeElement;
+      if (typeof dlg.showModal === 'function') { if (!dlg.open) dlg.showModal(); }
+      else { dlg.setAttribute('open', ''); dlg.classList.add('dlg-fallback'); }
+      document.documentElement.classList.add('dlg-open');
+    },
+    hide(dlg) {
+      if (dlg.hasAttribute('open')) { if (typeof dlg.close === 'function') dlg.close(); else dlg.removeAttribute('open'); }
+      if (!$('dialog[open]')) document.documentElement.classList.remove('dlg-open');
+      const el = dlg._opener;
+      dlg._opener = null;
+      if (el && el.focus && document.contains(el)) el.focus({ preventScroll: true });
+    },
+    // Esc and a click on the backdrop take the same path as the close button
+    wire(dlg, onClose) {
+      let downOnBackdrop = false;
+      dlg.addEventListener('cancel', (e) => { e.preventDefault(); onClose(); });
+      dlg.addEventListener('pointerdown', (e) => { downOnBackdrop = e.target === dlg; });
+      dlg.addEventListener('click', (e) => { if (e.target === dlg && downOnBackdrop) onClose(); });
+    }
+  };
+
+  /* ============================================================
+     Venue maps: cards on On the Ground, full-screen viewer
+     ============================================================ */
+  function renderMaps() {
+    const M = D.maps;
+    const official = $('#maps-official');
+    official.href = M.official.href;
+    official.textContent = '';
+    official.append(M.official.label, ' ', icon('ext', 13), h('span', { class: 'sr-only' }, ' (opens in a new tab)'));
+    const grid = $('#map-grid');
+    M.items.forEach(m => grid.append(h('li', {},
+      h('button', { class: 'map-card', type: 'button', dataset: { map: m.id }, 'aria-label': `Open map: ${m.title}`, on: { click: (e) => openMap(m.id, e.currentTarget) } },
+        h('span', { class: 'map-thumb' },
+          h('img', { src: m.thumb, width: m.tw, height: m.th, alt: '', loading: 'lazy', decoding: 'async' }),
+          h('span', { class: 'map-open', 'aria-hidden': 'true' }, icon('zoom', 18))),
+        h('span', { class: 'map-meta' }, h('b', {}, m.title), h('small', {}, m.blurb))))));
+    $('#map-credit').append(
+      'Maps are shown as presented in the ', extLink('Power HUG Know Before You Go session', D.video.watchUrl),
+      '. They are a guide only, so follow the signs on site and check Whova for room locations.');
+  }
+
+  function createMapViewer() {
+    const dlg = $('#map-dialog'), stage = $('#map-stage'), img = $('#map-img'), info = $('#map-info');
+    const items = D.maps.items;
+    const wide = matchMedia('(min-width: 1000px)');
+    const v = { i: 0, s: 1, tx: 0, ty: 0, min: 1, max: 4, pointers: new Map(), pinch: null, multi: false, lastTap: null };
+    const cur = () => items[v.i];
+    const size = () => ({ w: stage.clientWidth, h: stage.clientHeight });
+    const local = (e) => { const r = stage.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+
+    function clamp() {
+      const { w, h: sh } = size(), m = cur();
+      const iw = m.w * v.s, ih = m.h * v.s;
+      v.tx = iw <= w ? (w - iw) / 2 : Math.min(0, Math.max(w - iw, v.tx));
+      v.ty = ih <= sh ? (sh - ih) / 2 : Math.min(0, Math.max(sh - ih, v.ty));
+    }
+    function apply() {
+      img.style.transform = `translate3d(${v.tx.toFixed(2)}px, ${v.ty.toFixed(2)}px, 0) scale(${v.s.toFixed(4)})`;
+      $('#zoom-out').disabled = v.s <= v.min * 1.001;
+      $('#zoom-in').disabled = v.s >= v.max * 0.999;
+    }
+    function limits() {
+      const { w, h: sh } = size(), m = cur();
+      v.min = Math.min(w / m.w, sh / m.h, 1);
+      v.max = Math.max(v.min * 8, 3);
+    }
+    function reset() { limits(); v.s = v.min; clamp(); apply(); }
+    function zoomAt(ns, cx, cy) {
+      ns = Math.min(v.max, Math.max(v.min, ns));
+      const k = ns / v.s;
+      v.tx = cx - (cx - v.tx) * k;
+      v.ty = cy - (cy - v.ty) * k;
+      v.s = ns;
+      clamp(); apply();
+    }
+    const zoomCenter = (k) => { const { w, h: sh } = size(); zoomAt(v.s * k, w / 2, sh / 2); };
+    const panBy = (dx, dy) => { v.tx += dx; v.ty += dy; clamp(); apply(); };
+
+    function fillInfo(m) {
+      const body = $('#map-info-body');
+      body.textContent = '';
+      body.scrollTop = 0;
+      body.append(h('p', {}, m.blurb));
+      if (m.note) body.append(h('p', { class: 'mv-note' }, m.note));
+      (m.directions || []).forEach(d => body.append(h('div', { class: 'dirs' },
+        h('h4', {}, d.from), h('ol', {}, d.steps.map(s => h('li', {}, s))))));
+      body.append(h('div', { class: 'mv-links' },
+        extLink('Open the image full size', m.src),
+        extLink(`Hear it explained (${mmss(m.videoAt)})`, `${D.video.watchUrl}&t=${m.videoAt}s`),
+        extLink(D.maps.official.label, D.maps.official.href)));
+    }
+    function show(i) {
+      v.i = (i + items.length) % items.length;
+      const m = cur();
+      $('#map-title').textContent = m.title;
+      $('#map-count').textContent = `Map ${v.i + 1} of ${items.length}`;
+      img.alt = m.alt;
+      img.style.width = m.w + 'px';
+      img.style.height = m.h + 'px';
+      img.style.background = `#fff url("${m.thumb}") center / 100% 100% no-repeat`;
+      img.src = m.src;
+      fillInfo(m);
+      reset();
+    }
+    function go(d) {
+      show(v.i + d);
+      history.replaceState(null, '', '#ground/map-' + cur().id);
+    }
+
+    /* drag to pan, pinch to zoom, double-tap to toggle zoom, wheel to zoom */
+    function startPinch() {
+      const [a, b] = [...v.pointers.values()];
+      v.pinch = { d: Math.hypot(a.x - b.x, a.y - b.y) || 1, mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2 };
+      v.multi = true;
+    }
+    function updatePinch() {
+      if (!v.pinch || v.pointers.size < 2) return;
+      const [a, b] = [...v.pointers.values()];
+      const d = Math.hypot(a.x - b.x, a.y - b.y) || 1;
+      const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+      const r = stage.getBoundingClientRect();
+      const ns = Math.min(v.max, Math.max(v.min, v.s * d / v.pinch.d));
+      const k = ns / v.s;
+      const cx = v.pinch.mx - r.left, cy = v.pinch.my - r.top;
+      v.tx = cx - (cx - v.tx) * k + (mx - v.pinch.mx);
+      v.ty = cy - (cy - v.ty) * k + (my - v.pinch.my);
+      v.s = ns;
+      v.pinch = { d, mx, my };
+      clamp(); apply();
+    }
+    function tap(e) {
+      const [x, y] = local(e), now = performance.now(), last = v.lastTap;
+      if (last && now - last.t < 320 && Math.hypot(x - last.x, y - last.y) < 40) {
+        v.lastTap = null;
+        if (v.s > v.min * 1.2) reset(); else zoomAt(Math.min(v.max, Math.max(1, v.min * 2)), x, y);
+      } else v.lastTap = { x, y, t: now };
+    }
+    stage.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      try { stage.setPointerCapture(e.pointerId); } catch (err) { /* synthetic pointer */ }
+      v.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t0: performance.now() });
+      if (v.pointers.size === 2) startPinch();
+      stage.classList.add('grabbing');
+    });
+    stage.addEventListener('pointermove', (e) => {
+      const p = v.pointers.get(e.pointerId);
+      if (!p) return;
+      const dx = e.clientX - p.x, dy = e.clientY - p.y;
+      p.x = e.clientX; p.y = e.clientY;
+      if (v.pointers.size === 1) panBy(dx, dy); else updatePinch();
+    });
+    const endPointer = (e) => {
+      const p = v.pointers.get(e.pointerId);
+      if (!p) return;
+      v.pointers.delete(e.pointerId);
+      if (e.type === 'pointerup' && !v.multi && Math.hypot(e.clientX - p.x0, e.clientY - p.y0) < 8 && performance.now() - p.t0 < 350) tap(e);
+      if (v.pointers.size < 2) v.pinch = null;
+      if (!v.pointers.size) { v.multi = false; stage.classList.remove('grabbing'); }
+    };
+    stage.addEventListener('pointerup', endPointer);
+    stage.addEventListener('pointercancel', endPointer);
+    stage.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const dy = e.deltaMode === 1 ? e.deltaY * 33 : e.deltaMode === 2 ? e.deltaY * 400 : e.deltaY;
+      const [x, y] = local(e);
+      zoomAt(v.s * Math.exp(-dy * (e.ctrlKey ? 0.01 : 0.0018)), x, y);
+    }, { passive: false });
+
+    dlg.addEventListener('keydown', (e) => {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      const onStage = e.target === stage || e.target === dlg;
+      const zoomed = v.s > v.min * 1.01;
+      const key = e.key;
+      if (key === '+' || key === '=') { e.preventDefault(); zoomCenter(1.4); }
+      else if (key === '-' || key === '_') { e.preventDefault(); zoomCenter(1 / 1.4); }
+      else if (key === '0') { e.preventDefault(); reset(); }
+      else if (onStage && key === 'ArrowLeft') { e.preventDefault(); if (zoomed) panBy(90, 0); else go(-1); }
+      else if (onStage && key === 'ArrowRight') { e.preventDefault(); if (zoomed) panBy(-90, 0); else go(1); }
+      else if (onStage && zoomed && key === 'ArrowUp') { e.preventDefault(); panBy(0, 90); }
+      else if (onStage && zoomed && key === 'ArrowDown') { e.preventDefault(); panBy(0, -90); }
+    });
+    $('#map-prev').addEventListener('click', () => go(-1));
+    $('#map-next').addEventListener('click', () => go(1));
+    $('#zoom-in').addEventListener('click', () => zoomCenter(1.5));
+    $('#zoom-out').addEventListener('click', () => zoomCenter(1 / 1.5));
+    $('#zoom-fit').addEventListener('click', reset);
+    $('#map-close').addEventListener('click', popOverlay);
+    dlgs.wire(dlg, popOverlay);
+
+    // keep the view sensible on rotation and when the info panel opens or closes
+    const onResize = () => {
+      if (!dlgs.isOpen(dlg)) return;
+      const wasFit = v.s <= v.min * 1.01;
+      limits();
+      v.s = wasFit ? v.min : Math.min(v.max, Math.max(v.min, v.s));
+      clamp(); apply();
+    };
+    if ('ResizeObserver' in window) new ResizeObserver(onResize).observe(stage);
+    else window.addEventListener('resize', onResize);
+    wide.addEventListener('change', () => { info.open = wide.matches; });
+
+    return {
+      isOpen: () => dlgs.isOpen(dlg),
+      currentId: () => cur().id,
+      open(id, opener) {
+        dlgs.show(dlg, opener);
+        info.open = wide.matches;
+        show(Math.max(0, items.findIndex(m => m.id === id)));
+        stage.focus({ preventScroll: true });
+      },
+      close() { dlgs.hide(dlg); }
+    };
+  }
+
+  /* ============================================================
+     Request a meeting with Microsoft product group leaders
+     ============================================================ */
+  function createMeet() {
+    const dlg = $('#meet-dialog'), form = $('#meet-form');
+    const fld = { name: $('#m-name'), org: $('#m-org'), role: $('#m-role'), details: $('#m-details'), outcome: $('#m-outcome') };
+    const send = $('#meet-send'), copyBtn = $('#meet-copy'), msg = $('#meet-msg');
+    const OTHER = D.meet.topics[D.meet.topics.length - 1];
+    const enc = encodeURIComponent;
+    const crlf = (s) => s.replace(/\n/g, '\r\n');
+    let composed = null, long = false;
+
+    const optEl = (group, text) => {
+      const input = h('input', { type: 'checkbox', name: group, value: text });
+      const label = h('label', { class: 'opt' }, input, h('span', {}, text));
+      input.addEventListener('change', () => label.classList.toggle('on', input.checked));
+      return label;
+    };
+    D.meet.topics.forEach(t => $('#m-topics').append(optEl('topic', t)));
+    D.meet.days.forEach(d => $('#m-days').append(optEl('day', d)));
+    const picked = (sel) => $$(sel + ' input:checked').map(i => i.value);
+
+    function compose() {
+      const name = fld.name.value.trim(), org = fld.org.value.trim(), role = fld.role.value.trim();
+      const details = fld.details.value.trim(), outcome = fld.outcome.value.trim();
+      const topics = picked('#m-topics'), days = picked('#m-days');
+      const L = [
+        'Hello Microsoft healthcare team,', '',
+        `I will be at the Power Platform Community Conference (${D.conference.venue}, Oct 27 to 29) and would like to meet with Microsoft product group leaders while I am there.`, '',
+        'About me',
+        `- Name: ${name || '[your name]'}`,
+        `- Organization: ${org || '[your organization]'}`];
+      if (role) L.push(`- Role: ${role}`);
+      L.push('', 'What I would like to discuss');
+      if (topics.length) topics.forEach(t => L.push(`- ${t}`)); else L.push('- [choose at least one topic]');
+      if (details) L.push('', 'More detail', details);
+      if (outcome) L.push('', 'What would make the meeting worthwhile', outcome);
+      if (days.length) L.push('', `Best days: ${days.join('; ')}`);
+      L.push('', 'I understand availability is limited. Could you let me know what is possible and who from the product group would be the best fit?', '', 'Thank you,', name || '[your name]');
+      return { name, org, topics, details, subject: D.meet.subject + (org ? ` (${org})` : ''), body: L.join('\n') };
+    }
+
+    function problems() {
+      const c = composed, out = [];
+      if (!c.name) out.push({ el: fld.name, text: 'Add your name.' });
+      if (!c.org) out.push({ el: fld.org, text: 'Add your organization.' });
+      if (!c.topics.length) out.push({ el: $('#m-topics input'), text: 'Choose at least one topic.' });
+      else if (c.topics.length === 1 && c.topics[0] === OTHER && !c.details) out.push({ el: fld.details, text: 'Tell us what the topic is.' });
+      return out;
+    }
+    function flag(list) {
+      $$('.invalid', dlg).forEach(el => el.classList.remove('invalid'));
+      list.forEach(p => { const box = p.el.closest('.field, .field-set'); if (box) box.classList.add('invalid'); });
+    }
+    const say = (text, ok) => { msg.textContent = text; msg.classList.toggle('ok', !!ok); };
+
+    function update() {
+      composed = compose();
+      const c = composed, to = D.contact.email;
+      $('#meet-to').textContent = to;
+      $('#meet-subject').textContent = c.subject;
+      $('#meet-preview').textContent = c.body;
+      const full = `mailto:${to}?subject=${enc(c.subject)}&body=${enc(crlf(c.body))}`;
+      long = full.length > 1900;
+      const body = long ? 'Hello Microsoft healthcare team,\n\nMy full request is on my clipboard. Please paste it here before sending.\n' : c.body;
+      send.href = long ? `mailto:${to}?subject=${enc(c.subject)}&body=${enc(crlf(body))}` : full;
+      $('#meet-outlook').href = `https://outlook.office.com/mail/deeplink/compose?to=${enc(to)}&subject=${enc(c.subject)}&body=${enc(body)}`;
+      $('#meet-gmail').href = `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(to)}&su=${enc(c.subject)}&body=${enc(body)}`;
+      send.setAttribute('aria-disabled', String(problems().length > 0));
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+      return new Promise((resolve, reject) => {
+        const ta = h('textarea', { 'aria-hidden': 'true', readonly: true, style: 'position:fixed;left:-9999px;top:0;opacity:0' });
+        ta.value = text;
+        document.body.append(ta);
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        try { document.execCommand('copy') ? resolve() : reject(new Error('copy failed')); } catch (err) { reject(err); } finally { ta.remove(); }
+      });
+    }
+    const fullText = () => `To: ${D.contact.email}\nSubject: ${composed.subject}\n\n${composed.body}`;
+
+    // returns true when the draft can open; otherwise shows what is missing
+    function guard(e) {
+      update();
+      const p = problems();
+      flag(p);
+      if (!p.length) return true;
+      e.preventDefault();
+      say(p.map(x => x.text).join(' '), false);
+      p[0].el.focus();
+      return false;
+    }
+    function openedDraft(e) {
+      if (!guard(e)) return;
+      if (long) copyText(fullText()).then(
+        () => say('Your request is long, so the full text is on your clipboard. Paste it into the email that opens.', true),
+        () => say('Your request is long. Use Copy email text, then paste it into the email.', false));
+      else say('Your email app should open with the draft. If nothing happens, use Copy email text or one of the links below.', true);
+    }
+    send.addEventListener('click', openedDraft);
+    $('#meet-outlook').addEventListener('click', openedDraft);
+    $('#meet-gmail').addEventListener('click', openedDraft);
+    copyBtn.addEventListener('click', (e) => {
+      if (!guard(e)) return;
+      copyText(fullText()).then(
+        () => say(`Copied. Paste it into a new email to ${D.contact.email}.`, true),
+        () => say('Could not copy automatically. Select the text in the preview and copy it.', false));
+    });
+
+    const refresh = () => { flag([]); say(''); update(); };
+    form.addEventListener('input', refresh);
+    form.addEventListener('change', refresh);
+    form.addEventListener('submit', (e) => e.preventDefault());
+    $('#meet-close').addEventListener('click', popOverlay);
+    dlgs.wire(dlg, popOverlay);
+    update();
+
+    return {
+      isOpen: () => dlgs.isOpen(dlg),
+      open(opener) {
+        dlgs.show(dlg, opener);
+        update();
+        $('#meet-body').scrollTop = 0;
+        if (matchMedia('(pointer: fine)').matches) fld.name.focus({ preventScroll: true });
+      },
+      close() { dlgs.hide(dlg); }
+    };
+  }
+
+  /* ============================================================
      Boot
      ============================================================ */
   function boot() {
     buildTabs();
+    buildMenu();
     renderCountdown();
     renderVideo();
     renderDue();
@@ -757,9 +1216,13 @@
     renderPlan();
     renderDays();
     renderFaq();
+    renderMaps();
+    maps = createMapViewer();
+    meet = createMeet();
     $('#help-cta').href = `mailto:${D.contact.email}?subject=${encodeURIComponent(D.contact.subject)}`;
+    $('#help-meet').addEventListener('click', (e) => openMeet(e.currentTarget));
     $('#updated').textContent = `${fmtMD(D.updated)}, 2026`;
-    activate(hashTab() || 'start', false);
+    route(true);
   }
   boot();
 })();

@@ -2,30 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
   <title>Know Before You Go · PPCC 2026 for Healthcare &amp; Life Sciences</title>
   <meta name="description" content="A healthcare-focused Know Before You Go guide for the Power Platform Community Conference, Oct 27 to 29, 2026, at the MGM Grand in Las Vegas.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#090d1b">
+  <meta name="color-scheme" content="dark">
+  <meta name="format-detection" content="telephone=no">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/montserrat-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="=3a1f2721fc">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="glow" aria-hidden="true"></div>
 
-  <header class="site-header">
+  <header class="site-header" id="site-header">
     <div class="wrap header-row">
       <a class="brand" href="#start" aria-label="PPCC 2026 Know Before You Go, back to Start Here">
         <img src="assets/img/ppcc-logo.svg" width="176" height="29" alt="Power Platform Community Conference">
       </a>
       <p class="header-tag"><span>Know Before You Go</span><b>Healthcare &amp; Life Sciences</b></p>
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-menu">
+        <span class="menu-current" id="menu-current" aria-hidden="true">Start Here</span>
+        <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="sr-only">Menu</span>
+      </button>
     </div>
     <div class="wrap">
       <div class="tabs" id="tablist" role="tablist" aria-label="Guide sections"></div>
     </div>
+    <nav class="nav-menu" id="nav-menu" aria-label="Guide sections" hidden></nav>
   </header>
+  <div class="nav-scrim" id="nav-scrim" hidden></div>
 
   <noscript>
     <div class="wrap"><p class="noscript">This guide uses JavaScript for its tabs and planner. Please enable it, or visit <a href="https://powerplatformconf.com">powerplatformconf.com</a> for the official details.</p></div>
@@ -108,8 +117,20 @@
       <div class="wrap page-head">
         <p class="eyebrow"><i class="cross" aria-hidden="true"></i>On the ground</p>
         <h2 class="page-title">Find your way around the MGM Grand</h2>
-        <p class="lede">The venue is big. Start with the one morning that matters most, then use the notes below to save time and steps.</p>
+        <p class="lede">The venue is big. Open a map first, follow the one morning that matters most, then use the notes below to save time and steps.</p>
       </div>
+
+      <section class="wrap maps" id="maps" aria-labelledby="maps-h">
+        <div class="maps-head">
+          <div>
+            <h3 id="maps-h">Venue and conference maps</h3>
+            <p>Select a map to open it, then pinch, scroll or use the zoom buttons to look closer. Maps are from the Power HUG Know Before You Go session.</p>
+          </div>
+          <a class="textlink" id="maps-official" target="_blank" rel="noopener noreferrer">Official MGM Grand map (PDF)</a>
+        </div>
+        <ul class="map-grid" id="map-grid"></ul>
+        <p class="map-credit" id="map-credit"></p>
+      </section>
 
       <section class="wrap route" aria-labelledby="route-h">
         <div class="route-head">
@@ -271,9 +292,12 @@
     <div class="wrap help-row">
       <div>
         <h2 id="help-h">Questions before you go?</h2>
-        <p>Your Microsoft healthcare team can help with introductions, evening-event invitations and time with Microsoft leaders.</p>
+        <p>Your Microsoft healthcare team can help with introductions, evening-event invitations and time to meet with Microsoft product group leaders.</p>
       </div>
-      <a class="btn primary" id="help-cta" href="#">Email your Microsoft team</a>
+      <div class="help-actions">
+        <a class="btn primary" id="help-cta" href="#">Email your Microsoft team</a>
+        <button class="btn ghost" id="help-meet" type="button">Request a product group meeting</button>
+      </div>
     </div>
   </section>
 
@@ -287,7 +311,111 @@
     </div>
   </footer>
 
-  <script src="data.js" charset="utf-8"></script>
-  <script src="app.js" charset="utf-8"></script>
+  <!-- ============ Request a product group meeting ============ -->
+  <dialog id="meet-dialog" class="dlg dlg-form" aria-labelledby="meet-title">
+    <div class="dlg-shell">
+      <header class="dlg-head">
+        <div>
+          <p class="eyebrow"><i class="cross" aria-hidden="true"></i>Request a meeting</p>
+          <h2 id="meet-title">Meet with Microsoft product group leaders</h2>
+        </div>
+        <button class="icon-btn" id="meet-close" type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>
+        </button>
+      </header>
+
+      <div class="dlg-body" id="meet-body">
+        <p class="dlg-lede">Tell us what you want to discuss. We’ll draft an email to your Microsoft healthcare team asking them to request time with the product group during the conference. Availability is limited and not guaranteed, so send it early.</p>
+
+        <form id="meet-form" novalidate>
+          <div class="field-row">
+            <label class="field" for="m-name"><span>Your name <i class="req" aria-hidden="true">*</i></span>
+              <input id="m-name" type="text" autocomplete="name" required></label>
+            <label class="field" for="m-org"><span>Organization <i class="req" aria-hidden="true">*</i></span>
+              <input id="m-org" type="text" autocomplete="organization" required></label>
+          </div>
+          <label class="field" for="m-role"><span>Your role <small>optional</small></span>
+            <input id="m-role" type="text" autocomplete="organization-title"></label>
+
+          <fieldset class="field-set">
+            <legend>What would you like to discuss? <i class="req" aria-hidden="true">*</i> <small>Choose all that apply</small></legend>
+            <div class="opts" id="m-topics"></div>
+          </fieldset>
+
+          <label class="field" for="m-details"><span>Anything specific to cover? <small>optional</small></span>
+            <textarea id="m-details" rows="4" maxlength="600" placeholder="A challenge you are facing, a decision coming up, or a question you want answered"></textarea></label>
+          <label class="field" for="m-outcome"><span>What would make the meeting worthwhile? <small>optional</small></span>
+            <textarea id="m-outcome" rows="2" maxlength="300" placeholder="For example, a clear next step or a roadmap view for your team"></textarea></label>
+
+          <fieldset class="field-set">
+            <legend>When are you free? <small>optional</small></legend>
+            <div class="opts opts-inline" id="m-days"></div>
+          </fieldset>
+        </form>
+
+        <section class="meet-preview" aria-labelledby="meet-preview-h">
+          <h3 id="meet-preview-h">Your email</h3>
+          <p class="meet-line">To <b id="meet-to"></b></p>
+          <p class="meet-line">Subject <b id="meet-subject"></b></p>
+          <pre class="meet-pre" id="meet-preview" tabindex="0" aria-label="Email preview"></pre>
+        </section>
+      </div>
+
+      <footer class="dlg-foot">
+        <p class="dlg-msg" id="meet-msg" role="status" aria-live="polite"></p>
+        <div class="dlg-actions">
+          <a class="btn primary" id="meet-send" href="#" role="button" aria-disabled="true">Open email draft</a>
+          <button class="btn ghost" id="meet-copy" type="button">Copy email text</button>
+        </div>
+        <p class="dlg-alt">No email app set up? Try
+          <a id="meet-outlook" target="_blank" rel="noopener noreferrer">Outlook on the web</a> or
+          <a id="meet-gmail" target="_blank" rel="noopener noreferrer">Gmail</a>.</p>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- ============ Map viewer ============ -->
+  <dialog id="map-dialog" class="dlg dlg-map" aria-labelledby="map-title">
+    <div class="mv">
+      <header class="mv-bar">
+        <div class="mv-titles">
+          <h2 id="map-title"></h2>
+          <p id="map-count"></p>
+        </div>
+        <button class="icon-btn" id="map-close" type="button" aria-label="Close map">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>
+        </button>
+      </header>
+      <div class="mv-stage" id="map-stage" tabindex="0" role="group" aria-label="Map viewer" aria-describedby="map-hint">
+        <img id="map-img" alt="" draggable="false" decoding="async">
+        <p class="mv-hint" aria-hidden="true"><span class="hint-touch">Pinch to zoom · Double-tap to magnify</span><span class="hint-mouse">Scroll to zoom · Drag to move</span></p>
+      </div>
+      <p class="sr-only" id="map-hint">Drag to move the map. Pinch, scroll or use the zoom buttons to zoom. With the map focused, plus and minus zoom, zero resets the view, and the arrow keys move the map.</p>
+      <div class="mv-tools">
+        <button class="tool" id="map-prev" type="button" aria-label="Previous map">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        </button>
+        <div class="mv-zoom" role="group" aria-label="Zoom">
+          <button class="tool" id="zoom-out" type="button" aria-label="Zoom out">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>
+          </button>
+          <button class="tool tool-fit" id="zoom-fit" type="button">Fit</button>
+          <button class="tool" id="zoom-in" type="button" aria-label="Zoom in">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>
+          </button>
+        </div>
+        <button class="tool" id="map-next" type="button" aria-label="Next map">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        </button>
+      </div>
+      <details class="mv-info" id="map-info">
+        <summary>About this map</summary>
+        <div class="mv-info-body" id="map-info-body"></div>
+      </details>
+    </div>
+  </dialog>
+
+  <script src="=a69170b7fc" charset="utf-8"></script>
+  <script src="=a0222904b5" charset="utf-8"></script>
 </body>
 </html>
