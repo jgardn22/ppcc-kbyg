@@ -211,7 +211,7 @@ window.KBYG = {
 
   /* ---------- Evening events ----------
      audience: hls | open | exec | official | tbd
-     access:   register | ask | badge
+     access:   register | ask | badge | open
      Healthcare & Life Sciences events and industry-agnostic events only.
      ------------------------------------------------------------ */
   audiences: {
@@ -224,7 +224,8 @@ window.KBYG = {
   accessLabels: {
     register: "Registration required",
     ask:      "Ask your Microsoft account team",
-    badge:    "Included with your badge"
+    badge:    "Included with your badge",
+    open:     "Open: just show up"
   },
   eventDays: [
     { date: "2026-10-26", label: "Monday",    short: "Mon", n: "Oct 26" },
@@ -265,13 +266,14 @@ window.KBYG = {
 
     { id: "root16-bd", day: "2026-10-27", start: "16:00", end: "21:00",
       title: "Happy Hour at BrewDog", host: "Root16 (a Reply company)", hostUrl: "https://www.reply.com/root16-reply/en",
-      venue: "BrewDog Las Vegas", kind: "Happy hour", audience: "open", access: "register",
-      summary: "A drop-in happy hour for customers, prospects and Microsoft teams, with a long window so you can come before or after other plans.",
-      reg: { url: "https://assets-usa.mkt.dynamics.com/26f01a67-1f8c-45da-a661-979b54ab257b/digitalassets/standaloneforms/38e833bb-f39f-f111-b8dc-000d3a31542c", label: "Register" } },
+      venue: "BrewDog Las Vegas (5-minute walk from MGM Grand)", address: "3767 Las Vegas Blvd S, Las Vegas, NV", kind: "Happy hour", audience: "open", access: "register",
+      summary: "A happy hour for customers, prospects and Microsoft teams, away from the conference floor, with a long window so you can come before or after other plans.",
+      reg: { url: "https://assets-usa.mkt.dynamics.com/26f01a67-1f8c-45da-a661-979b54ab257b/digitalassets/standaloneforms/38e833bb-f39f-f111-b8dc-000d3a31542c", label: "Register" },
+      regNote: "Please RSVP so Root16 can plan for an estimated 200 to 300 guests." },
 
     { id: "alithya", day: "2026-10-27", start: "18:00", end: "21:00",
       title: "Client Reception at Topgolf", host: "Alithya", hostUrl: "https://www.alithya.com/en",
-      venue: "Topgolf", kind: "Reception", audience: "open", access: "ask",
+      venue: "Topgolf, next to MGM Grand", kind: "Reception", audience: "open", access: "ask",
       summary: "A relaxed client reception for PPCC customers, prospects and Microsoft teams.",
       regNote: "No public link yet. Your Microsoft account team can connect you with Alithya." },
 
@@ -295,8 +297,8 @@ window.KBYG = {
 
     { id: "root16-lounge", day: "2026-10-28", start: "09:00", end: "16:00",
       title: "Hospitality Lounge at Emeril’s", host: "Root16 (a Reply company)", hostUrl: "https://www.reply.com/root16-reply/en",
-      venue: "Emeril’s New Orleans Fish House, MGM Grand", kind: "Hospitality lounge", audience: "open", access: "ask",
-      summary: "A daytime lounge for customers, prospects and Microsoft teams. Drop in between sessions. No RSVP is needed to stop by.",
+      venue: "Emeril’s New Orleans Fish House, MGM Grand", kind: "Hospitality lounge", audience: "open", access: "open",
+      summary: "An all-day hospitality lounge serving breakfast, lunch and happy hour for customers, prospects and Microsoft teams. Drop in between sessions. No RSVP is needed to stop by.",
       regNote: "Want to reserve a space for a customer meeting? Your Microsoft account team can contact Root16." },
 
     { id: "visionet", day: "2026-10-28", start: "16:00", end: "19:00",
@@ -316,7 +318,7 @@ window.KBYG = {
     { id: "engineerup-wed", day: "2026-10-28", start: "18:30", end: "20:30",
       title: "Customer Dinner at Hakkasan", host: "Engineer Up", hostUrl: "https://www.engineerup.com",
       venue: "Hakkasan, MGM Grand", kind: "Dinner", audience: "open", access: "ask",
-      summary: "A second hosted dinner for end-user customers and Microsoft teams.",
+      summary: "A second hosted dinner for end-user customers and Microsoft teams, with informal conversation around Power Platform and AI. The end time is approximate.",
       regNote: "No public link yet. Your Microsoft account team can request a seat." },
 
     { id: "stoneridge", day: "2026-10-28", start: "18:30", end: "20:30",
@@ -328,7 +330,7 @@ window.KBYG = {
     { id: "velrada", day: "2026-10-28", start: null, end: null, timeNote: "Evening · time to be announced",
       title: "Power Swings & Power Platform", host: "Velrada", hostUrl: "https://velrada.com",
       venue: "Topgolf Las Vegas", kind: "Networking", audience: "open", access: "ask",
-      summary: "An evening of golf-ball swings and Power Platform conversation with customers and prospects.",
+      summary: "An evening of golf-ball swings and Power Platform conversation with customers and prospects. Velrada is also exhibiting at Booth 115.",
       regNote: "Details are still being finalized. Your Microsoft account team can connect you with Velrada." },
 
     { id: "wed-expo", day: "2026-10-28", start: "16:30", end: "18:30",

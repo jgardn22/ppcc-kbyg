@@ -530,7 +530,7 @@
   }
 
   function evRow(e) {
-    const accessText = e.access === 'badge' ? D.accessLabels.badge : (e.reg ? D.accessLabels.register : null);
+    const accessText = e.access === 'badge' ? D.accessLabels.badge : e.access === 'open' ? D.accessLabels.open : (e.reg ? D.accessLabels.register : null);
     return h('article', { class: 'ev', id: 'ev-' + e.id },
       h('div', { class: 'ev-time' }, timeBlock(e)),
       h('div', { class: 'ev-main' },
