@@ -264,6 +264,13 @@ window.KBYG = {
       reg: { url: "https://cnj95.share.hsforms.com/2LBk1usVsRli0paGrGhYWiQ", label: "Register" },
       regNote: "Space is limited." },
 
+    { id: "cyclotron", day: "2026-10-27", start: "17:30", end: "20:30",
+      title: "Happy Hour at Hakkasan", host: "Cyclotron", hostUrl: "https://cyclotron.com",
+      venue: "Hakkasan, MGM Grand", kind: "Happy hour", audience: "open", access: "register",
+      summary: "Cyclotron and Microsoft host a happy hour to unwind with good drinks and great company after the conference day. It is free to attend, and drinks are included.",
+      reg: { url: "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=a2ODZVbRLkmGzrj8y3kN8Y4owkqkyRtJouHxvCySKpdUNDRGS1YzTU9RTUNPNTJHRUJPMDI3RjA2RC4u", label: "Register" },
+      regNote: "Register to secure your spot." },
+
     { id: "root16-bd", day: "2026-10-27", start: "16:00", end: "21:00",
       title: "Happy Hour at BrewDog", host: "Root16 (a Reply company)", hostUrl: "https://www.reply.com/root16-reply/en",
       venue: "BrewDog Las Vegas (5-minute walk from MGM Grand)", address: "3767 Las Vegas Blvd S, Las Vegas, NV", kind: "Happy hour", audience: "open", access: "register",
