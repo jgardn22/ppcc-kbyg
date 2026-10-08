@@ -321,6 +321,21 @@ window.KBYG = {
       summary: "An all-day hospitality lounge serving breakfast, lunch and happy hour for customers, prospects and Microsoft teams. Drop in between sessions. No RSVP is needed to stop by.",
       regNote: "Want to reserve a space for a customer meeting? Your Microsoft account team can contact Root16." },
 
+    /* WinWire: one event with two drop-in windows, so two rows keep the timeline, plan and calendar export accurate. Times are Las Vegas local. */
+    { id: "winwire-midday", day: "2026-10-28", start: "11:00", end: "14:00",
+      title: "Poolside Lunch & Networking (midday window)", host: "WinWire", hostUrl: "https://www.winwire.com",
+      venue: "Producers Pool Cabana, MGM Grand", kind: "Lunch", audience: "open", access: "register",
+      summary: "WinWire and Microsoft invite you to take a break from the conference and relax poolside in a private cabana. Expect refreshments, lunch and informal networking with industry peers and Microsoft leaders. No presentations and no agenda.",
+      reg: { url: "https://www.winwire.com/power-platform-conference/", label: "RSVP" },
+      regNote: "Drop in any time during either window, 11:00 AM to 2:00 PM or 4:00 to 6:00 PM. WinWire has 30 spots available, so RSVP early." },
+
+    { id: "winwire-afternoon", day: "2026-10-28", start: "16:00", end: "18:00",
+      title: "Poolside Lunch & Networking (afternoon window)", host: "WinWire", hostUrl: "https://www.winwire.com",
+      venue: "Producers Pool Cabana, MGM Grand", kind: "Networking", audience: "open", access: "register",
+      summary: "The afternoon drop-in window for WinWire and Microsoft’s poolside gathering. Drinks, food and relaxed conversation in a private cabana, with no presentations and no agenda.",
+      reg: { url: "https://www.winwire.com/power-platform-conference/", label: "RSVP" },
+      regNote: "Same event as the midday window. RSVP on WinWire’s page, then drop in any time from 4:00 to 6:00 PM." },
+
     { id: "visionet", day: "2026-10-28", start: "16:00", end: "19:00",
       title: "Where Technology Leaders Connect", host: "Visionet", hostUrl: "https://www.visionet.com",
       venue: "Hard Rock Cafe Las Vegas (off-site)", address: "3771 Las Vegas Blvd S, #120, Las Vegas, NV 89109", kind: "Evening event", audience: "open", access: "register",
@@ -402,12 +417,6 @@ window.KBYG = {
       regNote: "For VP and C-suite leaders. Registration needs an access code from your Microsoft account team." },
 
     /* ---- Still being finalized ---- */
-    { id: "winwire", group: "pending", day: null, start: null, end: null, noPlan: true, timeNote: "TBA · date and time",
-      title: "Exclusive Client Event", host: "WinWire", hostUrl: "https://www.winwire.com",
-      venue: "To be announced", kind: "Client event", audience: "open", access: "ask",
-      summary: "WinWire is hosting an exclusive client event and has not published the agenda yet.",
-      regNote: "Your Microsoft account team can connect you with WinWire for the invite list." },
-
     { id: "kerv", group: "pending", day: null, start: null, end: null, noPlan: true, timeNote: "TBA · dates and times",
       title: "Industry Dinners and Lunches", host: "Kerv", hostUrl: "https://kerv.com",
       venue: "To be announced", kind: "Dinners and lunches", audience: "tbd", access: "ask",
