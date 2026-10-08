@@ -190,7 +190,7 @@ window.KBYG = {
         { time: "8:00 to 10:00 PM",   text: "Pitbull live in the MGM Grand Garden Arena", key: true }
       ],
       hls: { time: "8:00 AM · Roundtable Room 353", text: "Healthcare & Life Sciences panel" },
-      evening: "Partner dinners wrap up around the time Pitbull starts, and the arena line is long. Plan your timing."
+      evening: "Brooksource hosts a healthcare social reception at the Lobby Bar from 5:30 to 7:30 PM. Partner dinners wrap up around the time Pitbull starts, and the arena line is long. Plan your timing."
     },
     {
       id: "thu", date: "2026-10-29", label: "Thursday", short: "Oct 29", n: 3, theme: "Make it real",
@@ -240,14 +240,15 @@ window.KBYG = {
       title: "Healthcare & Life Sciences Happy Hour", host: "Hummingbird", hostUrl: "https://hummingbirdworks.ai",
       venue: "Losers Bar, MGM Grand", kind: "Happy hour", audience: "hls", access: "register",
       limit: "Limited to 40 guests",
+      blurb: "Meet healthcare and life sciences peers and Microsoft insiders over drinks and small plates. No stage, no slides, no pitch.",
       summary: "Health and Life Sciences leaders and Microsoft insiders talking AI, Copilot, agents, low-code and what is genuinely delivering results this year. Drinks and small plates. No stage, no slides, no pitch.",
       reg: { url: "https://hummingbirdworks.ai/events/hummingbird-hls-happy-hour-ppcc", label: "Request to attend" },
       regNote: "Hummingbird confirms your request by email, then sends the calendar invite and full details once approved.",
       tip: "Losers Bar is one of the first spots you see as you walk out of the conference at the MGM Grand." },
 
     { id: "brooksource", day: "2026-10-27", start: "17:00", end: "19:30",
-      title: "Brooksource & Microsoft at Crush", host: "Brooksource", hostUrl: "https://www.brooksource.com",
-      venue: "Crush, MGM Grand", kind: "Dinner", audience: "hls", access: "register",
+      title: "Brooksource & Microsoft at Craftsteak", host: "Brooksource", hostUrl: "https://www.brooksource.com",
+      venue: "Tom Colicchio’s Craftsteak, MGM Grand", kind: "Dinner", audience: "hls", access: "register",
       summary: "Cocktails, a seated dinner and good conversation, hosted with Microsoft. Expect other healthcare payers and providers in the room.",
       reg: { url: "https://www.brooksource.com/microsoft-power-platform", label: "RSVP" } },
 
@@ -296,6 +297,18 @@ window.KBYG = {
       summary: "The conference’s official opening reception in the Expo and Makers Market. A natural first stop before a partner event." },
 
     /* ---- Wednesday ---- */
+    /* Featured Wednesday: times are Pacific. The invite shows 6:30 to 8:30 PM Mountain, which is 5:30 to 7:30 PM Las Vegas time. */
+    { id: "brooksource-wed", featured: true, day: "2026-10-28", start: "17:30", end: "19:30",
+      title: "Lobby Bar Social Reception", host: "Brooksource", hostUrl: "https://www.brooksource.com",
+      venue: "Lobby Bar, MGM Grand", address: "3799 S Las Vegas Blvd, Las Vegas, NV 89109", kind: "Social reception", audience: "hls", access: "ask",
+      limit: "Limited to 30 guests",
+      blurb: "Bring your team to a relaxed social reception with Brooksource’s healthcare specialists and your Microsoft team, right inside the MGM Grand.",
+      summary: "A relaxed social reception hosted by Brooksource at the Lobby Bar, inside the MGM Grand. Bring your team and connect with Brooksource’s healthcare and life sciences specialists and your Microsoft healthcare team.",
+      tip: "The Lobby Bar is inside the MGM Grand, on the walk from the hotel front desk into the casino.",
+      tipMap: "resort",
+      ask: { label: "Reserve a spot", body: "Please reserve a spot for me at the Lobby Bar Social Reception with Brooksource on Wednesday, Oct 28.\n\nName:\nOrganization:\nNumber of guests, including me:\n" },
+      regNote: "Space is limited to 30 guests, so reserve your spot with your Microsoft account team. Brooksource will share a flyer with final details soon." },
+
     { id: "quisitive-hls", day: "2026-10-28", start: "11:30", end: "13:30",
       title: "Healthcare & Life Sciences Lunch", host: "Quisitive", hostUrl: "https://quisitive.com",
       venue: "Quisitive suite", kind: "Lunch", audience: "hls", access: "ask",

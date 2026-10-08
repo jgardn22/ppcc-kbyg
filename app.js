@@ -359,7 +359,8 @@
   }
 
   /* ----- feature cards ----- */
-  const featuredEvent = () => D.events.find(e => e.featured);
+  const featuredEvents = () => D.events.filter(e => e.featured)
+    .sort((a, b) => a.day.localeCompare(b.day) || mins(a.start) - mins(b.start));
 
   function renderFeatures() {
     const r = D.roundtable;
@@ -372,18 +373,21 @@
       h('div', { class: 'feature-links' },
         h('a', { class: 'btn ghost sm', href: '#days' }, 'See Wednesday’s plan'),
         r.mapId ? h('a', { class: 'textlink', href: '#ground/map-' + r.mapId }, 'Find the room on the map') : null));
-    const e = featuredEvent();
-    $('#feature-evening').append(
-      h('span', { class: 'kicker' }, 'Tuesday night'),
-      h('h3', {}, `${e.host} ${e.title}`),
-      h('div', { class: 'meta' },
-        h('span', { class: 'chip' }, `${fmtTime(e.start)} to ${fmtTime(e.end)}`),
-        h('span', { class: 'chip' }, e.venue),
-        h('span', { class: 'chip' }, e.limit)),
-      h('p', {}, 'Meet healthcare and life sciences peers and Microsoft insiders over drinks and small plates. No stage, no slides, no pitch.'),
-      h('div', { class: 'feature-links' },
-        extLink(e.reg.label, e.reg.url, 'btn primary sm'),
-        h('a', { class: 'textlink', href: '#evenings' }, 'All evening events')));
+    const evs = featuredEvents();
+    const hi = $('#highlights');
+    evs.forEach((e, i) => hi.append(
+      h('article', { class: 'feature feature-eve', id: 'feature-' + e.id },
+        h('span', { class: 'kicker' }, `${dayLabel(e.day)} night`),
+        h('h3', {}, `${e.host} ${e.title}`),
+        h('div', { class: 'meta' },
+          h('span', { class: 'chip' }, `${fmtTime(e.start)} to ${fmtTime(e.end)}`),
+          h('span', { class: 'chip' }, e.venue),
+          e.limit ? h('span', { class: 'chip' }, e.limit) : null),
+        e.blurb ? h('p', {}, e.blurb) : null,
+        h('div', { class: 'feature-links' },
+          regButton(e, 'btn primary sm'),
+          i === evs.length - 1 ? h('a', { class: 'textlink', href: '#evenings' }, 'All evening events') : null))));
+    hi.classList.toggle('split-3', evs.length > 1);
   }
 
   const GUIDE_DESC = {
@@ -513,11 +517,13 @@
     return [h('b', {}, a), h('span', {}, rest.join(' · '))];
   }
 
-  function regButton(e) {
-    if (e.reg && e.reg.url) return extLink(e.reg.label, e.reg.url, 'btn primary sm');
+  function regButton(e, cls) {
+    if (e.reg && e.reg.url) return extLink(e.reg.label, e.reg.url, cls || 'btn primary sm');
     if (e.access === 'ask') {
+      const ask = e.ask || {};
       const subject = encodeURIComponent(`PPCC 2026: ${e.host} ${e.title}`);
-      return h('a', { class: 'btn ghost sm', href: `mailto:${D.contact.email}?subject=${subject}` }, 'Ask your Microsoft team');
+      const body = ask.body ? '&body=' + encodeURIComponent(ask.body.replace(/\n/g, '\r\n')) : '';
+      return h('a', { class: cls || 'btn ghost sm', href: `mailto:${D.contact.email}?subject=${subject}${body}` }, ask.label || 'Ask your Microsoft team');
     }
     return null;
   }
@@ -618,30 +624,36 @@
     el.textContent = txt;
   }
 
-  /* ----- featured card ----- */
-  function renderFeatured() {
-    const e = featuredEvent();
-    const root = $('#featured-event');
+  /* ----- featured cards ----- */
+  function featuredCard(e) {
     const [hh, mm] = e.start.split(':').map(Number);
     const big = `${hh % 12 || 12}${mm ? ':' + String(mm).padStart(2, '0') : ''}`;
-    root.append(h('article', { class: 'featured', id: 'ev-' + e.id },
+    return h('article', { class: 'featured', id: 'ev-' + e.id },
       h('div', { class: 'featured-body' },
-        h('div', { class: 'featured-kick' }, tagEl('hls'), h('span', {}, 'Featured evening event')),
+        h('div', { class: 'featured-kick' }, tagEl(e.audience), h('span', {}, `Featured ${dayLabel(e.day)} night`)),
         h('h3', {}, `${e.host} ${e.title}`),
         h('p', { class: 'hostline' }, 'Hosted by ', extLink(e.host, e.hostUrl)),
         h('div', { class: 'kv' },
           h('span', {}, icon('clock', 16), `${fmtDate(e.day)} · ${fmtTime(e.start)} to ${fmtTime(e.end)}`),
           h('span', {}, icon('pin', 16), e.venue),
-          h('span', {}, icon('users', 16), e.limit)),
+          e.limit ? h('span', {}, icon('users', 16), e.limit) : null),
         h('p', {}, e.summary),
-        e.tip ? h('p', { class: 'tipbox' }, e.tip) : null,
-        h('div', { class: 'featured-actions' }, extLink(e.reg.label, e.reg.url, 'btn primary'), planButton(e)),
-        h('p', { class: 'featured-note' }, e.regNote)),
+        e.tip ? h('p', { class: 'tipbox' }, e.tip, e.tipMap ? [' ', h('a', { href: '#ground/map-' + e.tipMap }, 'See it on the resort map.')] : null) : null,
+        h('div', { class: 'featured-actions' }, regButton(e, 'btn primary'), planButton(e)),
+        e.regNote ? h('p', { class: 'featured-note' }, e.regNote) : null),
       h('div', { class: 'featured-time', 'aria-hidden': 'true' },
         h('span', { class: 'ft-day' }, fmtDate(e.day)),
         h('span', { class: 'ft-big' }, big, h('small', {}, hh >= 12 ? 'PM' : 'AM')),
         h('span', { class: 'ft-end' }, `to ${fmtTime(e.end)}`),
-        h('span', { class: 'ft-cap' }, 'Pacific time'))));
+        h('span', { class: 'ft-cap' }, 'Pacific time')));
+  }
+
+  function renderFeatured() {
+    const list = featuredEvents();
+    const root = $('#featured-event');
+    root.textContent = '';
+    if (!list.length) return;
+    root.append(h('div', { class: 'featured-row' + (list.length > 1 ? ' multi' : '') }, list.map(featuredCard)));
   }
 
   /* ----- controls ----- */
