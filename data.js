@@ -399,7 +399,7 @@ window.KBYG = {
       venue: "Bali Hai Golf Club", kind: "Executive experience", audience: "exec", access: "ask",
       summary: "A friendly nine-hole scramble with fellow executives, followed by food and drinks at the Tiki Bar. Clubs are provided.",
       reg: { url: "https://mppcc2026.lateetud.com/", label: "VIP registration page" },
-      regNote: "For VP and C-suite leaders. Registration needs an access code from your Microsoft account team. Register by Oct 16 to help ensure your spot." },
+      regNote: "For VP and C-suite leaders. Copy the access code from the Executive Experience tab, then register by Oct 16 to help ensure your spot." },
 
     { id: "lateetud-xpot", group: "exec", days: ["2026-10-27", "2026-10-28"], day: "2026-10-27", start: "18:00", end: null, noPlan: true,
       options: ["Tue, Oct 27 · 6:00 PM", "or Wed, Oct 28 · 6:00 PM"], duration: "About 2.5 hours",
@@ -407,7 +407,7 @@ window.KBYG = {
       venue: "Details on the registration page", kind: "Executive experience", audience: "exec", access: "ask",
       summary: "An intimate dinner around a private table with exceptional seafood, A5 Wagyu and conversation with a few executive peers.",
       reg: { url: "https://mppcc2026.lateetud.com/", label: "VIP registration page" },
-      regNote: "For VP and C-suite leaders. Registration needs an access code from your Microsoft account team. Register by Oct 16 to help ensure your spot." },
+      regNote: "For VP and C-suite leaders. Copy the access code from the Executive Experience tab, then register by Oct 16 to help ensure your spot." },
 
     { id: "lateetud-race", group: "exec", days: ["2026-10-28", "2026-10-29"], day: "2026-10-28", start: "13:30", end: null, noPlan: true,
       options: ["Wed, Oct 28 · 1:30 PM", "or Thu, Oct 29 · morning"], duration: "About 2.5 hours",
@@ -415,7 +415,7 @@ window.KBYG = {
       venue: "Details on the registration page", kind: "Executive experience", audience: "exec", access: "ask",
       summary: "Drive an exotic performance car on a professional track with a small group of executives.",
       reg: { url: "https://mppcc2026.lateetud.com/", label: "VIP registration page" },
-      regNote: "For VP and C-suite leaders. Registration needs an access code from your Microsoft account team. Register by Oct 16 to help ensure your spot." },
+      regNote: "For VP and C-suite leaders. Copy the access code from the Executive Experience tab, then register by Oct 16 to help ensure your spot." },
 
     /* ---- Still being finalized ---- */
     { id: "kerv", group: "pending", day: null, start: null, end: null, noPlan: true, timeNote: "TBA · dates and times",
@@ -439,12 +439,13 @@ window.KBYG = {
       intro: "Hosted by Microsoft and Lateetud for a small group of VP and C-suite leaders. There is no presentation and no formal agenda. Each experience is a memorable way to step away from the conference floor and exchange ideas with fellow leaders. Space is limited.",
       registerUrl: "https://mppcc2026.lateetud.com/",
       registerLabel: "Open the VIP registration page",
+      code: "3UPQV",
       deadline: "2026-10-16"
     },
     stepsTitle: "How to register",
     steps: [
-      { label: "From your Microsoft team", title: "Get your access code", text: "Your Microsoft account team provides the access code for Lateetud’s VIP registration page. Not sure who that is? Ask us and we will route your request." },
-      { label: "On Lateetud’s site", title: "Open the VIP page", text: "Go to the VIP registration page and enter your access code. The code is not case sensitive." },
+      { label: "On this page", title: "Copy your access code", text: "Use this code to open Lateetud’s VIP registration page. It is not case sensitive.", showCode: true },
+      { label: "On Lateetud’s site", title: "Open the VIP page", text: "Go to the VIP registration page and enter the access code when asked." },
       { label: "On the same page", title: "Pick a first choice and a backup", text: "Read the details for each experience, then select your first choice and a backup. Space is limited for each one." },
       { label: "By Oct 16", title: "Submit your choices", text: "Register by Friday, Oct 16 to help ensure your spot. Lateetud coordinates the selections, then confirms and sends your details." }
     ],

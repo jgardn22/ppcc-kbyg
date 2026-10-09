@@ -455,6 +455,7 @@ h1 em { font-style: normal; color: var(--teal); }
 .xcard-body .kv { gap: 4px 18px; font-size: 13.5px; color: #cfd2e4; }
 .xcard-body p { font-size: 14.5px; color: #cfd2e4; }
 .xhead + .route-steps { margin-top: 22px; }
+.xcode { margin-top: 14px; }
 .xcta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 .xsec > h3 + .tips { margin-top: 16px; }
 #panel-exec .fineprint { padding-top: 36px; }

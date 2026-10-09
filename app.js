@@ -71,19 +71,20 @@
   }
 
   // the code stays visible and selectable even when copying is blocked
-  function codeChip(code) {
+  function codeChip(code, label) {
+    const name = label || 'Invitation code';
     const status = h('span', { class: 'sr-only', role: 'status' });
-    const btn = h('button', { class: 'codechip-btn', type: 'button', 'aria-label': `Copy invitation code ${code}` }, 'Copy');
+    const btn = h('button', { class: 'codechip-btn', type: 'button', 'aria-label': `Copy ${name.toLowerCase()} ${code}` }, 'Copy');
     let timer;
     btn.addEventListener('click', () => {
       copyPlain(code).then(
-        () => { btn.textContent = 'Copied'; status.textContent = 'Invitation code copied.'; },
+        () => { btn.textContent = 'Copied'; status.textContent = `${name} copied.`; },
         () => { btn.textContent = 'Select code'; status.textContent = 'Copying was blocked. Select the code to copy it.'; });
       clearTimeout(timer);
       timer = setTimeout(() => { btn.textContent = 'Copy'; status.textContent = ''; }, 2400);
     });
     return h('span', { class: 'codewrap' },
-      h('span', { class: 'codechip' }, h('span', { class: 'codechip-k' }, 'Invitation code'), h('b', { class: 'codechip-v' }, code), btn),
+      h('span', { class: 'codechip' }, h('span', { class: 'codechip-k' }, name), h('b', { class: 'codechip-v' }, code), btn),
       status);
   }
 
@@ -581,7 +582,7 @@
       any = true;
       root.append(h('section', { class: 'day-group', 'aria-label': 'Executive experiences' },
         h('h3', { class: 'day-title' }, 'Executive experiences', h('small', {}, 'VP and C-suite · access code')),
-        h('p', { class: 'day-pointer' }, `How to register and the ${fmtMD(D.exec.lateetud.deadline)} deadline are on the `, h('a', { href: '#exec' }, 'Executive Experience tab'), '.'),
+        h('p', { class: 'day-pointer' }, `The access code, how to register and the ${fmtMD(D.exec.lateetud.deadline)} deadline are on the `, h('a', { href: '#exec' }, 'Executive Experience tab'), '.'),
         exec.map(evRow)));
     }
     const pend = evs.filter(e => e.group === 'pending');
@@ -926,7 +927,8 @@
       h('ol', { class: 'route-steps' }, x.steps.map(s => h('li', {},
         h('span', { class: 'step-time' }, s.label),
         h('h4', {}, s.title),
-        h('p', {}, s.text)))),
+        h('p', {}, s.text),
+        s.showCode ? h('div', { class: 'xcode' }, codeChip(lat.code, 'Access code')) : null))),
       h('div', { class: 'xcta' },
         extLink(lat.registerLabel, lat.registerUrl, 'btn primary')));
 
