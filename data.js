@@ -439,12 +439,7 @@ window.KBYG = {
       intro: "Hosted by Microsoft and Lateetud for a small group of VP and C-suite leaders. There is no presentation and no formal agenda. Each experience is a memorable way to step away from the conference floor and exchange ideas with fellow leaders. Space is limited.",
       registerUrl: "https://mppcc2026.lateetud.com/",
       registerLabel: "Open the VIP registration page",
-      deadline: "2026-10-16",
-      ask: {
-        label: "Ask for an access code",
-        subject: "PPCC 2026: access code for a Lateetud executive experience",
-        body: "Hello,\n\nI would like to register for a Lateetud executive experience at PPCC 2026. Could you send me the access code for the VIP registration page?\n\nName:\nTitle:\nOrganization:\nExperiences I am interested in (golf, XPOT dinner or racing):\n"
-      }
+      deadline: "2026-10-16"
     },
     stepsTitle: "How to register",
     steps: [

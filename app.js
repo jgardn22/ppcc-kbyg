@@ -906,7 +906,6 @@
   function renderExec() {
     const x = D.exec, o = x.official, lat = x.lateetud;
     const dl = execDeadline(lat.deadline);
-    const mail = `mailto:${D.contact.email}?subject=${encodeURIComponent(lat.ask.subject)}&body=${encodeURIComponent(lat.ask.body.replace(/\n/g, '\r\n'))}`;
 
     $('#exec-official').append(
       h('section', { class: 'xsoon', 'aria-labelledby': 'exec-official-h' },
@@ -929,8 +928,7 @@
         h('h4', {}, s.title),
         h('p', {}, s.text)))),
       h('div', { class: 'xcta' },
-        extLink(lat.registerLabel, lat.registerUrl, 'btn primary'),
-        h('a', { class: 'btn ghost', href: mail }, lat.ask.label)));
+        extLink(lat.registerLabel, lat.registerUrl, 'btn primary')));
 
     $('#exec-notes').append(
       h('h3', { id: 'exec-notes-h' }, x.notesTitle),
