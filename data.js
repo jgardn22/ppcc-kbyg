@@ -46,6 +46,7 @@ window.KBYG = {
     { id: "before",   label: "Before You Go" },
     { id: "ground",   label: "On the Ground" },
     { id: "evenings", label: "Evening Events" },
+    { id: "exec",     label: "Executive Experience", short: "Executive" },
     { id: "days",     label: "3 Perfect Days" },
     { id: "faq",      label: "FAQ & Links" }
   ],
@@ -391,30 +392,30 @@ window.KBYG = {
       summary: "A second night of small hosted dinners for qualified customers and prospects, with seats limited to nine.",
       regNote: "Invitation only. Your Microsoft account team can request a seat." },
 
-    /* ---- Executive experiences (Lateetud): VP and C-suite, nomination-based ---- */
+    /* ---- Executive experiences (Lateetud): VP and C-suite, access code required. Steps and deadline live in exec below. ---- */
     { id: "lateetud-golf", group: "exec", days: ["2026-10-26"], day: "2026-10-26", start: "13:30", end: null, noPlan: true,
-      options: ["Mon, Oct 26 · 1:30 PM"],
+      options: ["Mon, Oct 26 · 1:30 PM"], duration: "About 3 hours",
       title: "Bali Hai Executive Scramble", host: "Lateetud", hostUrl: "https://www.lateetud.com",
       venue: "Bali Hai Golf Club", kind: "Executive experience", audience: "exec", access: "ask",
       summary: "A friendly nine-hole scramble with fellow executives, followed by food and drinks at the Tiki Bar. Clubs are provided.",
       reg: { url: "https://mppcc2026.lateetud.com/", label: "VIP registration page" },
-      regNote: "For VP and C-suite leaders. Registration needs an access code from your Microsoft account team." },
+      regNote: "For VP and C-suite leaders. Registration needs an access code from your Microsoft account team. Register by Oct 16 to help ensure your spot." },
 
     { id: "lateetud-xpot", group: "exec", days: ["2026-10-27", "2026-10-28"], day: "2026-10-27", start: "18:00", end: null, noPlan: true,
-      options: ["Tue, Oct 27 · 6:00 PM", "or Wed, Oct 28 · 6:00 PM"],
+      options: ["Tue, Oct 27 · 6:00 PM", "or Wed, Oct 28 · 6:00 PM"], duration: "About 2.5 hours",
       title: "XPOT Private Table", host: "Lateetud", hostUrl: "https://www.lateetud.com",
-      venue: "Details with registration", kind: "Executive experience", audience: "exec", access: "ask",
+      venue: "Details on the registration page", kind: "Executive experience", audience: "exec", access: "ask",
       summary: "An intimate dinner around a private table with exceptional seafood, A5 Wagyu and conversation with a few executive peers.",
       reg: { url: "https://mppcc2026.lateetud.com/", label: "VIP registration page" },
-      regNote: "For VP and C-suite leaders. Registration needs an access code from your Microsoft account team." },
+      regNote: "For VP and C-suite leaders. Registration needs an access code from your Microsoft account team. Register by Oct 16 to help ensure your spot." },
 
     { id: "lateetud-race", group: "exec", days: ["2026-10-28", "2026-10-29"], day: "2026-10-28", start: "13:30", end: null, noPlan: true,
-      options: ["Wed, Oct 28 · 1:30 PM", "or Thu, Oct 29 · morning"],
+      options: ["Wed, Oct 28 · 1:30 PM", "or Thu, Oct 29 · morning"], duration: "About 2.5 hours",
       title: "Executive Racing Challenge", host: "Lateetud", hostUrl: "https://www.lateetud.com",
-      venue: "Details with registration", kind: "Executive experience", audience: "exec", access: "ask",
+      venue: "Details on the registration page", kind: "Executive experience", audience: "exec", access: "ask",
       summary: "Drive an exotic performance car on a professional track with a small group of executives.",
       reg: { url: "https://mppcc2026.lateetud.com/", label: "VIP registration page" },
-      regNote: "For VP and C-suite leaders. Registration needs an access code from your Microsoft account team." },
+      regNote: "For VP and C-suite leaders. Registration needs an access code from your Microsoft account team. Register by Oct 16 to help ensure your spot." },
 
     /* ---- Still being finalized ---- */
     { id: "kerv", group: "pending", day: null, start: null, end: null, noPlan: true, timeNote: "TBA · dates and times",
@@ -423,6 +424,43 @@ window.KBYG = {
       summary: "Industry-specific dinners and lunches for customers and prospects. Ask whether a healthcare session is planned.",
       regNote: "Details are still being finalized. Your Microsoft account team can ask Kerv about a healthcare session." }
   ],
+
+  /* ---------- Executive Experience tab ----------
+     Keep the Oct 16 deadline in sync: exec.lateetud.deadline, the regNote on each lateetud event, and the last step below.
+     ------------------------------------------------------------ */
+  exec: {
+    official: {
+      title: "Official PPCC Executive Experience track",
+      text: "The official PPCC Executive Experience is an invitation-only track for senior leaders. Its agenda and details are coming soon, and we will add them here as soon as they are confirmed.",
+      note: "Already invited? Watch your email for calendar invitations and programming details from the Executive Experience team."
+    },
+    lateetud: {
+      title: "Executive experiences with Lateetud",
+      intro: "Hosted by Microsoft and Lateetud for a small group of VP and C-suite leaders. There is no presentation and no formal agenda. Each experience is a memorable way to step away from the conference floor and exchange ideas with fellow leaders. Space is limited.",
+      registerUrl: "https://mppcc2026.lateetud.com/",
+      registerLabel: "Open the VIP registration page",
+      deadline: "2026-10-16",
+      ask: {
+        label: "Ask for an access code",
+        subject: "PPCC 2026: access code for a Lateetud executive experience",
+        body: "Hello,\n\nI would like to register for a Lateetud executive experience at PPCC 2026. Could you send me the access code for the VIP registration page?\n\nName:\nTitle:\nOrganization:\nExperiences I am interested in (golf, XPOT dinner or racing):\n"
+      }
+    },
+    stepsTitle: "How to register",
+    steps: [
+      { label: "From your Microsoft team", title: "Get your access code", text: "Your Microsoft account team provides the access code for Lateetud’s VIP registration page. Not sure who that is? Ask us and we will route your request." },
+      { label: "On Lateetud’s site", title: "Open the VIP page", text: "Go to the VIP registration page and enter your access code. The code is not case sensitive." },
+      { label: "On the same page", title: "Pick a first choice and a backup", text: "Read the details for each experience, then select your first choice and a backup. Space is limited for each one." },
+      { label: "By Oct 16", title: "Submit your choices", text: "Register by Friday, Oct 16 to help ensure your spot. Lateetud coordinates the selections, then confirms and sends your details." }
+    ],
+    notesTitle: "Good to know",
+    notes: [
+      "Full details for each experience are on the registration page once you enter your code.",
+      "Also invited to the official Executive Experience track? Compare its agenda with these dates before you choose. We will post it here when it is ready.",
+      "Times are Pacific (Las Vegas)."
+    ],
+    fineprint: "Details come from Lateetud and Microsoft and can change. Confirm with your Microsoft account team before you go."
+  },
 
   /* ---------- FAQ ---------- */
   faq: [

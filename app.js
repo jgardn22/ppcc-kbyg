@@ -125,9 +125,11 @@
     D.tabs.forEach(t => {
       tablist.append(h('button', {
         class: 'tab', type: 'button', role: 'tab', id: 'tab-' + t.id,
+        // a short strip label keeps seven tabs on one row; the full name stays the accessible name
+        'aria-label': t.short ? t.label : null,
         'aria-controls': 'panel-' + t.id, 'aria-selected': 'false', tabindex: '-1',
         on: { click: () => { location.hash = '#' + t.id; } }
-      }, t.label, t.id === 'days' ? h('span', { class: 'soon' }, 'Soon') : null));
+      }, t.short || t.label, t.id === 'days' ? h('span', { class: 'soon' }, 'Soon') : null));
     });
     tablist.addEventListener('keydown', (e) => {
       const i = tabIds.indexOf(currentTab());
@@ -394,6 +396,7 @@
     before: 'A checklist with live deadlines, plus a way to request time with product group leaders. Your progress saves on this device.',
     ground: 'Venue maps you can zoom, badge pickup, the keynote-morning route and tips for getting around the MGM Grand.',
     evenings: 'Healthcare happy hours first, then every open event, with a Tuesday overlap timeline.',
+    exec: 'Optional VIP experiences for senior leaders and how to register. Official track details are coming soon.',
     days: 'Our recommended sessions, one day at a time.',
     faq: 'Official answers and the links worth bookmarking.'
   };
@@ -543,7 +546,7 @@
         h('div', { class: 'ev-tags' }, tagEl(e.audience), accessText ? h('span', { class: 'tag tbd' }, accessText) : null),
         h('h4', {}, e.title),
         h('p', { class: 'ev-host' }, 'Hosted by ', extLink(e.host, e.hostUrl)),
-        h('div', { class: 'ev-meta' }, h('span', {}, e.venue), h('span', {}, e.kind)),
+        h('div', { class: 'ev-meta' }, h('span', {}, e.venue), h('span', {}, e.kind), e.duration ? h('span', {}, e.duration) : null),
         h('p', { class: 'ev-sum' }, e.summary),
         e.regNote ? h('p', { class: 'ev-note' }, e.regNote) : null),
       h('div', { class: 'ev-actions' }, regButton(e), planButton(e)));
@@ -577,7 +580,8 @@
     if (exec.length) {
       any = true;
       root.append(h('section', { class: 'day-group', 'aria-label': 'Executive experiences' },
-        h('h3', { class: 'day-title' }, 'Executive experiences', h('small', {}, 'VP and C-suite · nomination')),
+        h('h3', { class: 'day-title' }, 'Executive experiences', h('small', {}, 'VP and C-suite · access code')),
+        h('p', { class: 'day-pointer' }, `How to register and the ${fmtMD(D.exec.lateetud.deadline)} deadline are on the `, h('a', { href: '#exec' }, 'Executive Experience tab'), '.'),
         exec.map(evRow)));
     }
     const pend = evs.filter(e => e.group === 'pending');
@@ -863,6 +867,75 @@
     $('#events-list').hidden = isTl;
     $('#events-timeline').hidden = !isTl;
     if (isTl) renderTimeline(); else renderList();
+  }
+
+  /* ============================================================
+     Executive Experience
+     ============================================================ */
+  function execDeadline(iso) {
+    const left = dayDiff(ptToday(), iso);
+    const md = fmtMD(iso);
+    if (left > 1) return { cls: 'soonp', text: `Register by ${md} · ${left} days left` };
+    if (left === 1) return { cls: 'soonp', text: `Register by tomorrow · ${md}` };
+    if (left === 0) return { cls: 'today', text: `Register today · ${md}` };
+    return { cls: 'past', text: `Deadline passed ${md}` };
+  }
+
+  // "Tue, Oct 27 · 6:00 PM" or "or Thu, Oct 29 · morning" becomes a day and a time
+  function slotParts(opt) {
+    const [day, time = ''] = opt.replace(/^or\s+/i, '').split(' · ');
+    return { day, time: time.charAt(0).toUpperCase() + time.slice(1) };
+  }
+
+  function execCard(e) {
+    const slots = (e.options || []).map(slotParts);
+    return h('article', { class: 'xcard', id: 'exec-' + e.id },
+      h('div', { class: 'xcard-when' },
+        slots.map((s, i) => h('div', { class: 'xslot' },
+          i ? h('span', { class: 'xor' }, 'or') : null,
+          h('span', { class: 'xday' }, s.day),
+          h('b', { class: 'xtime' }, s.time)))),
+      h('div', { class: 'xcard-body' },
+        h('h4', {}, e.title),
+        h('div', { class: 'kv' },
+          h('span', {}, icon('pin', 16), e.venue),
+          e.duration ? h('span', {}, icon('clock', 16), e.duration) : null),
+        h('p', {}, e.summary)));
+  }
+
+  function renderExec() {
+    const x = D.exec, o = x.official, lat = x.lateetud;
+    const dl = execDeadline(lat.deadline);
+    const mail = `mailto:${D.contact.email}?subject=${encodeURIComponent(lat.ask.subject)}&body=${encodeURIComponent(lat.ask.body.replace(/\n/g, '\r\n'))}`;
+
+    $('#exec-official').append(
+      h('section', { class: 'xsoon', 'aria-labelledby': 'exec-official-h' },
+        h('p', { class: 'soon-badge' }, h('span', { class: 'dot', 'aria-hidden': 'true' }), 'Coming soon'),
+        h('h3', { id: 'exec-official-h' }, o.title),
+        h('p', {}, o.text),
+        o.note ? h('p', { class: 'xsoon-note' }, o.note) : null));
+
+    $('#exec-lateetud').append(
+      h('div', { class: 'xhead' },
+        h('h3', { id: 'exec-lat-h' }, lat.title),
+        h('span', { class: 'pill ' + dl.cls }, dl.text)),
+      h('p', { class: 'xintro' }, lat.intro),
+      h('div', { class: 'xgrid' }, D.events.filter(e => e.group === 'exec').map(execCard)));
+
+    $('#exec-steps').append(
+      h('div', { class: 'xhead' }, h('h3', { id: 'exec-steps-h' }, x.stepsTitle)),
+      h('ol', { class: 'route-steps' }, x.steps.map(s => h('li', {},
+        h('span', { class: 'step-time' }, s.label),
+        h('h4', {}, s.title),
+        h('p', {}, s.text)))),
+      h('div', { class: 'xcta' },
+        extLink(lat.registerLabel, lat.registerUrl, 'btn primary'),
+        h('a', { class: 'btn ghost', href: mail }, lat.ask.label)));
+
+    $('#exec-notes').append(
+      h('h3', { id: 'exec-notes-h' }, x.notesTitle),
+      h('ul', { class: 'tips' }, x.notes.map(n => h('li', {}, n))));
+    $('#exec-fineprint').textContent = x.fineprint;
   }
 
   /* ============================================================
@@ -1304,6 +1377,7 @@
     buildControls();
     renderEvents();
     renderPlan();
+    renderExec();
     renderDays();
     renderFaq();
     renderMaps();
