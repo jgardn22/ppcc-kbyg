@@ -126,11 +126,9 @@
     D.tabs.forEach(t => {
       tablist.append(h('button', {
         class: 'tab', type: 'button', role: 'tab', id: 'tab-' + t.id,
-        // a short strip label keeps seven tabs on one row; the full name stays the accessible name
-        'aria-label': t.short ? t.label : null,
         'aria-controls': 'panel-' + t.id, 'aria-selected': 'false', tabindex: '-1',
         on: { click: () => { location.hash = '#' + t.id; } }
-      }, t.short || t.label, t.id === 'days' ? h('span', { class: 'soon' }, 'Soon') : null));
+      }, t.label, t.id === 'days' ? h('span', { class: 'soon' }, 'Soon') : null));
     });
     tablist.addEventListener('keydown', (e) => {
       const i = tabIds.indexOf(currentTab());
@@ -159,7 +157,7 @@
 
   /* ----- hamburger menu (phones and small tablets) ----- */
   const menuBtn = $('#menu-btn'), navMenu = $('#nav-menu'), navScrim = $('#nav-scrim');
-  const phoneNav = matchMedia('(max-width: 900px)');
+  const phoneNav = matchMedia('(max-width: 1100px)');
 
   function setMenu(open, returnFocus) {
     if (open === !navMenu.hidden) return;
@@ -376,7 +374,8 @@
       h('div', { class: 'feature-links' },
         h('a', { class: 'btn ghost sm', href: '#days' }, 'See Wednesday’s plan'),
         r.mapId ? h('a', { class: 'textlink', href: '#ground/map-' + r.mapId }, 'Find the room on the map') : null));
-    const evs = featuredEvents();
+    // the Start tab keeps its healthcare highlights; events marked noStartCard are featured on Evening Events only
+    const evs = featuredEvents().filter(e => !e.noStartCard);
     const hi = $('#highlights');
     evs.forEach((e, i) => hi.append(
       h('article', { class: 'feature feature-eve', id: 'feature-' + e.id },
@@ -527,7 +526,7 @@
       const ask = e.ask || {};
       const subject = encodeURIComponent(`PPCC 2026: ${e.host} ${e.title}`);
       const body = ask.body ? '&body=' + encodeURIComponent(ask.body.replace(/\n/g, '\r\n')) : '';
-      return h('a', { class: cls || 'btn ghost sm', href: `mailto:${D.contact.email}?subject=${subject}${body}` }, ask.label || 'Ask your Microsoft team');
+      return h('a', { class: cls || 'btn ghost sm', href: `mailto:${ask.to || D.contact.email}?subject=${subject}${body}` }, ask.label || 'Ask your Microsoft team');
     }
     return null;
   }
@@ -636,14 +635,14 @@
     return h('article', { class: 'featured', id: 'ev-' + e.id },
       h('div', { class: 'featured-body' },
         h('div', { class: 'featured-kick' }, tagEl(e.audience), h('span', {}, `Featured ${dayLabel(e.day)} night`)),
-        h('h3', {}, `${e.host} ${e.title}`),
+        h('h3', {}, e.heading || `${e.host} ${e.title}`),
         h('p', { class: 'hostline' }, 'Hosted by ', extLink(e.host, e.hostUrl)),
         h('div', { class: 'kv' },
           h('span', {}, icon('clock', 16), `${fmtDate(e.day)} · ${fmtTime(e.start)} to ${fmtTime(e.end)}`),
           h('span', {}, icon('pin', 16), e.venue),
           e.limit ? h('span', {}, icon('users', 16), e.limit) : null),
         h('p', {}, e.summary),
-        e.tip ? h('p', { class: 'tipbox' }, e.tip, e.tipMap ? [' ', h('a', { href: '#ground/map-' + e.tipMap }, 'See it on the resort map.')] : null) : null,
+        e.tip ? h('p', { class: 'tipbox' }, e.tip, e.tipMap ? [' ', h('a', { href: '#ground/map-' + e.tipMap }, e.tipMapLabel || 'See it on the resort map.')] : null) : null,
         h('div', { class: 'featured-actions' }, regButton(e, 'btn primary'), planButton(e)),
         e.regNote ? h('p', { class: 'featured-note' }, e.regNote) : null),
       h('div', { class: 'featured-time', 'aria-hidden': 'true' },
@@ -658,7 +657,7 @@
     const root = $('#featured-event');
     root.textContent = '';
     if (!list.length) return;
-    root.append(h('div', { class: 'featured-row' + (list.length > 1 ? ' multi' : '') }, list.map(featuredCard)));
+    root.append(h('div', { class: 'featured-row' + (list.length > 1 ? ' multi' : '') + (list.length > 2 ? ' multi-3' : '') }, list.map(featuredCard)));
   }
 
   /* ----- controls ----- */
@@ -836,7 +835,8 @@
     const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//PPCC 2026 Know Before You Go//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:PPCC 2026 evenings'];
     items.forEach(e => {
       const end = e.end || addMin(e.start, 120);
-      const desc = [e.summary, e.reg && e.reg.url ? 'Register: ' + e.reg.url : null, e.endNote ? e.endNote + '.' : null, 'Partner event details can change. Confirm with the host.'].filter(Boolean).join('\n');
+      const note = e.audience === 'official' ? 'Details can change. Check the Whova app for the latest.' : 'Partner event details can change. Confirm with the host.';
+      const desc = [e.summary, e.reg && e.reg.url ? 'Register: ' + e.reg.url : null, e.endNote ? e.endNote + '.' : null, note].filter(Boolean).join('\n');
       lines.push('BEGIN:VEVENT', `UID:${e.id}@ppcc26-kbyg`, `DTSTAMP:${now}`, `DTSTART:${stamp(e.day, e.start)}`, `DTEND:${stamp(e.day, end)}`,
         `SUMMARY:${icsText(e.host + ': ' + e.title)}`, `LOCATION:${icsText(e.address ? e.venue + ', ' + e.address : e.venue + (/MGM Grand/.test(e.venue) ? ', Las Vegas' : ', MGM Grand area, Las Vegas'))}`, `DESCRIPTION:${icsText(desc)}`, 'END:VEVENT');
     });

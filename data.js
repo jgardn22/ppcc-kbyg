@@ -46,7 +46,7 @@ window.KBYG = {
     { id: "before",   label: "Before You Go" },
     { id: "ground",   label: "On the Ground" },
     { id: "evenings", label: "Evening Events" },
-    { id: "exec",     label: "Executive Experience", short: "Executive" },
+    { id: "exec",     label: "Executive Experience" },
     { id: "days",     label: "3 Perfect Days" },
     { id: "faq",      label: "FAQ & Links" }
   ],
@@ -307,8 +307,8 @@ window.KBYG = {
       summary: "A relaxed social reception hosted by Brooksource at the Lobby Bar, inside the MGM Grand. Bring your team and connect with Brooksource’s healthcare and life sciences specialists and your Microsoft healthcare team.",
       tip: "The Lobby Bar is inside the MGM Grand, on the walk from the hotel front desk into the casino.",
       tipMap: "resort",
-      ask: { label: "Reserve a spot", body: "Please reserve a spot for me at the Lobby Bar Social Reception with Brooksource on Wednesday, Oct 28.\n\nName:\nOrganization:\nNumber of guests, including me:\n" },
-      regNote: "Space is limited to 30 guests, so reserve your spot with your Microsoft account team. Brooksource will share a flyer with final details soon." },
+      ask: { label: "Reserve a spot", to: "mscott@brooksource.com", body: "Hi Mike - Please reserve a spot for me at the Lobby Bar Social Reception with Brooksource on Wednesday, Oct 28.\n\nName:\nOrganization:\nNumber of guests, including me:\n\nThanks.\n" },
+      regNote: "Space is limited to 30 guests. To reserve a spot, email Mike Scott at Brooksource (mscott@brooksource.com). Brooksource will share a flyer with final details soon." },
 
     { id: "quisitive-hls", day: "2026-10-28", start: "11:30", end: "13:30",
       title: "Healthcare & Life Sciences Lunch", host: "Quisitive", hostUrl: "https://quisitive.com",
@@ -374,10 +374,16 @@ window.KBYG = {
       venue: "Expo and Makers Market", kind: "Expo", audience: "official", access: "badge",
       summary: "The last evening window to browse partner booths and collect your conference T-shirt." },
 
-    { id: "pitbull", day: "2026-10-28", start: "20:00", end: "22:00",
+    /* Official headliner. The start time and venue are listed on powerplatformconf.com. */
+    { id: "pitbull", featured: true, noStartCard: true, day: "2026-10-28", start: "20:00", end: "22:00",
+      heading: "Pitbull live at PPCC",
       title: "Pitbull Live", host: "Power Platform Community Conference", hostUrl: "https://powerplatformconf.com",
       venue: "MGM Grand Garden Arena", kind: "Concert", audience: "official", access: "badge",
-      summary: "An exclusive evening for full conference attendees: live music, drinks and networking, scheduled from 8:00 to 10:00 PM. Expect a long line to get in, and bring your badge because it is required for entry.       Guests and plus-ones are not allowed." },
+      limit: "Badge required · 21 and over",
+      summary: "An exclusive evening for full conference attendees with a live performance by Pitbull in the MGM Grand Garden Arena. Expect music, drinks and networking.",
+      tip: "Expect a long line to get in. Partner dinners wrap up around the time Pitbull starts, so plan your timing.",
+      tipMap: "walkway", tipMapLabel: "See the walk to the arena.",
+      regNote: "Included with a full conference pass. Your PPCC badge is required for entry, guests and plus-ones are not allowed, and security will be tightly monitored." },
 
     /* ---- Monday: hosted dinners ---- */
     { id: "root16-dinner-mon", day: "2026-10-26", start: "19:00", end: "21:00",
@@ -484,7 +490,7 @@ window.KBYG = {
     { q: "What is the dress code?",
       a: "Business casual at most, and plenty of people dress casually. Comfortable shoes matter more than anything else." },
     { q: "Can I bring a guest to the Pitbull concert?",
-      a: "Entry requires a PPCC badge. Guest passes are not available." },
+      a: "Entry requires a PPCC badge, and guests and plus-ones are not allowed. Attendees must be 21 or older." },
     { q: "How do I get the Whova app?",
       a: "Whova is the conference app, and it is available now on the App Store and Google Play. Download it and join the event with the invitation code LasVegas26. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda.",
       code: "LasVegas26",
