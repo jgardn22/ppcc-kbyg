@@ -375,11 +375,12 @@ window.KBYG = {
       summary: "The last evening window to browse partner booths and collect your conference T-shirt." },
 
     /* Official headliner. The start time and venue are listed on powerplatformconf.com. */
-    { id: "pitbull", featured: true, noStartCard: true, day: "2026-10-28", start: "20:00", end: "22:00",
+    { id: "pitbull", featured: true, day: "2026-10-28", start: "20:00", end: "22:00",
       heading: "Pitbull live at PPCC",
       title: "Pitbull Live", host: "Power Platform Community Conference", hostUrl: "https://powerplatformconf.com",
       venue: "MGM Grand Garden Arena", kind: "Concert", audience: "official", access: "badge",
-      limit: "Badge required · 21 and over",
+      limit: "Badge required",
+      blurb: "An exclusive evening for full conference attendees with a live performance by Pitbull in the MGM Grand Garden Arena. Bring your badge, because it is required for entry.",
       summary: "An exclusive evening for full conference attendees with a live performance by Pitbull in the MGM Grand Garden Arena. Expect music, drinks and networking.",
       tip: "Expect a long line to get in. Partner dinners wrap up around the time Pitbull starts, so plan your timing.",
       tipMap: "walkway", tipMapLabel: "See the walk to the arena.",
@@ -490,7 +491,7 @@ window.KBYG = {
     { q: "What is the dress code?",
       a: "Business casual at most, and plenty of people dress casually. Comfortable shoes matter more than anything else." },
     { q: "Can I bring a guest to the Pitbull concert?",
-      a: "Entry requires a PPCC badge, and guests and plus-ones are not allowed. Attendees must be 21 or older." },
+      a: "Entry requires a PPCC badge, and guests and plus-ones are not allowed." },
     { q: "How do I get the Whova app?",
       a: "Whova is the conference app, and it is available now on the App Store and Google Play. Download it and join the event with the invitation code LasVegas26. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda.",
       code: "LasVegas26",

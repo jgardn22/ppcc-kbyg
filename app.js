@@ -374,22 +374,23 @@
       h('div', { class: 'feature-links' },
         h('a', { class: 'btn ghost sm', href: '#days' }, 'See Wednesday’s plan'),
         r.mapId ? h('a', { class: 'textlink', href: '#ground/map-' + r.mapId }, 'Find the room on the map') : null));
-    // the Start tab keeps its healthcare highlights; events marked noStartCard are featured on Evening Events only
-    const evs = featuredEvents().filter(e => !e.noStartCard);
+    const evs = featuredEvents();
     const hi = $('#highlights');
     evs.forEach((e, i) => hi.append(
       h('article', { class: 'feature feature-eve', id: 'feature-' + e.id },
         h('span', { class: 'kicker' }, `${dayLabel(e.day)} night`),
-        h('h3', {}, `${e.host} ${e.title}`),
+        h('h3', {}, e.heading || `${e.host} ${e.title}`),
         h('div', { class: 'meta' },
           h('span', { class: 'chip' }, `${fmtTime(e.start)} to ${fmtTime(e.end)}`),
           h('span', { class: 'chip' }, e.venue),
           e.limit ? h('span', { class: 'chip' }, e.limit) : null),
         e.blurb ? h('p', {}, e.blurb) : null,
         h('div', { class: 'feature-links' },
-          regButton(e, 'btn primary sm'),
+          // events without a registration link point to their map instead
+          regButton(e, 'btn primary sm') || (e.tipMap ? h('a', { class: 'btn ghost sm', href: '#ground/map-' + e.tipMap }, (e.tipMapLabel || 'See it on the map').replace(/\.$/, '')) : null),
           i === evs.length - 1 ? h('a', { class: 'textlink', href: '#evenings' }, 'All evening events') : null))));
-    hi.classList.toggle('split-3', evs.length > 1);
+    hi.classList.toggle('split-3', evs.length === 2);
+    hi.classList.toggle('split-4', evs.length > 2);
   }
 
   const GUIDE_DESC = {
