@@ -27,14 +27,17 @@ window.KBYG = {
   /* ---------- Hosting-partner contacts ----------
      Request-to-attend emails go to the host's own contact, never to Microsoft staff.
      Events point here with ask.partner. Each address appears once, in this table only.
+     Optional: role (shown after the name) and aside (one short sentence shown after the address).
      ------------------------------------------------------------ */
   partners: {
-    alithya:    { org: "Alithya",             name: "Francois Khan",      email: "Francois.khan@alithya.com" },
-    engineerup: { org: "Engineer Up",         name: "Brian Columbus",     email: "Brian.Columbus@engineerup.com" },
-    kerv:       { org: "Kerv",                name: "William Dorrington", email: "William.Dorrington@kerv.com" },
-    quisitive:  { org: "Quisitive",           name: "Avi Sujeeth",        email: "Avi.Sujeeth@quisitive.com" },
-    root16:     { org: "Root16",              name: "Jeff Meister",       email: "je.meister@reply.com" },
-    stoneridge: { org: "Stoneridge Software", name: "Zarea Barber",       email: "zarea.barber@stoneridgesoftware.com" }
+    alithya:     { org: "Alithya",             name: "Francois Khan",      email: "Francois.khan@alithya.com" },
+    brooksource: { org: "Brooksource",         name: "Annie Kafka",        role: "event coordinator", email: "akafka@eightelevengroup.com",
+                   aside: "Her address ends in eightelevengroup.com because Brooksource is part of the Eight Eleven family of companies." },
+    engineerup:  { org: "Engineer Up",         name: "Brian Columbus",     email: "Brian.Columbus@engineerup.com" },
+    kerv:        { org: "Kerv",                name: "William Dorrington", email: "William.Dorrington@kerv.com" },
+    quisitive:   { org: "Quisitive",           name: "Avi Sujeeth",        email: "Avi.Sujeeth@quisitive.com" },
+    root16:      { org: "Root16",              name: "Jeff Meister",       email: "je.meister@reply.com" },
+    stoneridge:  { org: "Stoneridge Software", name: "Zarea Barber",       email: "zarea.barber@stoneridgesoftware.com" }
   },
 
   /* ---------- Product group meeting request (checklist CTA + FAQ) ---------- */
@@ -315,7 +318,7 @@ window.KBYG = {
       summary: "The conference’s official opening reception in the Expo and Makers Market. A natural first stop before a partner event." },
 
     /* ---- Wednesday ---- */
-    /* Featured Wednesday: times are Pacific. The invite shows 6:30 to 8:30 PM Mountain, which is 5:30 to 7:30 PM Las Vegas time. */
+    /* Featured Wednesday: 5:30 to 7:30 PM Pacific (PDT), confirmed by the host on Oct 12. Their invite shows 6:30 to 8:30 PM Mountain. */
     { id: "brooksource-wed", featured: true, day: "2026-10-28", start: "17:30", end: "19:30",
       title: "Lobby Bar Social Reception", host: "Brooksource", hostUrl: "https://www.brooksource.com",
       venue: "Lobby Bar, MGM Grand", address: "3799 S Las Vegas Blvd, Las Vegas, NV 89109", kind: "Social reception", audience: "hls", access: "ask",
@@ -324,8 +327,10 @@ window.KBYG = {
       summary: "A relaxed social reception hosted by Brooksource at the Lobby Bar, inside the MGM Grand. Bring your team and connect with Brooksource’s healthcare and life sciences specialists and your Microsoft healthcare team.",
       tip: "The Lobby Bar is inside the MGM Grand, on the walk from the hotel front desk into the casino.",
       tipMap: "resort",
-      ask: { label: "Reserve a spot", to: "mscott@brooksource.com", body: "Hi Mike - Please reserve a spot for me at the Lobby Bar Social Reception with Brooksource on Wednesday, Oct 28.\n\nName:\nOrganization:\nNumber of guests, including me:\n\nThanks.\n" },
-      regNote: "Space is limited to 30 guests. To reserve a spot, email Mike Scott at Brooksource (mscott@brooksource.com). Brooksource will share a flyer with final details soon." },
+      ask: { partner: "brooksource", label: "Reserve a spot", action: "reserve a spot or ask to meet with the Brooksource team",
+             subject: "PPCC 2026: reserve a spot at the Brooksource Lobby Bar Social Reception (Oct 28)",
+             sentence: "Please reserve a spot for me at the Lobby Bar Social Reception with Brooksource on Wednesday, Oct 28, from 5:30 to 7:30 PM." },
+      regNote: "Space is limited to 30 guests. Brooksource will share a flyer with final details soon." },
 
     { id: "quisitive-hls", day: "2026-10-28", start: "11:30", end: "13:30",
       title: "Healthcare & Life Sciences Lunch", host: "Quisitive", hostUrl: "https://quisitive.com",

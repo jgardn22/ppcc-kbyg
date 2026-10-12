@@ -551,7 +551,9 @@
   function contactNote(e) {
     const m = e.ask && e.ask.partner ? requestMail(e) : null;
     if (!m) return null;
-    return [` To ${e.ask.action || 'request an invitation'}, email ${m.p.name} at ${m.p.org} (`, h('a', { href: m.href }, m.p.email), ').'];
+    const p = m.p;
+    const who = p.role ? `${p.name}, ${p.role} for ${p.org}` : `${p.name} at ${p.org}`;
+    return [` To ${e.ask.action || 'request an invitation'}, email ${who} (`, h('a', { href: m.href }, p.email), ').', p.aside ? ' ' + p.aside : null];
   }
 
   function planButton(e) {
@@ -662,6 +664,7 @@
 
   /* ----- featured cards ----- */
   function featuredCard(e) {
+    const cn = contactNote(e);
     const [hh, mm] = e.start.split(':').map(Number);
     const big = `${hh % 12 || 12}${mm ? ':' + String(mm).padStart(2, '0') : ''}`;
     return h('article', { class: 'featured', id: 'ev-' + e.id },
@@ -676,7 +679,7 @@
         h('p', {}, e.summary),
         e.tip ? h('p', { class: 'tipbox' }, e.tip, e.tipMap ? [' ', h('a', { href: '#ground/map-' + e.tipMap }, e.tipMapLabel || 'See it on the resort map.')] : null) : null,
         h('div', { class: 'featured-actions' }, regButton(e, 'btn primary'), planButton(e)),
-        e.regNote ? h('p', { class: 'featured-note' }, e.regNote) : null),
+        e.regNote || cn ? h('p', { class: 'featured-note' }, e.regNote, cn) : null),
       h('div', { class: 'featured-time', 'aria-hidden': 'true' },
         h('span', { class: 'ft-day' }, fmtDate(e.day)),
         h('span', { class: 'ft-big' }, big, h('small', {}, hh >= 12 ? 'PM' : 'AM')),
