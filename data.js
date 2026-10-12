@@ -346,7 +346,9 @@ window.KBYG = {
       venue: "Producers Pool Cabana, MGM Grand", kind: "Lunch", audience: "open", access: "register",
       summary: "WinWire and Microsoft invite you to take a break from the conference and relax poolside in a private cabana. Expect refreshments, lunch and informal networking with industry peers and Microsoft leaders. No presentations and no agenda.",
       reg: { url: "https://www.winwire.com/power-platform-conference/", label: "RSVP" },
-      regNote: "Drop in any time during either window, 11:00 AM to 2:00 PM or 4:00 to 6:00 PM. WinWire has 30 spots available, so RSVP early." },
+      regNote: "Drop in any time during either window, 11:00 AM to 2:00 PM or 4:00 to 6:00 PM. WinWire has 30 spots available, so RSVP early.",
+      invite: { src: "assets/img/invites/winwire-poolside.webp", w: 1200, h: 500, caption: "The invitation from WinWire and Microsoft",
+                alt: "WinWire and Microsoft invitation. Poolside Connections: relax, recharge, connect at MGM Grand. October 28, 2026." } },
 
     { id: "winwire-afternoon", day: "2026-10-28", start: "16:00", end: "18:00",
       title: "Poolside Lunch & Networking (afternoon window)", host: "WinWire", hostUrl: "https://www.winwire.com",

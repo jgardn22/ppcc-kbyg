@@ -561,6 +561,13 @@
     return btn;
   }
 
+  // A partner's own invitation artwork, shown under the event details
+  function inviteFig(inv) {
+    return h('figure', { class: 'ev-invite' },
+      h('img', { src: inv.src, alt: inv.alt, width: inv.w, height: inv.h, loading: 'lazy', decoding: 'async' }),
+      h('figcaption', {}, inv.caption));
+  }
+
   function evRow(e) {
     const cn = contactNote(e);
     const accessText = e.access === 'badge' ? D.accessLabels.badge : e.access === 'open' ? D.accessLabels.open : (e.reg ? D.accessLabels.register : null);
@@ -572,7 +579,8 @@
         h('p', { class: 'ev-host' }, 'Hosted by ', extLink(e.host, e.hostUrl)),
         h('div', { class: 'ev-meta' }, h('span', {}, e.venue), h('span', {}, e.kind), e.duration ? h('span', {}, e.duration) : null),
         h('p', { class: 'ev-sum' }, e.summary),
-        e.regNote || cn ? h('p', { class: 'ev-note' }, e.regNote, cn) : null),
+        e.regNote || cn ? h('p', { class: 'ev-note' }, e.regNote, cn) : null,
+        e.invite ? inviteFig(e.invite) : null),
       h('div', { class: 'ev-actions' }, regButton(e), planButton(e)));
   }
 
