@@ -24,6 +24,19 @@ window.KBYG = {
     subject: "PPCC 2026 Know Before You Go"
   },
 
+  /* ---------- Hosting-partner contacts ----------
+     Request-to-attend emails go to the host's own contact, never to Microsoft staff.
+     Events point here with ask.partner. Each address appears once, in this table only.
+     ------------------------------------------------------------ */
+  partners: {
+    alithya:    { org: "Alithya",             name: "Francois Khan",      email: "Francois.khan@alithya.com" },
+    engineerup: { org: "Engineer Up",         name: "Brian Columbus",     email: "Brian.Columbus@engineerup.com" },
+    kerv:       { org: "Kerv",                name: "William Dorrington", email: "William.Dorrington@kerv.com" },
+    quisitive:  { org: "Quisitive",           name: "Avi Sujeeth",        email: "Avi.Sujeeth@quisitive.com" },
+    root16:     { org: "Root16",              name: "Jeff Meister",       email: "je.meister@reply.com" },
+    stoneridge: { org: "Stoneridge Software", name: "Zarea Barber",       email: "zarea.barber@stoneridgesoftware.com" }
+  },
+
   /* ---------- Product group meeting request (checklist CTA + FAQ) ---------- */
   meet: {
     title: "Meet with Microsoft product group leaders",
@@ -213,6 +226,8 @@ window.KBYG = {
   /* ---------- Evening events ----------
      audience: hls | open | exec | official | tbd
      access:   register | ask | badge | open
+     ask:      for "ask" events: { partner, label?, action?, subject?, sentence? } emails partners[partner].
+               An "ask" event with no partner (and no ask.to) shows no request button.
      Healthcare & Life Sciences events and industry-agnostic events only.
      ------------------------------------------------------------ */
   audiences: {
@@ -224,7 +239,7 @@ window.KBYG = {
   },
   accessLabels: {
     register: "Registration required",
-    ask:      "Ask your Microsoft account team",
+    ask:      "Email the host to request an invitation",
     badge:    "Included with your badge",
     open:     "Open: just show up"
   },
@@ -284,13 +299,15 @@ window.KBYG = {
       title: "Client Reception at Topgolf", host: "Alithya", hostUrl: "https://www.alithya.com/en",
       venue: "Topgolf, next to MGM Grand", kind: "Reception", audience: "open", access: "ask",
       summary: "A relaxed client reception for PPCC customers, prospects and Microsoft teams.",
-      regNote: "No public link yet. Your Microsoft account team can connect you with Alithya." },
+      ask: { partner: "alithya" },
+      regNote: "No public link yet." },
 
     { id: "engineerup-tue", day: "2026-10-27", start: "18:00", end: "20:00",
       title: "Customer Dinner at Craftsteak", host: "Engineer Up", hostUrl: "https://www.engineerup.com",
       venue: "Craftsteak, MGM Grand", kind: "Dinner", audience: "open", access: "ask",
       summary: "A hosted dinner for end-user customers and Microsoft teams. Engineer Up is also a Gold sponsor, so you can find the team at Booth 113.",
-      regNote: "No public link yet. Your Microsoft account team can request a seat." },
+      ask: { partner: "engineerup" },
+      regNote: "No public link yet." },
 
     { id: "night-market", day: "2026-10-27", start: "17:00", end: "19:30",
       title: "Night Market: Opening Reception", host: "Power Platform Community Conference", hostUrl: "https://powerplatformconf.com",
@@ -314,7 +331,8 @@ window.KBYG = {
       title: "Healthcare & Life Sciences Lunch", host: "Quisitive", hostUrl: "https://quisitive.com",
       venue: "Quisitive suite", kind: "Lunch", audience: "hls", access: "ask",
       summary: "A catered, healthcare-focused lunch hosted with Microsoft in the Quisitive suite. Come and go during the window, and take a quiet break from the crowds.",
-      regNote: "Space is limited. Your Microsoft account team can connect you with Quisitive for an invitation." },
+      ask: { partner: "quisitive" },
+      regNote: "Space is limited." },
 
     { id: "root16-lounge", day: "2026-10-28", start: "09:00", end: "16:00",
       title: "Hospitality Lounge at Emeril’s", host: "Root16 (a Reply company)", hostUrl: "https://www.reply.com/root16-reply/en",
@@ -355,19 +373,21 @@ window.KBYG = {
       title: "Customer Dinner at Hakkasan", host: "Engineer Up", hostUrl: "https://www.engineerup.com",
       venue: "Hakkasan, MGM Grand", kind: "Dinner", audience: "open", access: "ask",
       summary: "A second hosted dinner for end-user customers and Microsoft teams, with informal conversation around Power Platform and AI. The end time is approximate.",
-      regNote: "No public link yet. Your Microsoft account team can request a seat." },
+      ask: { partner: "engineerup" },
+      regNote: "No public link yet." },
 
     { id: "stoneridge", day: "2026-10-28", start: "18:30", end: "20:30",
       title: "Expo and Happy Hour", host: "Stoneridge Software", hostUrl: "https://stoneridgesoftware.com",
       venue: "Tap Sports Bar, MGM Grand", kind: "Happy hour", audience: "open", access: "ask",
       summary: "A happy hour for customers and prospects. Microsoft teams are welcome too.",
-      regNote: "No public link yet. Your Microsoft account team can connect you with Stoneridge." },
+      ask: { partner: "stoneridge" },
+      regNote: "No public link yet." },
 
     { id: "velrada", day: "2026-10-28", start: null, end: null, timeNote: "Evening · time to be announced",
       title: "Power Swings & Power Platform", host: "Velrada", hostUrl: "https://velrada.com",
       venue: "Topgolf Las Vegas", kind: "Networking", audience: "open", access: "ask",
       summary: "An evening of golf-ball swings and Power Platform conversation with customers and prospects. Velrada is also exhibiting at Booth 115.",
-      regNote: "Details are still being finalized. Your Microsoft account team can connect you with Velrada." },
+      regNote: "Details are still being finalized. We will add the time and how to sign up here as soon as Velrada confirms." },
 
     { id: "wed-expo", day: "2026-10-28", start: "16:30", end: "18:30",
       title: "Expo and Makers Market, plus T-shirt pick-up", host: "Power Platform Community Conference", hostUrl: "https://powerplatformconf.com",
@@ -391,13 +411,15 @@ window.KBYG = {
       title: "Hosted Customer Dinner", host: "Root16 (a Reply company)", hostUrl: "https://www.reply.com/root16-reply/en",
       venue: "Various MGM Grand restaurants", kind: "Dinner", audience: "open", access: "ask",
       summary: "Small hosted dinners for qualified customers and prospects, with seats limited to nine.",
-      regNote: "Invitation only. Your Microsoft account team can request a seat." },
+      ask: { partner: "root16" },
+      regNote: "Invitation only. Seats go to qualified customers and prospects, so request early." },
 
     { id: "root16-dinner-wed", day: "2026-10-28", start: "19:00", end: "21:00",
       title: "Hosted Customer Dinner", host: "Root16 (a Reply company)", hostUrl: "https://www.reply.com/root16-reply/en",
       venue: "Various MGM Grand restaurants", kind: "Dinner", audience: "open", access: "ask",
       summary: "A second night of small hosted dinners for qualified customers and prospects, with seats limited to nine.",
-      regNote: "Invitation only. Your Microsoft account team can request a seat." },
+      ask: { partner: "root16" },
+      regNote: "Invitation only. Seats go to qualified customers and prospects, so request early." },
 
     /* ---- Executive experiences (Lateetud): VP and C-suite, access code required. Steps and deadline live in exec below. ---- */
     { id: "lateetud-golf", group: "exec", days: ["2026-10-26"], day: "2026-10-26", start: "13:30", end: null, noPlan: true,
@@ -429,7 +451,10 @@ window.KBYG = {
       title: "Industry Dinners and Lunches", host: "Kerv", hostUrl: "https://kerv.com",
       venue: "To be announced", kind: "Dinners and lunches", audience: "tbd", access: "ask",
       summary: "Industry-specific dinners and lunches for customers and prospects. Ask whether a healthcare session is planned.",
-      regNote: "Details are still being finalized. Your Microsoft account team can ask Kerv about a healthcare session." }
+      ask: { partner: "kerv", label: "Ask about a healthcare session", action: "ask about a healthcare session",
+             subject: "PPCC 2026: healthcare dinner or lunch question",
+             sentence: "I am attending PPCC 2026 and would like to ask whether Kerv is planning a healthcare or life sciences dinner or lunch, and how to request an invitation." },
+      regNote: "Details are still being finalized." }
   ],
 
   /* ---------- Executive Experience tab ----------

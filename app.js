@@ -521,15 +521,37 @@
     return [h('b', {}, a), h('span', {}, rest.join(' · '))];
   }
 
+  // Request emails go to the hosting partner's own contact. An "ask" event with no contact gets no button.
+  function requestMail(e) {
+    const ask = e.ask || {};
+    const p = ask.partner && D.partners ? D.partners[ask.partner] : null;
+    if (!p && !ask.to) return null;
+    let body = ask.body;
+    if (!body && p) {
+      const when = e.day ? ` on ${fmtDate(e.day)}${e.start ? ' at ' + fmtTime(e.start) : ''}` : '';
+      const lead = ask.sentence || `I am attending PPCC 2026 and would like to request an invitation to the ${e.title}${when}.`;
+      body = `Hi ${p.name.split(' ')[0]} - ${lead}\n\nName:\nTitle and organization:\nNumber of guests, including me:\nMicrosoft contact, if I have one:\n\nThanks.\n`;
+    }
+    const subject = ask.subject || (p && e.day ? `PPCC 2026: invitation request for ${e.title} on ${fmtMD(e.day)}` : `PPCC 2026: ${e.host} ${e.title}`);
+    const href = `mailto:${p ? p.email : ask.to}?subject=${encodeURIComponent(subject)}` +
+      (body ? '&body=' + encodeURIComponent(body.replace(/\n/g, '\r\n')) : '');
+    return { p, href, label: ask.label || 'Request an invitation' };
+  }
+
   function regButton(e, cls) {
     if (e.reg && e.reg.url) return extLink(e.reg.label, e.reg.url, cls || 'btn primary sm');
     if (e.access === 'ask') {
-      const ask = e.ask || {};
-      const subject = encodeURIComponent(`PPCC 2026: ${e.host} ${e.title}`);
-      const body = ask.body ? '&body=' + encodeURIComponent(ask.body.replace(/\n/g, '\r\n')) : '';
-      return h('a', { class: cls || 'btn ghost sm', href: `mailto:${ask.to || D.contact.email}?subject=${subject}${body}` }, ask.label || 'Ask your Microsoft team');
+      const m = requestMail(e);
+      if (m) return h('a', { class: cls || 'btn ghost sm', href: m.href }, m.label);
     }
     return null;
+  }
+
+  // Plain-text copy of the contact, so the address is on the page even if no email app opens
+  function contactNote(e) {
+    const m = e.ask && e.ask.partner ? requestMail(e) : null;
+    if (!m) return null;
+    return [` To ${e.ask.action || 'request an invitation'}, email ${m.p.name} at ${m.p.org} (`, h('a', { href: m.href }, m.p.email), ').'];
   }
 
   function planButton(e) {
@@ -540,6 +562,7 @@
   }
 
   function evRow(e) {
+    const cn = contactNote(e);
     const accessText = e.access === 'badge' ? D.accessLabels.badge : e.access === 'open' ? D.accessLabels.open : (e.reg ? D.accessLabels.register : null);
     return h('article', { class: 'ev', id: 'ev-' + e.id },
       h('div', { class: 'ev-time' }, timeBlock(e)),
@@ -549,7 +572,7 @@
         h('p', { class: 'ev-host' }, 'Hosted by ', extLink(e.host, e.hostUrl)),
         h('div', { class: 'ev-meta' }, h('span', {}, e.venue), h('span', {}, e.kind), e.duration ? h('span', {}, e.duration) : null),
         h('p', { class: 'ev-sum' }, e.summary),
-        e.regNote ? h('p', { class: 'ev-note' }, e.regNote) : null),
+        e.regNote || cn ? h('p', { class: 'ev-note' }, e.regNote, cn) : null),
       h('div', { class: 'ev-actions' }, regButton(e), planButton(e)));
   }
 

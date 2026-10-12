@@ -393,6 +393,7 @@ h1 em { font-style: normal; color: var(--teal); }
 .ev-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px; font-size: 13px; color: #cfd2e4; font-weight: 600; }
 .ev-sum { font-size: 14px; color: #cfd2e4; margin-top: 8px; max-width: 62ch; }
 .ev-note { font-size: 13px; color: var(--faint); margin-top: 8px; max-width: 62ch; }
+.ev-note a, .featured-note a { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
 .ev-actions { display: flex; flex-direction: column; align-items: stretch; gap: 8px; min-width: 150px; }
 .planbtn { padding: 9px 14px; border-radius: 99px; font-size: 12.5px; font-weight: 700; border: 1.5px solid var(--line-strong); color: var(--muted); text-align: center; transition: all .18s; }
 .planbtn:hover { color: #fff; border-color: #fff; }
