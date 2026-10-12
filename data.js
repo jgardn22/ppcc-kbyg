@@ -272,10 +272,11 @@ window.KBYG = {
       reg: { url: "https://www.brooksource.com/microsoft-power-platform", label: "RSVP" } },
 
     { id: "ey", day: "2026-10-27", start: "18:00", end: "20:00",
-      title: "Customer Reception", host: "EY", hostUrl: "https://www.ey.com/en_gl/alliances/microsoft",
+      title: "Client Reception", host: "EY", hostUrl: "https://www.ey.com/en_gl/alliances/microsoft",
       venue: "Luchini’s, MGM Grand", kind: "Reception", audience: "open", access: "register",
-      summary: "EY, a Platinum sponsor of PPCC 2026, invites customers, prospects and Microsoft colleagues to a Tuesday reception.",
-      reg: null, regNote: "Registration is required and EY’s link is coming soon. Ask your Microsoft account team for the invitation." },
+      summary: "EY, a Platinum sponsor of PPCC 2026, hosts an evening reception for clients, Microsoft leaders and industry peers. Expect signature cocktails, gourmet bites and relaxed networking.",
+      reg: { url: "https://web-eur.cvent.com/event/cc782b7f-677c-42b2-be9c-f534d5e27f47/summary?rt=5Qtag0wLVkyIAFIybufn-Q&RefId=Client", label: "Register" },
+      regNote: "Registration is required and space is limited. On EY’s page, select Register Now to reserve your spot. The end time is approximate: EY’s agenda says 8:00 PM and its description says 9:00 PM." },
 
     { id: "congruentx-tue", day: "2026-10-27", start: "16:30", end: "18:30",
       title: "Customer Happy Hour", host: "congruentX", hostUrl: "https://congruentx.com",
