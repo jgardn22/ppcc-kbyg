@@ -226,6 +226,27 @@ window.KBYG = {
     }
   ],
 
+  /* ---------- Optional partner sessions (daytime) ----------
+     Partner-hosted sessions that run during the day. They show in one place only, the On the Ground tab:
+     never on 3 Perfect Days, Evening Events, the planner, the timeline or the calendar export.
+     time is display text. regFrom is the id of an event whose registration link is reused.
+     ------------------------------------------------------------ */
+  partnerSessions: [
+    { host: "EY", place: "Room 262", regFrom: "ey", mapId: "floor2",
+      intro: "EY hosts optional sessions in Room 262 on the second floor of the MGM Grand Conference Center. They are not part of the official conference agenda, and they run at the same time as official sessions, so compare them with your agenda before you register. Registration is required. On EY’s page, select Register Now.",
+      sessions: [
+        { day: "2026-10-27", time: "2:00 to 3:00 PM",
+          title: "Lessons from the frontier: Building the agentic enterprise at EY",
+          summary: "An open discussion on how EY is applying Copilot, agents, automation and governance internally, including key successes, challenges and lessons from scaling." },
+        { day: "2026-10-28", time: "2:00 to 3:00 PM",
+          title: "The agentic contact center: beyond chatbots and demos",
+          summary: "What organizations are learning as AI moves from pilots into real customer service operations." },
+        { day: "2026-10-28", time: "3:30 to 4:30 PM",
+          title: "What happens to sales when everyone has an AI Copilot?",
+          summary: "How AI is reshaping the roles, processes and operating models of modern sales organizations." }
+      ] }
+  ],
+
   /* ---------- Evening events ----------
      audience: hls | open | exec | official | tbd
      access:   register | ask | badge | open
@@ -590,7 +611,8 @@ window.KBYG = {
       { id: "floor2", title: "Convention Center, 2nd floor",
         blurb: "Vista and Cedar ballrooms plus meeting rooms 201 to 264.",
         src: "assets/img/maps/floor2.webp", thumb: "assets/img/maps/floor2-thumb.webp", w: 1615, h: 773, tw: 640, th: 306, videoAt: 1134,
-        alt: "Second-floor plan of the Conference Center. Vista Ballroom (rooms 206 to 211) runs along the bottom, Cedar Ballroom (rooms 250 to 255) is at the lower right, and meeting rooms 201 to 205 and 256 to 264 sit between them. Escalators to the first and third floors are at both ends of the lower corridor." },
+        note: "EY hosts optional partner sessions in Room 262 on Tuesday and Wednesday afternoon. Look for the orange block of rooms 261 to 264, right of center and just above the restrooms.",
+        alt: "Second-floor plan of the Conference Center. Vista Ballroom (rooms 206 to 211) runs along the bottom, Cedar Ballroom (rooms 250 to 255) is at the lower right, and meeting rooms 201 to 205 and 256 to 264 sit between them. Room 262, where EY hosts partner sessions, is in the orange block of rooms 261 to 264, right of center and just above the restrooms. Escalators to the first and third floors are at both ends of the lower corridor." },
 
       { id: "floor3", title: "Convention Center, 3rd floor",
         blurb: "Premier and Chairman’s ballrooms, the Community Lounge and Room 353, home of the healthcare panel.",

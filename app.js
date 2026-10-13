@@ -395,7 +395,7 @@
 
   const GUIDE_DESC = {
     before: 'A checklist with live deadlines, plus a way to request time with product group leaders. Your progress saves on this device.',
-    ground: 'Venue maps you can zoom, badge pickup, the keynote-morning route and tips for getting around the MGM Grand.',
+    ground: 'Venue maps you can zoom, badge pickup, the keynote-morning route, tips for getting around the MGM Grand and optional partner sessions.',
     evenings: 'Healthcare happy hours first, then every open event, with a Tuesday overlap timeline.',
     exec: 'Optional VIP experiences for senior leaders and how to register. Official track details are coming soon.',
     days: 'Our recommended sessions, one day at a time.',
@@ -491,6 +491,26 @@
       body.append(h('tr', { class: r.date === today ? 'today' : null },
         h('td', {}, r.day, r.tip ? h('span', { class: 'htag' }, r.tip) : null),
         h('td', {}, r.hours)));
+    });
+  }
+
+  // Optional partner-hosted daytime sessions. They live on this tab only: never on Evening Events, the planner, the timeline or the calendar export.
+  function renderPartnerSessions() {
+    const root = $('#partner-sessions');
+    const groups = D.partnerSessions || [];
+    if (!groups.length) { root.hidden = true; return; }
+    groups.forEach(g => {
+      const src = g.regFrom ? D.events.find(e => e.id === g.regFrom) : null;
+      const regUrl = src && src.reg && src.reg.url;
+      root.append(
+        h('p', {}, g.intro),
+        h('ul', { class: 'tips' }, g.sessions.map(s => h('li', {},
+          h('b', {}, s.title),
+          h('span', { class: 'ps-when' }, `${dayLabel(s.day)}, ${fmtMD(s.day)} · ${s.time}`),
+          h('span', { class: 'ps-sum' }, s.summary)))),
+        h('div', { class: 'ps-links' },
+          regUrl ? extLink(`Register on ${g.host}’s page`, regUrl, 'textlink') : null,
+          g.mapId ? h('a', { class: 'textlink', href: '#ground/map-' + g.mapId }, `Find ${g.place} on the map`) : null));
     });
   }
 
@@ -1408,6 +1428,7 @@
     renderGuide();
     renderChecklist();
     renderBadgeHours();
+    renderPartnerSessions();
     renderFeatured();
     buildControls();
     renderEvents();

@@ -302,6 +302,10 @@ h1 em { font-style: normal; color: var(--teal); }
 .tips li { position: relative; padding-left: 24px; color: #d4d6e6; font-size: 15.5px; }
 .tips li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 2px; background: var(--teal); transform: rotate(45deg); }
 .tips b { color: #fff; }
+.ps-when { display: block; margin-top: 2px; color: var(--teal); font-weight: 700; font-size: 13px; font-variant-numeric: tabular-nums; }
+#partner-sessions .tips { margin-top: 18px; }
+.ps-sum { display: block; margin-top: 3px; color: var(--muted); font-size: 14.5px; }
+.ps-links { display: flex; flex-wrap: wrap; gap: 2px 22px; margin-top: 16px; }
 .notes-side { position: sticky; top: var(--sticky); align-self: start; }
 .sidecard { border-radius: 22px; padding: 26px; background: rgba(10, 23, 42, .72); border: 1px solid var(--line); }
 .sidecard h3 { font-size: 18px; margin-bottom: 8px; }
