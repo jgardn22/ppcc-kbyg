@@ -186,18 +186,17 @@ window.KBYG = {
         { time: "11:30 AM to 12:30 PM",
           options: [
             { kind: "rec", badge: "Top Pick",
-              title: "Beyond the CRM Screen: Headless CRM in the Age of Copilot", room: "Premier Ballroom 311", time: "11:45 AM to 12:45 PM", format: "Session",
-              why: "If agents can do the work, do you still need the CRM screen? This session shows Dynamics 365 as the platform behind agents and Copilot, following one customer journey from frontline staff to relationship managers and compliance reviewers. The example is a bank, and healthcare teams can look for the same pattern in member and patient service.",
-              note: "Starts at 11:45 AM and runs 15 minutes into lunch, which is open until 2:00 PM, so you can still eat afterward.",
-              tags: ["Dynamics 365", "Agents", "Cowork"] },
+              title: "Roundtable: Apps, Agents & AI: Strategy at Scale", room: "Premier Ballroom 318", format: "Roundtable", level: "Intermediate",
+              why: "How do you go from a handful of successful apps and agents to enterprise-wide adoption without a large center of excellence? This interactive roundtable compares what is working on governance guardrails, maker enablement and measuring ROI on agents that reach production. It is a discussion, not a lecture, and you leave with a checklist of guardrails to set before you scale.",
+              tags: ["Copilot Studio", "Governance", "Makers and adoption"] },
             { kind: "key", badge: "Keynote",
               title: "Product Talk: What’s Next in Microsoft Fabric & Power BI: The Data Foundation for AI", room: "MGM Grand Garden Arena", format: "Keynote",
               why: "Kim Manis, CVP of Product for Microsoft Fabric, on how Fabric, OneLake and Power BI give agents a trusted data foundation.",
               note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes." }
           ],
           alts: [
-            { title: "Roundtable: Apps, Agents & AI: Strategy at Scale", room: "Premier Ballroom 318", format: "Roundtable", level: "Intermediate",
-              note: "Governance guardrails to set before you scale, how to structure a center of excellence, maker enablement and ROI, from people who run large programs." },
+            { title: "Beyond the CRM Screen: Headless CRM in the Age of Copilot", room: "Premier Ballroom 311", time: "11:45 AM to 12:45 PM", format: "Session",
+              note: "Dynamics 365 as the platform behind agents and Copilot, following one customer journey from frontline staff to compliance reviewers. The example is a bank, and the same pattern applies to member and patient service. It starts at 11:45 AM and runs 15 minutes into lunch." },
             { title: "Getting Started with Agent 365", room: "Premier Ballroom 319", format: "Session", level: "Foundational",
               note: "Core concepts, deployment, governance, security and adoption for agents across your organization." },
             { title: "Work, Reimagined: Copilot, Cowork & the Power Platform", room: "Boulevard Ballroom 163", format: "Session", level: "Intermediate",
@@ -216,6 +215,10 @@ window.KBYG = {
               tags: ["Cost and ROI", "Leaders"] }
           ],
           alts: [
+            { title: "Your Processes, Now Intelligent: Process Mining and Optimization", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
+              note: "Process mining and process intelligence show how work really happens, so you can find the biggest improvement opportunities and build a base for smarter automation and AI. Includes practical scenarios, lessons learned and where Process Intelligence in Power Platform is headed." },
+            { title: "Don’t Start Over: Move Copilot Studio Agents to the GitHub Copilot Harness",
+              note: "For teams that already built agents in Copilot Studio: how to move them to the GitHub Copilot harness instead of starting over. It is not on the public session list yet, so check the Whova app for the room and level." },
             { title: "Governing Agents at Scale", room: "Premier Ballroom 318", format: "Roundtable", level: "Intermediate",
               note: "How governance and admin duties should span the Power Platform admin center and Agent 365, and how agent centers of excellence partner with IT and security." },
             { title: "Demystifying Copilot Studio Licensing", room: "Grand Ballroom 116", format: "Session", level: "Foundational",
@@ -231,17 +234,17 @@ window.KBYG = {
               note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
               tags: ["Power Apps", "Roadmap"] },
             { kind: "rec", badge: "Top Alternative",
-              title: "Enabling Vibe Coding in Copilot Studio at Scale Across Organizations", room: "Premier Ballroom 318", format: "Roundtable", level: "Intermediate",
-              why: "Vibe coding puts app building in more hands, and scaling it takes more than enthusiasm. Compare notes on what to put in place first: governance, enablement, quality, security and culture.",
-              tags: ["Copilot Studio", "Makers and adoption", "Governance"] }
+              title: "When One Agent Isn’t Enough: Designing Scalable Multi-Agent Systems", room: "Grand Ballroom 116", format: "Session", level: "Advanced",
+              why: "Single agents hit their limits quickly. This deep dive covers when to build one generalist agent versus several specialists, orchestration patterns like routing and handoffs, and how to choose a knowledge strategy, with demos that include a self-service agent calling specialized HR and IT sub-agents.",
+              tags: ["Copilot Studio", "Agents"] }
           ],
           alts: [
+            { title: "Enabling Vibe Coding in Copilot Studio at Scale Across Organizations", room: "Premier Ballroom 318", format: "Roundtable", level: "Intermediate",
+              note: "Vibe coding puts app building in more hands, and scaling it takes more than enthusiasm. Compare notes on what to put in place first: governance, enablement, quality, security and culture." },
             { title: "Beyond the Basics: the GitHub Copilot Harness and Workflows in Copilot Studio", room: "Premier Ballroom 316", format: "Session", level: "Advanced",
               note: "A technical deep dive into the GitHub Copilot harness in Copilot Studio, built for reasoning-heavy agents and workflows that automate a business process end to end." },
             { title: "Delegate It to Cowork: From Meeting to Working App, Agent, and Flow", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
-              note: "A demo of a Teams meeting becoming a spec, an app, an agent and a flow, plus how IT stays in control." },
-            { title: "Empower Your Agent to Do More: What's New in Agent Capabilities", room: "Boulevard Ballroom 163", format: "Session", level: "Foundational",
-              note: "Memory, identity, skills and richer experiences for your Copilot Studio agents, in a demo-packed session." }
+              note: "A demo of a Teams meeting becoming a spec, an app, an agent and a flow, plus how IT stays in control." }
           ] }
       ],
       agenda: [
@@ -300,8 +303,8 @@ window.KBYG = {
               note: "Watch an agent get built live that queries Dataverse, analyzes customer data and recommends next best actions." },
             { title: "Managed Governance: Governing Copilot Studio Without Killing Innovation", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
               note: "Governance signals move earlier into the maker experience, so makers hit fewer blockers late." },
-            { title: "From AI Adoption to AI Confidence: Evaluation and Analytics for Agents, Flows and Apps", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
-              note: "A practical AgentOps playbook: set a quality bar, gate releases and watch quality, compliance and consumption from one place." }
+            { title: "The Copilot Compass: Finding True North Across Copilot, Cowork, Scout, and Agents", room: "Chairman’s Ballroom 368", format: "Session", level: "Intermediate",
+              note: "A demo-driven guide to choosing the right tool across Copilot, Cowork, Scout and agents." }
           ] },
         { time: "11:30 AM to 12:30 PM",
           options: [
@@ -401,8 +404,6 @@ window.KBYG = {
           alts: [
             { title: "Agent Accounts in Copilot Studio and Agent 365", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
               note: "Entra agent accounts give autonomous agents an identity to work through Office documents, Teams and email, with the permissions and oversight enterprises need." },
-            { title: "The Copilot Compass: Finding True North Across Copilot, Cowork, Scout, and Agents", room: "Premier Ballroom 316", format: "Session", level: "Intermediate",
-              note: "A demo-driven guide to choosing the right tool across Copilot, Cowork, Scout and agents." },
             { title: "Managed Platform as the Enterprise Default: Life After the CoE Toolkit", room: "Room 353", format: "Roundtable", level: "Intermediate",
               note: "The Power CAT team leads a roundtable on life after the CoE Toolkit: modern inventory, usage and monitoring tools for governing apps, flows, agents and environments." },
             { title: "Real-World Stories: Becoming a Frontier Firm with Apps and Agents", room: "Chairman’s Ballroom 370", format: "Session", level: "Foundational",
@@ -430,7 +431,7 @@ window.KBYG = {
         { time: "2:30 to 3:30 PM",
           options: [
             { kind: "rec", badge: "Top Pick",
-              title: "Copilot credits at scale: governing consumption, empowering everyone", room: "Chairman’s Ballroom 368", format: "Roundtable", level: "Intermediate",
+              title: "Copilot credits at scale: governing consumption, empowering everyone", room: "Chairman’s Ballroom 368", format: "Session", level: "Intermediate",
               why: "Credits are now a line item. Admins, CoE leads and business owners compare how they budget, monitor and allocate Copilot credits while still empowering everyone to use agents.",
               tags: ["Cost and ROI", "Governance", "Copilot Studio"] },
             { kind: "rec", badge: "Top Alternative",

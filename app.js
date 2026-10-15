@@ -999,6 +999,8 @@
   };
   const roomLine = (x) => [x.room, floorOf(x.room)].filter(Boolean).join(', ');
 
+  const metaOf = (x) => [x.time, roomLine(x), x.format, x.level].filter(Boolean).join(' \u00b7 ');
+
   function optionEl(o, slotTime) {
     return h('div', { class: 'pick' + (o.kind ? ' ' + o.kind : '') },
       o.badge ? h('span', { class: 'pick-badge' }, o.badge) : null,
@@ -1021,7 +1023,7 @@
         h('summary', {}, `Also at this time (${alts.length})`, icon('chev', 14)),
         h('ul', {}, alts.map(x => h('li', {},
           h('b', {}, x.title),
-          h('small', {}, [x.time, roomLine(x), x.format, x.level].filter(Boolean).join(' \u00b7 ')),
+          metaOf(x) ? h('small', {}, metaOf(x)) : null,
           h('span', {}, x.note))))) : null);
   }
 
