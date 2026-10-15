@@ -394,7 +394,7 @@
     ground: 'Venue maps you can zoom, badge pickup, the keynote-morning route, tips for getting around the MGM Grand and optional partner sessions.',
     evenings: 'Healthcare happy hours first, then every open event, with a Tuesday overlap timeline.',
     exec: 'Optional VIP experiences for senior leaders and how to register. Official track details are coming soon.',
-    days: 'Our healthcare session picks, one day at a time, with a backup for every time slot.',
+    days: 'Our healthcare session picks, one day at a time, with two options for most time slots.',
     faq: 'Official answers and the links worth bookmarking.'
   };
   function renderGuide() {

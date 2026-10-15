@@ -548,7 +548,7 @@ h1 em { font-style: normal; color: var(--teal); }
 .ag.key b::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--magenta); margin-right: 8px; vertical-align: 1px; }
 .day-evening { margin-top: auto; padding: 18px 26px 24px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); }
 .day-evening b { color: #fff; }
-/* A keynote and our pick at the same time sit side by side once there is room; on phones they stack with an "or" between. */
+/* Two options in the same time slot sit side by side once there is room; on phones they stack with an "or" between. */
 @media (min-width: 700px) {
   .pair .options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pair .or { display: none; }
