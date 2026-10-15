@@ -5,7 +5,7 @@
    Times are Pacific (Las Vegas). Dates are ISO (YYYY-MM-DD).
    ============================================================ */
 window.KBYG = {
-  updated: "2026-10-07",
+  updated: "2026-10-15",
 
   conference: {
     name: "Power Platform Community Conference",
@@ -120,12 +120,12 @@ window.KBYG = {
     { id: "video", group: "plan", title: "Watch the Know Before You Go video",
       detail: "41 minutes from the Power HUG team. Use the chapters to jump to what matters most to you.", action: "video" },
 
-    { id: "whova", group: "plan", title: "Get the Whova app and join", due: "2026-10-15", soft: true, dueLabel: "Sessions load mid-October", code: "LasVegas26",
-      detail: "Whova is the conference app, and it is open now. Download it, then sign up with the work email address you registered with. Whova uses two-factor sign-in, so it emails you a verification code each time you log in; check your spam folder if it does not show up. You are usually added to the event automatically. If Whova asks for an invitation code, use the one below. If that code does not work, look for a backup code in the Whova invitation email sent to the address you registered with. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda. A login from past years still works, and building your agenda in a browser gives you more screen space.",
+    { id: "whova", group: "plan", title: "Get the Whova app and join", due: "2026-10-15", soft: true, dueLabel: "Sessions are live", code: "LasVegas26",
+      detail: "Whova is the conference app, and it is open now. Download it, then sign up with the work email address you registered with. Whova uses two-factor sign-in, so it emails you a verification code each time you log in; check your spam folder if it does not show up. You are usually added to the event automatically. If Whova asks for an invitation code, use the one below. If that code does not work, look for a backup code in the Whova invitation email sent to the address you registered with. The full schedule, with sessions, times and rooms, is now live, so you can build your agenda. A login from past years still works, and building your agenda in a browser gives you more screen space.",
       links: [{ label: "App Store", href: "https://apps.apple.com/us/app/whova-event-conference-app/id716979741" }, { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.whova.event&hl=en-US&pli=1" }] },
 
     { id: "sessions", group: "plan", title: "Pick sessions, then pick backups",
-      detail: "With 200+ sessions, filter by topic and experience level. Double-book yourself and stay flexible. Rooms on the upper floors are smaller and popular sessions can fill up, so keep a backup in mind." },
+      detail: "With 200+ sessions, filter by topic and experience level. Double-book yourself and stay flexible. Rooms on the upper floors are smaller and popular sessions can fill up, so keep a backup in mind.", action: "tab:days" },
 
     { id: "roundtable", group: "plan", title: "Put the healthcare panel on your calendar",
       detail: "Wednesday, Oct 28 at 8:00 AM in Roundtable Room 353, on the third floor of the Conference Center. It is one of the few sessions built for healthcare and life sciences, with a panel discussion and audience Q&A. It is often standing room only, so plan to arrive early. Rooms can change, so check Whova for the latest.",
@@ -153,53 +153,282 @@ window.KBYG = {
     { day: "Thursday, Oct 29",   date: "2026-10-29", hours: "7:00 AM to 4:00 PM" }
   ],
 
-  /* ---------- 3 Perfect Days (official agenda anchors) ---------- */
+  /* ---------- 3 Perfect Days ----------
+     picks:   one entry per time slot. options are shown together as cards, best choice first; a keynote and our pick
+              that share a slot appear side by side so people can choose. alts are the collapsible "Also at this time" list.
+              kind: "key" keynote or headliner, "hls" healthcare session, "rec" our pick next to a keynote. note is an optional tip.
+              Room, time, level and format come from the official session list. App.js works out the floor from the room number.
+     agenda:  the official anchors (keynotes, expo hours, meals, evening events).
+     ------------------------------------------------------------ */
   days: [
     {
       id: "tue", date: "2026-10-27", label: "Tuesday", short: "Oct 27", n: 1, theme: "Learn",
-      line: "The big announcements land first thing.",
+      line: "The big announcements land first thing, then the Copilot Studio and Power Apps keynotes.",
+      picks: [
+        { time: "8:30 to 10:00 AM",
+          options: [
+            { kind: "key", badge: "Keynote",
+              title: "PPCC 2026 Opening Keynote", room: "MGM Grand Garden Arena", format: "Keynote",
+              why: "Charles Lamanna and Ryan Cunningham open the conference with what is next for Power Platform, Copilot Studio and agents. Doors open at 8:00 AM, and you need your badge to get in.",
+              note: "Plan to be seated 30 to 45 minutes early. Once the arena fills, standing in the corridors is not allowed.",
+              tags: ["Roadmap", "Agents"] }
+          ] },
+        { time: "11:30 AM to 12:30 PM",
+          options: [
+            { kind: "rec", badge: "Our pick",
+              title: "Beyond the CRM Screen: Headless CRM in the Age of Copilot", room: "Premier Ballroom 311", time: "11:45 AM to 12:45 PM", format: "Session",
+              why: "If agents can do the work, do you still need the CRM screen? This session shows Dynamics 365 as the platform behind agents and Copilot, following one customer journey from frontline staff to relationship managers and compliance reviewers. The example is a bank, and healthcare teams can look for the same pattern in member and patient service.",
+              note: "Starts at 11:45 AM and runs 15 minutes into lunch, which is open until 2:00 PM, so you can still eat afterward.",
+              tags: ["Dynamics 365", "Agents", "Cowork"] },
+            { kind: "key", badge: "Keynote",
+              title: "Product Talk: What’s Next in Microsoft Fabric & Power BI: The Data Foundation for AI", room: "MGM Grand Garden Arena", format: "Keynote",
+              why: "Kim Manis, CVP of Product for Microsoft Fabric, on how Fabric, OneLake and Power BI give agents a trusted data foundation.",
+              note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes." }
+          ],
+          alts: [
+            { title: "Roundtable: Apps, Agents & AI: Strategy at Scale", room: "Premier Ballroom 318", format: "Roundtable", level: "Intermediate",
+              note: "Governance guardrails to set before you scale, how to structure a center of excellence, maker enablement and ROI, from people who run large programs." },
+            { title: "Getting Started with Agent 365", room: "Premier Ballroom 319", format: "Session", level: "Foundational",
+              note: "Core concepts, deployment, governance, security and adoption for agents across your organization." },
+            { title: "Work, Reimagined: Copilot, Cowork & the Power Platform", room: "Boulevard Ballroom 163", format: "Session", level: "Intermediate",
+              note: "How Microsoft 365 Copilot, Cowork and Power Platform apps come together, with live demos." }
+          ] },
+        { time: "2:00 to 3:00 PM",
+          options: [
+            { kind: "key", badge: "Keynote",
+              title: "Product Talk: What’s New with Copilot Studio", room: "MGM Grand Garden Arena", format: "Keynote",
+              why: "Bryan Goode and Jason Moore on what is new and next in Copilot Studio, with demos of building agents, connecting them to business processes and data, and moving from experiments to real impact.",
+              note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
+              tags: ["Copilot Studio", "Roadmap"] },
+            { kind: "rec", badge: "Our pick",
+              title: "Exec Panel: The Token Meter Is Running, What It Takes to Get Max ROI from AI Agents", room: "Premier Ballroom 319", format: "Session", level: "Intermediate",
+              why: "A Microsoft corporate vice president and customer executives on the real bill for agents: getting the data ready, consumption billing and proving lasting value to the CFO. You leave with one thing to do differently in the next 90 days.",
+              tags: ["Cost and ROI", "Leaders"] }
+          ],
+          alts: [
+            { title: "Governing Agents at Scale", room: "Premier Ballroom 318", format: "Roundtable", level: "Intermediate",
+              note: "How governance and admin duties should span the Power Platform admin center and Agent 365, and how agent centers of excellence partner with IT and security." },
+            { title: "Demystifying Copilot Studio Licensing", room: "Grand Ballroom 116", format: "Session", level: "Foundational",
+              note: "License types, where they overlap and how to save on cost without breaking the rules." },
+            { title: "Building on Power Platform: Choosing the Right Tool for the Job", room: "Premier Ballroom 316", format: "Session", level: "Intermediate",
+              note: "A practical guide to choosing the right tool, from Code Apps and Generative Pages to vibe apps, and moving between AI-assisted creation and pro-code precision." }
+          ] },
+        { time: "4:00 to 5:00 PM",
+          options: [
+            { kind: "key", badge: "Keynote",
+              title: "Product Talk: What’s New with Power Apps", room: "MGM Grand Garden Arena", format: "Keynote",
+              why: "Leon Welicki and Tiffany Treacy on what is new in Power Apps and how makers turn ideas into intelligent, enterprise-ready apps faster.",
+              note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
+              tags: ["Power Apps", "Roadmap"] },
+            { kind: "rec", badge: "Our pick",
+              title: "Enabling Vibe Coding in Copilot Studio at Scale Across Organizations", room: "Premier Ballroom 318", format: "Roundtable", level: "Intermediate",
+              why: "Vibe coding puts app building in more hands, and scaling it takes more than enthusiasm. Compare notes on what to put in place first: governance, enablement, quality, security and culture.",
+              tags: ["Copilot Studio", "Makers and adoption", "Governance"] }
+          ],
+          alts: [
+            { title: "Beyond the Basics: the GitHub Copilot Harness and Workflows in Copilot Studio", room: "Premier Ballroom 316", format: "Session", level: "Advanced",
+              note: "A technical deep dive into the GitHub Copilot harness in Copilot Studio, built for reasoning-heavy agents and workflows that automate a business process end to end." },
+            { title: "Delegate It to Cowork: From Meeting to Working App, Agent, and Flow", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
+              note: "A demo of a Teams meeting becoming a spec, an app, an agent and a flow, plus how IT stays in control." },
+            { title: "Empower Your Agent to Do More: What's New in Agent Capabilities", room: "Boulevard Ballroom 163", format: "Session", level: "Foundational",
+              note: "Memory, identity, skills and richer experiences for your Copilot Studio agents, in a demo-packed session." }
+          ] }
+      ],
       agenda: [
-        { time: "6:30 AM",           text: "Check-in opens at the Conference Center" },
-        { time: "8:00 AM",           text: "Arena doors open" },
-        { time: "8:30 to 10:00 AM",   text: "Opening Keynote", who: "Charles Lamanna and Ryan Cunningham", key: true },
-        { time: "10:00 AM",          text: "Expo Hall and Makers Market open" },
+        { time: "6:30 AM", text: "Check-in opens at the Conference Center" },
+        { time: "8:00 AM", text: "Arena doors open" },
+        { time: "8:30 to 10:00 AM", text: "Opening Keynote", who: "Charles Lamanna and Ryan Cunningham", key: true },
+        { time: "10:00 AM", text: "Expo Hall and Makers Market open" },
         { time: "11:30 AM to 12:30 PM", text: "What’s New with Power BI & Fabric", who: "Kim Manis" },
-        { time: "12:30 to 2:00 PM",   text: "Lunch", note: "The Women in Power Networking Luncheon runs at the same time in its own lunch hall. Sign up in Whova" },
-        { time: "2:00 to 3:00 PM",    text: "What’s New with Copilot Studio", who: "Bryan Goode and Jason Moore" },
-        { time: "4:00 to 5:00 PM",    text: "What’s New with Power Apps", who: "Leon Welicki and Tiffany Treacy" },
-        { time: "5:00 to 7:30 PM",    text: "Night Market: Opening Reception", note: "Expo and Makers Market. Women in Power hosts a meetup here too" }
+        { time: "12:30 to 2:00 PM", text: "Lunch", note: "Lunch is open until 2:00 PM, so a quick bite fits around a session. The Women in Power Networking Luncheon runs at the same time in its own lunch hall. Sign up in Whova" },
+        { time: "2:00 to 3:00 PM", text: "What’s New with Copilot Studio", who: "Bryan Goode and Jason Moore" },
+        { time: "4:00 to 5:00 PM", text: "What’s New with Power Apps", who: "Leon Welicki and Tiffany Treacy" },
+        { time: "5:00 to 7:30 PM", text: "Night Market: Opening Reception", note: "Expo and Makers Market. Women in Power hosts a meetup here too" }
       ],
       evening: "Busiest night for partner events. Hummingbird’s Healthcare & Life Sciences Happy Hour starts at 5:00 PM."
     },
     {
       id: "wed", date: "2026-10-28", label: "Wednesday", short: "Oct 28", n: 2, theme: "Build",
       line: "Go deep on agents, and meet your healthcare peers.",
-      agenda: [
-        { time: "8:00 to 9:00 AM",    text: "Building End to End Agents with Copilot Studio", who: "Jason Moore and Soufiane Loukili" },
-        { time: "9:00 AM",           text: "Expo Hall and Makers Market open" },
-        { time: "10:00 to 11:00 AM",  text: "The Future of Agent Apps", who: "Clay Wesener" },
-        { time: "11:30 AM to 12:30 PM", text: "From Work IQ to Agent 365: Building and Managing the Agentic Enterprise", who: "Nirav Shah" },
-        { time: "12:30 PM",          text: "Lunch" },
-        { time: "2:00 to 3:00 PM",    text: "Sessions", note: "Titles to be announced. Includes the Women in Power Panel, open to everyone" },
-        { time: "3:30 to 4:30 PM",    text: "Sessions", note: "Titles to be announced" },
-        { time: "4:30 to 6:30 PM",    text: "Expo and Makers Market, plus conference T-shirt pick-up" },
-        { time: "8:00 to 10:00 PM",   text: "Pitbull live in the MGM Grand Garden Arena", key: true }
+      picks: [
+        { time: "8:00 to 9:00 AM",
+          options: [
+            { kind: "hls", badge: "Built for healthcare",
+              title: "Reimagine Healthcare and Life Sciences with Low Code & AI Agents", room: "Room 353", format: "Roundtable", level: "Foundational",
+              why: "The one session built for healthcare and life sciences. Innovators from across the industry share how low code and agents are cutting friction and improving health outcomes, with audience Q&A. Arrive early; it is often standing room only.",
+              tags: ["Healthcare", "Customer stories"] },
+            { kind: "key", badge: "Keynote",
+              title: "Innovation Session: Building End-to-End Agents with Copilot Studio", room: "MGM Grand Garden Arena", format: "Keynote",
+              why: "Jason Moore takes an agent from design to production, with live demos of grounding it in business data, then testing, monitoring and running it securely at enterprise scale.",
+              note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
+              tags: ["Copilot Studio", "Agents"] }
+          ],
+          alts: [
+            { title: "The Meter Is Running: FinOps for Agents in a Consumption World", room: "Room 354", format: "Roundtable", level: "Intermediate",
+              note: "In the same block of rooms, so an easy switch if the panel is full. Bring one real agentic workflow and run a quick FinOps loop: attribute the cost, optimize, quantify the return and decide who owns the number." },
+            { title: "Meet Microsoft Autopilot: A Personal, Persistent, Proactive AI Agent for Work", room: "Boulevard Ballroom 163", format: "Session", level: "Foundational",
+              note: "Where Microsoft Autopilot fits in the Microsoft AI portfolio, with its capabilities, use cases and demos." },
+            { title: "RPA at Scale: What’s New, What’s Next, and What’s Driving Rapid Enterprise Adoption", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
+              note: "What is new and next in Power Automate RPA, with real-world examples of scaling automation across legacy and modern systems." },
+            { title: "Managed Security: Securing and Governing Apps, Automations, and Agents at Scale", room: "Premier Ballroom 319", format: "Session", level: "Intermediate",
+              note: "An agentic admin experience: ask questions about your tenant in plain language, then act on them, with a plan you approve before anything changes." }
+          ] },
+        { time: "10:00 to 11:00 AM",
+          options: [
+            { kind: "key", badge: "Keynote",
+              title: "Innovation Session: The Future of Agentic Apps", room: "MGM Grand Garden Arena", format: "Keynote",
+              why: "Clay Wesener and Emma Cooper show three live demos of building agentic apps with Power Apps, plus practical patterns for bringing that intelligence into the apps your organization already relies on.",
+              note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
+              tags: ["Power Apps", "Agents"] },
+            { kind: "rec", badge: "Our pick",
+              title: "Microsoft Copilot Managed Runtime: AI-Powered Development with Built-In Governance", room: "Boulevard Ballroom 163", format: "Session", level: "Intermediate",
+              why: "Build internal business apps with AI-assisted development and Git-based workflows, with Microsoft Entra sign-in, 1,400+ connectors, Work IQ and Cowork built in. IT gets governance, usage analytics and policy enforcement in the admin center.",
+              tags: ["Power Apps", "Cowork", "Governance"] }
+          ],
+          alts: [
+            { title: "AI Agents Meet Dataverse: Building Intelligent Automations with Microsoft Agent Framework", room: "Grand Ballroom 114", format: "Session", level: "Advanced",
+              note: "Watch an agent get built live that queries Dataverse, analyzes customer data and recommends next best actions." },
+            { title: "Managed Governance: Governing Copilot Studio Without Killing Innovation", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
+              note: "Governance signals move earlier into the maker experience, so makers hit fewer blockers late." },
+            { title: "From AI Adoption to AI Confidence: Evaluation and Analytics for Agents, Flows and Apps", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
+              note: "A practical AgentOps playbook: set a quality bar, gate releases and watch quality, compliance and consumption from one place." }
+          ] },
+        { time: "11:30 AM to 12:30 PM",
+          options: [
+            { kind: "key", badge: "Featured session",
+              title: "From Work IQ to Agent 365: Building and Managing the Agentic Enterprise", format: "Session",
+              why: "Nirav Shah, who leads Agent 365 and Agent Cloud, on how Work IQ and Agent 365 fit together for building and managing the agentic enterprise.",
+              note: "It is on the official agenda but not in the session list yet. Check Whova for the room.",
+              tags: ["Agent 365", "Work IQ"] },
+            { kind: "rec", badge: "Our pick",
+              title: "Power Apps + Power Automate: Best Practices for Building Production-Ready Solutions", room: "Boulevard Ballroom 163", format: "Session", level: "Advanced",
+              why: "The Power CAT team on proven practices for apps and flows that hold up in production: performance as usage grows, flows that are easier to troubleshoot, fewer fragile dependencies and a sound ALM setup.",
+              tags: ["Power Apps", "Power Automate", "Power CAT"] }
+          ],
+          alts: [
+            { title: "From Traditional to Agentic RPA: The Next Evolution", room: "Chairman’s Ballroom 370", format: "Session", level: "Intermediate",
+              note: "How Power Automate becomes agent-enhanced, pairing the reliability of RPA with the reasoning of AI while you keep control and governance." },
+            { title: "Operationalizing Agents at Scale: The Agentic COE Playbook", room: "Premier Ballroom 316", format: "Session", level: "Intermediate",
+              note: "The structures, roles, guardrails and operating rhythms of an agentic center of excellence." },
+            { title: "Extend Copilot Cowork: Build and Ship a Plugin in 45 Minutes", room: "Boulevard Ballroom 162", format: "Session", level: "Advanced",
+              note: "Watch a Cowork plugin get built live, with an MCP server, a skill and guardrails admins will approve." }
+          ] },
+        { time: "2:00 to 3:00 PM",
+          options: [
+            { title: "Secure by Design: Preparing Agents for Production and Scale", room: "Chairman’s Ballroom 368", format: "Session", level: "Intermediate",
+              why: "Building an agent is easy. Getting one your security team approves is harder. Covers permissions, data access, DLP policies and guardrails for Copilot Studio agents.",
+              tags: ["Security", "Governance"] }
+          ],
+          alts: [
+            { title: "Customer Story: The 5 Key Steps to Scale Apps, Agents & AI in a 40,000-User Organization", room: "Boulevard Ballroom 163", format: "Session", level: "Intermediate",
+              note: "How one organization grew to 2,500+ makers and 18,000+ monthly active users with governance in place." },
+            { title: "Reimagining Agentic Automation: Workflows and Agents Together in the Copilot Studio Designer", room: "Grand Ballroom 119", format: "Session", level: "Foundational",
+              note: "Decide which parts of a process to script and which to hand to agents, on one design surface." },
+            { title: "From Tokens to Business Value", room: "Room 353", format: "Roundtable", level: "Intermediate",
+              note: "A roundtable on agent costs, token usage, value and ROI." },
+            { title: "Collaborating on Apps with Citizen and Pro Devs", room: "Chairman’s Ballroom 370", format: "Session", level: "Advanced",
+              note: "How citizen makers and professional developers divide the work across the app lifecycle without slowing teams down." }
+          ] },
+        { time: "3:30 to 4:30 PM",
+          options: [
+            { kind: "key", badge: "Fireside chat",
+              title: "Building What’s Next: A Fireside Chat with Jeff Teper, EVP, Apps and Agents", room: "Boulevard Ballroom 162", format: "Session", level: "Foundational",
+              why: "A candid conversation with Jeff Teper, EVP of Apps and Agents, about AI, community and where technology is heading.",
+              tags: ["Leadership", "Roadmap"] },
+            { kind: "rec", badge: "Our pick",
+              title: "How Production GenAI Agents Get Built, Deployed, Funded & Cost-Optimized", room: "Chairman’s Ballroom 368", format: "Session", level: "Foundational",
+              why: "Skips the polished demo. Teams from EY, PwC, RSM and Accenture show how real agents get specified, built, tested, deployed and funded, and how to keep costs down.",
+              tags: ["Cost and ROI", "Production"] }
+          ],
+          alts: [
+            { title: "Managed Apps Built with Cowork, Copilot Studio and the SDK", room: "Premier Ballroom 310", format: "Session", level: "Advanced",
+              note: "How managed apps get built with Cowork, Copilot Studio and the SDK, including architecture, governance and licensing choices." },
+            { title: "How Microsoft Does IT: Managing and Governing Agents - Empower with Risk Aligned Oversight", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
+              note: "How Microsoft’s own IT team governs agents with Copilot Studio, Agent 365, Defender and Purview." },
+            { title: "From Agent Pilots to Business Value: Proving ROI at Scale", room: "Room 352", format: "Roundtable", level: "Foundational",
+              note: "The Power CAT team shares patterns for measuring the business impact of agents, from pilots to scaled deployments." }
+          ] }
       ],
-      hls: { time: "8:00 AM · Roundtable Room 353", text: "Healthcare & Life Sciences panel" },
+      agenda: [
+        { time: "8:00 to 9:00 AM", text: "Building End to End Agents with Copilot Studio", who: "Jason Moore and Soufiane Loukili", note: "Runs at the same time as the healthcare panel" },
+        { time: "9:00 AM", text: "Expo Hall and Makers Market open" },
+        { time: "10:00 to 11:00 AM", text: "The Future of Agentic Apps", who: "Clay Wesener and Emma Cooper" },
+        { time: "11:30 AM to 12:30 PM", text: "From Work IQ to Agent 365: Building and Managing the Agentic Enterprise", who: "Nirav Shah" },
+        { time: "12:30 PM", text: "Lunch" },
+        { time: "2:00 to 3:00 PM", text: "Women in Power Panel: Owning Your Power, Claiming Your Seat", note: "Boulevard Ballroom 162. Open to everyone; sign up in Whova. Breakout sessions run at the same time" },
+        { time: "3:30 to 4:30 PM", text: "Fireside chat with Jeff Teper, EVP, Apps and Agents", note: "Boulevard Ballroom 162. Breakout sessions run at the same time" },
+        { time: "4:30 to 6:30 PM", text: "Expo and Makers Market, plus conference T-shirt pick-up" },
+        { time: "8:00 to 10:00 PM", text: "Pitbull live in the MGM Grand Garden Arena", key: true }
+      ],
       evening: "Brooksource hosts a healthcare social reception at the Lobby Bar from 5:30 to 7:30 PM. Partner dinners wrap up around the time Pitbull starts, and the arena line is long. Plan your timing."
     },
     {
       id: "thu", date: "2026-10-29", label: "Thursday", short: "Oct 29", n: 3, theme: "Make it real",
-      line: "A fireside chat, a last round of sessions, then home with a plan.",
+      line: "A closing keynote, a last round of sessions, then home with a plan.",
+      picks: [
+        { time: "9:00 to 10:00 AM",
+          options: [
+            { kind: "key", badge: "Keynote",
+              title: "PPCC Closing Keynote: Charles Lamanna in Conversation with Chris Paul", room: "MGM Grand Garden Arena", format: "Keynote",
+              why: "Charles Lamanna in conversation with Chris Paul on what it takes to build and lead high-performing teams, and how that mindset carries into executing in a fast-moving tech landscape.",
+              note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
+              tags: ["Leadership"] }
+          ] },
+        { time: "10:45 to 11:45 AM",
+          options: [
+            { title: "Take Control of Your Power Platform Spend", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
+              why: "The newest cost management and licensing tools in Power Platform: consumption visibility, optimization opportunities and cost allocation across apps, agents, automations and makers.",
+              tags: ["Cost and ROI", "Admin"] }
+          ],
+          alts: [
+            { title: "Vibe Coding in Power Platform", room: "Grand Ballroom 122", format: "Session", level: "Intermediate",
+              note: "Co-create with AI across Power Apps, Copilot Studio, Power Automate and Dataverse, and turn an idea into a working app through iterative prompting." },
+            { title: "Agent Accounts in Copilot Studio and Agent 365", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
+              note: "Entra agent accounts give autonomous agents an identity to work through Office documents, Teams and email, with the permissions and oversight enterprises need." },
+            { title: "The Copilot Compass: Finding True North Across Copilot, Cowork, Scout, and Agents", room: "Premier Ballroom 316", format: "Session", level: "Intermediate",
+              note: "A demo-driven guide to choosing the right tool across Copilot, Cowork, Scout and agents." },
+            { title: "Managed Platform as the Enterprise Default: Life After the CoE Toolkit", room: "Room 353", format: "Roundtable", level: "Intermediate",
+              note: "The Power CAT team leads a roundtable on life after the CoE Toolkit: modern inventory, usage and monitoring tools for governing apps, flows, agents and environments." },
+            { title: "Real-World Stories: Becoming a Frontier Firm with Apps and Agents", room: "Chairman’s Ballroom 370", format: "Session", level: "Foundational",
+              note: "Leaders trade what worked and what did not on adoption, and how they balanced speed with responsible governance." }
+          ] },
+        { time: "12:00 to 1:00 PM",
+          options: [
+            { title: "Agentic Governance: Secure, Govern, and Operate Your Power Platform at Scale", room: "Premier Ballroom 316", format: "Session", level: "Intermediate",
+              why: "The CoE Starter Kit is retiring. This session shows what comes next: build your own center of excellence on the Power Platform API, with real-time inventory, custom reporting, automated controls and plain-language questions through AskAdvisor.",
+              tags: ["Governance", "Admin"] }
+          ],
+          alts: [
+            { title: "Wait, Where Do I Govern My Agents?", room: "Premier Ballroom 310", format: "Session", level: "Intermediate",
+              note: "What you govern where across the Power Platform admin center, Microsoft 365 admin center, Copilot Studio, Entra, Purview and Defender, and how Agent 365 and Copilot Studio controls work together." },
+            { title: "From Shadow AI to Tightly Managed Agentic Tools", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
+              note: "How Agent 365 helps teams discover every agent, enforce identity and least-privilege access, and defend against agentic threats." },
+            { title: "Build Fast, Govern Better: The Latest in Power Apps code apps and Copilot Managed Runtime for devs", room: "Boulevard Ballroom 163", format: "Session", level: "Advanced",
+              note: "The newest Power Apps code apps enhancements and an introduction to Copilot Managed Runtime, for developers who want speed without giving up control." }
+          ] },
+        { time: "2:30 to 3:30 PM",
+          options: [
+            { title: "Copilot credits at scale: governing consumption, empowering everyone", room: "Chairman’s Ballroom 368", format: "Roundtable", level: "Intermediate",
+              why: "Credits are now a line item. Admins, CoE leads and business owners compare how they budget, monitor and allocate Copilot credits while still empowering everyone to use agents.",
+              tags: ["Cost and ROI", "Governance", "Copilot Studio"] }
+          ],
+          alts: [
+            { title: "Right-Size & Secure Your Data Estate: Governing & Managing Dataverse and Dynamics 365", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
+              note: "Storage and capacity visibility, retention and archival policies, and security models that balance performance and compliance, so you pay only for what you need." },
+            { title: "Governance of All Your Agents at Scale", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
+              note: "Agent 365 governance from admin-led to autonomous: the signals that keep agent risk, approvals, usage, cost and health under control." },
+            { title: "Extending Copilot Cowork with Custom Plugins and Workflows with Real-World Customer Use Cases", room: "Premier Ballroom 316", format: "Session", level: "Advanced",
+              note: "How to extend Cowork with plugins, tools, skills and workflows, with real customer examples." }
+          ] }
+      ],
       agenda: [
-        { time: "9:00 to 10:00 AM",   text: "Keynote and fireside chat", key: true },
-        { time: "10:00 AM",          text: "Expo Hall and Makers Market open" },
-        { time: "10:45 to 11:45 AM",  text: "Sessions", note: "Titles to be announced" },
-        { time: "12:00 to 1:00 PM",   text: "Sessions", note: "Titles to be announced" },
-        { time: "1:00 to 2:30 PM",    text: "Lunch" },
-        { time: "2:30 PM",           text: "Expo Hall and Makers Market close" },
-        { time: "2:30 to 3:30 PM",    text: "Sessions", note: "Titles to be announced" },
-        { time: "Time to be announced", text: "Women in Power roundtable: Your Network Is Your Net Worth", note: "Small group, 60 minutes, open to everyone. Sign up in Whova" }
+        { time: "9:00 to 10:00 AM", text: "Closing Keynote", who: "Charles Lamanna in conversation with Chris Paul", key: true },
+        { time: "10:00 AM", text: "Expo Hall and Makers Market open" },
+        { time: "10:45 to 11:45 AM", text: "Breakout sessions", note: "Includes the Women in Power roundtable, Make Your Network Your Net Worth, in Room 351. Open to everyone; sign up in Whova" },
+        { time: "12:00 to 1:00 PM", text: "Breakout sessions" },
+        { time: "1:00 to 2:30 PM", text: "Lunch" },
+        { time: "2:30 PM", text: "Expo Hall and Makers Market close" },
+        { time: "2:30 to 3:30 PM", text: "Breakout sessions" }
       ],
       evening: "The conference wraps mid-afternoon, so there are no evening events listed."
     }
@@ -526,13 +755,13 @@ window.KBYG = {
     { q: "Can I bring a guest to the Pitbull concert?",
       a: "Entry requires a PPCC badge, and guests and plus-ones are not allowed." },
     { q: "How do I get the Whova app?",
-      a: "Whova is the conference app, and it is open now on the App Store and Google Play. Download it and sign up with the work email address you registered with. Whova sends a verification code to that email each time you log in, so check your spam folder if it does not arrive. You are usually added to the event automatically. If Whova asks for an invitation code, enter LasVegas26. If that does not work, look for a backup code in the Whova invitation email sent to the address you registered with. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda.",
+      a: "Whova is the conference app, and it is open now on the App Store and Google Play. Download it and sign up with the work email address you registered with. Whova sends a verification code to that email each time you log in, so check your spam folder if it does not arrive. You are usually added to the event automatically. If Whova asks for an invitation code, enter LasVegas26. If that does not work, look for a backup code in the Whova invitation email sent to the address you registered with. The full schedule, with sessions, times and rooms, is now live, so you can build your agenda.",
       code: "LasVegas26",
       links: [{ label: "App Store", href: "https://apps.apple.com/us/app/whova-event-conference-app/id716979741" }, { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.whova.event&hl=en-US&pli=1" }] },
     { q: "Who can I ask for help onsite?",
       a: "Anyone in a Microsoft lanyard. The Microsoft booth is staffed by engineers rather than salespeople, and you can message the Microsoft team in Whova." },
     { q: "What is Women in Power?",
-      a: "Women in Power is a set of four sessions that are open to everyone, allies included, and free with your pass: a networking luncheon on Tuesday (12:30 to 2:00 PM), a Night Market meetup on Tuesday evening, a panel on Wednesday at 2:00 PM, and a small-group roundtable on Thursday (time to be announced). Registration is required, and you sign up in the Whova app." },
+      a: "Women in Power is a set of four sessions that are open to everyone, allies included, and free with your pass: a networking luncheon on Tuesday (12:30 to 2:00 PM), a Night Market meetup on Tuesday evening, a panel on Wednesday at 2:00 PM, and a small-group roundtable on Thursday at 10:45 AM. Registration is required, and you sign up in the Whova app." },
     { q: "Where can I find a map of the venue?",
       a: "Open the maps on the On the Ground tab. They cover where the MGM Grand is, the walking route from the front desk and the Las Vegas Boulevard entrance to the Conference Center, the walkway to the Grand Garden Arena and Expo Hall, and floor plans for all three Conference Center floors.",
       action: "maps" }

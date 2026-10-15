@@ -128,7 +128,7 @@
         class: 'tab', type: 'button', role: 'tab', id: 'tab-' + t.id,
         'aria-controls': 'panel-' + t.id, 'aria-selected': 'false', tabindex: '-1',
         on: { click: () => { location.hash = '#' + t.id; } }
-      }, t.label, t.id === 'days' ? h('span', { class: 'soon' }, 'Soon') : null));
+      }, t.label));
     });
     tablist.addEventListener('keydown', (e) => {
       const i = tabIds.indexOf(currentTab());
@@ -172,7 +172,6 @@
   function buildMenu() {
     D.tabs.forEach(t => navMenu.append(h('a', { class: 'nav-item', href: '#' + t.id, dataset: { tab: t.id } },
       h('span', { class: 'nav-label' }, t.label),
-      t.id === 'days' ? h('span', { class: 'mini-soon' }, 'Coming soon') : null,
       icon('arrow', 18))));
     menuBtn.addEventListener('click', () => setMenu(navMenu.hidden));
     navScrim.addEventListener('click', () => setMenu(false, true));
@@ -395,7 +394,7 @@
     ground: 'Venue maps you can zoom, badge pickup, the keynote-morning route, tips for getting around the MGM Grand and optional partner sessions.',
     evenings: 'Healthcare happy hours first, then every open event, with a Tuesday overlap timeline.',
     exec: 'Optional VIP experiences for senior leaders and how to register. Official track details are coming soon.',
-    days: 'Our recommended sessions, one day at a time.',
+    days: 'Our healthcare session picks, one day at a time, with a backup for every time slot.',
     faq: 'Official answers and the links worth bookmarking.'
   };
   function renderGuide() {
@@ -403,7 +402,7 @@
     D.tabs.filter(t => t.id !== 'start').forEach((t, i) => {
       ol.append(h('li', {}, h('a', { href: '#' + t.id },
         h('span', { class: 'guide-num' }, String(i + 1).padStart(2, '0')),
-        h('span', {}, h('span', { class: 'guide-title' }, t.label, t.id === 'days' ? h('span', { class: 'mini-soon' }, 'Coming soon') : null),
+        h('span', {}, h('span', { class: 'guide-title' }, t.label),
           h('span', { class: 'guide-desc', style: 'display:block' }, GUIDE_DESC[t.id])),
         h('span', { class: 'guide-arrow' }, icon('arrow', 22)))));
     });
@@ -435,6 +434,7 @@
     const actions = [].concat(it.action || []);
     if (actions.includes('video')) links.push(h('button', { type: 'button', on: { click: () => goToVideo(0) } }, 'Play the video'));
     if (actions.includes('tab:evenings')) links.push(h('a', { href: '#evenings' }, 'See the evening events'));
+    if (actions.includes('tab:days')) links.push(h('a', { href: '#days' }, 'See our healthcare picks'));
     if (actions.includes('tab:ground')) links.push(h('a', { href: '#ground' }, 'See badge pickup hours'));
     if (actions.includes('maps')) links.push(h('a', { href: '#ground/maps' }, 'Open the maps'));
     actions.filter(a => a.startsWith('map:')).forEach(a => links.push(h('a', { href: '#ground/map-' + a.slice(4) }, 'Find the room on the map')));
@@ -992,6 +992,39 @@
   /* ============================================================
      3 Perfect Days
      ============================================================ */
+  const FLOORS = { 1: '1st', 2: '2nd', 3: '3rd' };
+  const floorOf = (room) => {
+    const m = /(\d)\d\d$/.exec(room || '');
+    return m && FLOORS[m[1]] ? `${FLOORS[m[1]]} floor` : null;
+  };
+  const roomLine = (x) => [x.room, floorOf(x.room)].filter(Boolean).join(', ');
+
+  function optionEl(o, slotTime) {
+    return h('div', { class: 'pick' + (o.kind ? ' ' + o.kind : '') },
+      o.badge ? h('span', { class: 'pick-badge' }, o.badge) : null,
+      h('b', { class: 'pick-title' }, o.title),
+      h('small', { class: 'pick-meta' }, [o.time !== slotTime ? o.time : null, roomLine(o), o.format, o.level].filter(Boolean).join(' \u00b7 ')),
+      h('p', { class: 'pick-why' }, o.why),
+      o.note ? h('p', { class: 'pick-note' }, o.note) : null,
+      o.tags ? h('div', { class: 'pick-tags' }, o.tags.map(t => h('span', {}, t))) : null);
+  }
+
+  function slotEl(s) {
+    const opts = s.options, alts = s.alts || [];
+    return h('div', { class: 'slot' + (opts.length > 1 ? ' pair' : '') },
+      h('div', { class: 'slot-head' },
+        h('time', {}, s.time),
+        opts.length > 1 ? h('span', { class: 'slot-hint' }, 'Choose one') : null),
+      h('div', { class: 'options' },
+        opts.map((o, i) => [i ? h('span', { class: 'or', 'aria-hidden': 'true' }, 'or') : null, optionEl(o, s.time)])),
+      alts.length ? h('details', { class: 'pick-alts' },
+        h('summary', {}, `Also at this time (${alts.length})`, icon('chev', 14)),
+        h('ul', {}, alts.map(x => h('li', {},
+          h('b', {}, x.title),
+          h('small', {}, [x.time, roomLine(x), x.format, x.level].filter(Boolean).join(' \u00b7 ')),
+          h('span', {}, x.note))))) : null);
+  }
+
   function renderDays() {
     const root = $('#days-grid');
     D.days.forEach(d => {
@@ -1001,10 +1034,9 @@
           h('h3', { class: 'day-theme' }, d.theme),
           h('p', { class: 'day-date' }, `${d.label}, ${d.short}`),
           h('p', { class: 'day-line' }, d.line)),
-        h('div', { class: 'soon-box' },
-          h('h4', {}, 'Recommended sessions', h('span', {}, 'Coming soon')),
-          h('div', { class: 'skel' }), h('div', { class: 'skel' }), h('div', { class: 'skel' })),
-        d.hls ? h('div', { class: 'hls-callout' }, h('b', {}, d.hls.text), h('span', {}, d.hls.time)) : null,
+        h('div', { class: 'picks' },
+          h('h4', {}, 'Recommended sessions', h('span', {}, 'Keynotes + picks')),
+          d.picks.map(slotEl)),
         h('div', { class: 'agenda' },
           h('h4', {}, 'On the official agenda'),
           d.agenda.map(a => h('div', { class: 'ag' + (a.key ? ' key' : '') },
