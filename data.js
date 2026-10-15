@@ -153,6 +153,15 @@ window.KBYG = {
     { day: "Thursday, Oct 29",   date: "2026-10-29", hours: "7:00 AM to 4:00 PM" }
   ],
 
+  /* ---------- 3 Perfect Days: Whova call to action (top of the tab, under the Picks are live badge) ---------- */
+  whovaCta: {
+    text: "Add these sessions to your agenda in the Whova app",
+    links: [
+      { label: "Apple App Store", href: "https://apps.apple.com/us/app/whova-event-conference-app/id716979741" },
+      { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.whova.event&hl=en-US&pli=1" }
+    ]
+  },
+
   /* ---------- 3 Perfect Days ----------
      picks:   one entry per time slot. options are shown together as cards, best choice first; two options in a slot appear
               side by side so people can choose. alts are the collapsible "Also at this time" list.

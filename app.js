@@ -1045,6 +1045,10 @@
         h('p', { class: 'day-evening' }, h('b', {}, 'Evening. '), d.evening)));
     });
     $('#days-updated').textContent = `${fmtMD(D.updated)}, 2026`;
+    const whova = D.whovaCta;
+    $('#days-whova').append(
+      h('p', { class: 'whova-cta-text', id: 'days-whova-text' }, whova.text),
+      h('div', { class: 'whova-cta-links' }, whova.links.map(l => extLink(l.label, l.href, 'btn ghost sm'))));
   }
 
   /* ============================================================

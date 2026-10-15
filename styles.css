@@ -496,6 +496,11 @@ h1 em { font-style: normal; color: var(--teal); }
 /* ---------- 3 Perfect Days ---------- */
 .days-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 22px; }
 .soon-badge { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; font-size: 13px; padding: 13px 22px; border-radius: 99px; border: 1.5px solid var(--teal); color: var(--teal); background: rgba(47, 255, 224, .08); }
+.days-head > div:first-child { flex: 1 1 520px; min-width: 0; }
+.days-aside { display: grid; justify-items: start; gap: 14px; flex: 0 0 auto; width: min(100%, 400px); }
+.whova-cta { width: 100%; padding: 16px 18px 18px; border-radius: 18px; border: 1px solid var(--line-strong); background: rgba(10, 23, 42, .64); }
+.whova-cta-text { font-size: 15px; font-weight: 700; line-height: 1.4; color: #fff; }
+.whova-cta-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
 .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 0 rgba(47, 255, 224, .6); animation: pulse 2s infinite; }
 @keyframes pulse { 70% { box-shadow: 0 0 0 12px rgba(47, 255, 224, 0); } 100% { box-shadow: 0 0 0 0 rgba(47, 255, 224, 0); } }
 .days-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding-block: 18px 12px; }
@@ -878,6 +883,8 @@ dialog[open] .mv-hint { animation: hintFade 5.5s ease .5s both; }
   .ag { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .day-evening { padding: 16px 20px 22px; }
   .soon-badge { padding: 11px 18px; font-size: 12px; }
+  .days-aside { width: 100%; }
+  .whova-cta-links .btn { flex: 1 1 auto; }
 
   .faq-layout { gap: 32px; padding-block: 14px 40px; }
   details.q summary { padding: 16px 2px; font-size: 16px; }
