@@ -553,17 +553,17 @@ h1 em { font-style: normal; color: var(--teal); }
   .pair .options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pair .or { display: none; }
 }
-/* Desktop: each day is a wide card with the picks on the left and the official agenda on the right. */
+/* Desktop: each day is a wide card with the official agenda on the left and the picks on the right. */
 @media (min-width: 1061px) {
-  .day { display: grid; grid-template-columns: minmax(0, 1fr) clamp(280px, 29%, 350px); grid-template-rows: auto auto 1fr; grid-template-areas: "top top" "picks agenda" "picks evening"; }
+  .day { display: grid; grid-template-columns: clamp(280px, 29%, 350px) minmax(0, 1fr); grid-template-rows: auto auto 1fr; grid-template-areas: "top top" "agenda picks" "evening picks"; }
   .day-top { grid-area: top; display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 34px; align-items: end; padding: 24px 30px 22px; }
   .day-num { grid-column: 1; grid-row: 1; }
   .day-theme { grid-column: 1; grid-row: 2; }
   .day-date { grid-column: 2; grid-row: 1; margin-top: 0; align-self: end; }
   .day-line { grid-column: 2; grid-row: 2; margin-top: 0; align-self: end; }
-  .picks { grid-area: picks; margin: 22px 0 24px 24px; align-self: start; }
-  .agenda { grid-area: agenda; padding: 22px 26px 4px 28px; }
-  .day-evening { grid-area: evening; margin-top: 0; align-self: start; }
+  .picks { grid-area: picks; margin: 22px 24px 24px 0; align-self: start; }
+  .agenda { grid-area: agenda; padding: 22px 28px 4px 30px; }
+  .day-evening { grid-area: evening; margin-top: 0; padding: 18px 28px 24px 30px; align-self: start; }
 }
 
 /* ---------- FAQ ---------- */
