@@ -120,8 +120,8 @@ window.KBYG = {
     { id: "video", group: "plan", title: "Watch the Know Before You Go video",
       detail: "41 minutes from the Power HUG team. Use the chapters to jump to what matters most to you.", action: "video" },
 
-    { id: "whova", group: "plan", title: "Get the Whova app and join", due: "2026-10-15", soft: true, dueLabel: "Sessions load mid-October", code: "5thAnnual2026",
-      detail: "Whova is the conference app, and the organizers have started sending Whova invitations. Download it, then sign up with your work email address (the same one you registered with). Whova uses two-factor sign-in, so it emails you a verification code each time you log in; check your spam folder if it does not show up. You are usually added to the event automatically. If Whova asks for an invitation code, use the one below. Please do not share it with anyone who is not attending. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda. A login from past years still works, and building your agenda in a browser gives you more screen space.",
+    { id: "whova", group: "plan", title: "Get the Whova app and join", due: "2026-10-15", soft: true, dueLabel: "Sessions load mid-October", code: "LasVegas26",
+      detail: "Whova is the conference app, and it is open now. Download it, then sign up with the work email address you registered with. Whova uses two-factor sign-in, so it emails you a verification code each time you log in; check your spam folder if it does not show up. You are usually added to the event automatically. If Whova asks for an invitation code, use the one below. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda. A login from past years still works, and building your agenda in a browser gives you more screen space.",
       links: [{ label: "App Store", href: "https://apps.apple.com/us/app/whova-event-conference-app/id716979741" }, { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.whova.event&hl=en-US&pli=1" }] },
 
     { id: "sessions", group: "plan", title: "Pick sessions, then pick backups",
@@ -526,8 +526,8 @@ window.KBYG = {
     { q: "Can I bring a guest to the Pitbull concert?",
       a: "Entry requires a PPCC badge, and guests and plus-ones are not allowed." },
     { q: "How do I get the Whova app?",
-      a: "Whova is the conference app, and it is available now on the App Store and Google Play. Download it and sign up with the work email address you registered with. Whova sends a verification code to that email each time you log in, so check your spam folder if it does not arrive. You are usually added to the event automatically. If Whova asks for an invitation code, enter 5thAnnual2026, and please keep it to attendees only. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda.",
-      code: "5thAnnual2026",
+      a: "Whova is the conference app, and it is open now on the App Store and Google Play. Download it and sign up with the work email address you registered with. Whova sends a verification code to that email each time you log in, so check your spam folder if it does not arrive. You are usually added to the event automatically. If Whova asks for an invitation code, enter LasVegas26. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda.",
+      code: "LasVegas26",
       links: [{ label: "App Store", href: "https://apps.apple.com/us/app/whova-event-conference-app/id716979741" }, { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.whova.event&hl=en-US&pli=1" }] },
     { q: "Who can I ask for help onsite?",
       a: "Anyone in a Microsoft lanyard. The Microsoft booth is staffed by engineers rather than salespeople, and you can message the Microsoft team in Whova." },
