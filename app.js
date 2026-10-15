@@ -215,18 +215,16 @@
     if (userLink) $('#panel-' + id).focus({ preventScroll: true });
     updateFab();
   }
-  /* ----- routing: #tab, plus #ground/maps, #ground/map-<id> and #<tab>/meet ----- */
-  let maps = null, meet = null, pushedOverlay = false, pendingOpener = null;
+  /* ----- routing: #tab, plus #ground/maps and #ground/map-<id> ----- */
+  let maps = null, pushedOverlay = false, pendingOpener = null;
 
   function syncOverlays(tab, sub, initial) {
-    const hadOverlay = maps.isOpen() || meet.isOpen();
+    const hadOverlay = maps.isOpen();
     const mapId = tab === 'ground' && sub.startsWith('map-') ? sub.slice(4) : null;
     if (mapId && D.maps.items.some(m => m.id === mapId)) {
       if (!maps.isOpen() || maps.currentId() !== mapId) maps.open(mapId, pendingOpener);
     } else if (maps.isOpen()) maps.close();
-    if (sub === 'meet') { if (!meet.isOpen()) meet.open(pendingOpener); }
-    else if (meet.isOpen()) meet.close();
-    if (!maps.isOpen() && !meet.isOpen()) { pushedOverlay = false; pendingOpener = null; }
+    if (!maps.isOpen()) { pushedOverlay = false; pendingOpener = null; }
     // only scroll when arriving at the maps; closing a viewer or dialog must leave the page where it was
     if (tab === 'ground' && sub === 'maps' && !hadOverlay) {
       requestAnimationFrame(() => $('#maps').scrollIntoView({ block: 'start', behavior: (initial || reduceMotion) ? 'instant' : 'smooth' }));
@@ -250,7 +248,6 @@
     history.replaceState(null, '', location.pathname + location.search + '#' + currentTab());
     syncOverlays(currentTab(), '', false);
   }
-  const openMeet = (opener) => pushOverlay('#' + currentTab() + '/meet', opener);
   const openMap = (id, opener) => pushOverlay('#ground/map-' + id, opener);
 
   window.addEventListener('hashchange', () => { setMenu(false); route(false); });
@@ -394,7 +391,7 @@
   }
 
   const GUIDE_DESC = {
-    before: 'A checklist with live deadlines, plus a way to request time with product group leaders. Your progress saves on this device.',
+    before: 'A checklist with live deadlines. Your progress saves on this device.',
     ground: 'Venue maps you can zoom, badge pickup, the keynote-morning route, tips for getting around the MGM Grand and optional partner sessions.',
     evenings: 'Healthcare happy hours first, then every open event, with a Tuesday overlap timeline.',
     exec: 'Optional VIP experiences for senior leaders and how to register. Official track details are coming soon.',
@@ -441,7 +438,6 @@
     if (actions.includes('tab:ground')) links.push(h('a', { href: '#ground' }, 'See badge pickup hours'));
     if (actions.includes('maps')) links.push(h('a', { href: '#ground/maps' }, 'Open the maps'));
     actions.filter(a => a.startsWith('map:')).forEach(a => links.push(h('a', { href: '#ground/map-' + a.slice(4) }, 'Find the room on the map')));
-    if (actions.includes('meet')) links.push(h('button', { class: 'btn primary sm', type: 'button', on: { click: (e) => openMeet(e.currentTarget) } }, 'Draft the request email'));
     const id = 'chk-' + it.id;
     return h('li', { class: 'cl-item' + (isDone ? ' done' : ''), dataset: { id: it.id } },
       h('input', { class: 'check', type: 'checkbox', id, checked: isDone, on: { change: (e) => toggleDone(it, e.target.checked) } }),
@@ -1029,7 +1025,6 @@
       h('div', { class: 'ans' },
         h('p', {}, f.a),
         (f.code || f.links) ? h('div', { class: 'ans-cta ans-links' }, (f.links || []).map(l => extLink(l.label, l.href, 'btn ghost sm')), f.code ? codeChip(f.code) : null) : null,
-        f.action === 'meet' ? h('div', { class: 'ans-cta' }, h('button', { class: 'btn primary sm', type: 'button', on: { click: (e) => openMeet(e.currentTarget) } }, 'Draft the request email')) : null,
         f.action === 'maps' ? h('div', { class: 'ans-cta' }, h('a', { class: 'btn primary sm', href: '#ground/maps' }, 'Open the maps')) : null,
         f.mapId ? h('div', { class: 'ans-cta' }, h('a', { class: 'btn primary sm', href: '#ground/map-' + f.mapId }, 'Find the room on the map')) : null))));
     $('#faq-search').addEventListener('input', (e) => {
@@ -1275,147 +1270,6 @@
   }
 
   /* ============================================================
-     Request a meeting with Microsoft product group leaders
-     ============================================================ */
-  function createMeet() {
-    const dlg = $('#meet-dialog'), form = $('#meet-form');
-    const fld = { name: $('#m-name'), org: $('#m-org'), role: $('#m-role'), details: $('#m-details'), outcome: $('#m-outcome') };
-    const send = $('#meet-send'), copyBtn = $('#meet-copy'), msg = $('#meet-msg');
-    const OTHER = D.meet.topics[D.meet.topics.length - 1];
-    const enc = encodeURIComponent;
-    const crlf = (s) => s.replace(/\n/g, '\r\n');
-    let composed = null, long = false;
-
-    const optEl = (group, text) => {
-      const input = h('input', { type: 'checkbox', name: group, value: text });
-      const label = h('label', { class: 'opt' }, input, h('span', {}, text));
-      input.addEventListener('change', () => label.classList.toggle('on', input.checked));
-      return label;
-    };
-    D.meet.topics.forEach(t => $('#m-topics').append(optEl('topic', t)));
-    D.meet.days.forEach(d => $('#m-days').append(optEl('day', d)));
-    const picked = (sel) => $$(sel + ' input:checked').map(i => i.value);
-
-    function compose() {
-      const name = fld.name.value.trim(), org = fld.org.value.trim(), role = fld.role.value.trim();
-      const details = fld.details.value.trim(), outcome = fld.outcome.value.trim();
-      const topics = picked('#m-topics'), days = picked('#m-days');
-      const L = [
-        'Hello Microsoft healthcare team,', '',
-        `I will be at the Power Platform Community Conference (${D.conference.venue}, Oct 27 to 29) and would like to meet with Microsoft product group leaders while I am there.`, '',
-        'About me',
-        `- Name: ${name || '[your name]'}`,
-        `- Organization: ${org || '[your organization]'}`];
-      if (role) L.push(`- Role: ${role}`);
-      L.push('', 'What I would like to discuss');
-      if (topics.length) topics.forEach(t => L.push(`- ${t}`)); else L.push('- [choose at least one topic]');
-      if (details) L.push('', 'More detail', details);
-      if (outcome) L.push('', 'What would make the meeting worthwhile', outcome);
-      if (days.length) L.push('', `Best days: ${days.join('; ')}`);
-      L.push('', 'I understand availability is limited. Could you let me know what is possible and who from the product group would be the best fit?', '', 'Thank you,', name || '[your name]');
-      return { name, org, topics, details, subject: D.meet.subject + (org ? ` (${org})` : ''), body: L.join('\n') };
-    }
-
-    function problems() {
-      const c = composed, out = [];
-      if (!c.name) out.push({ el: fld.name, text: 'Add your name.' });
-      if (!c.org) out.push({ el: fld.org, text: 'Add your organization.' });
-      if (!c.topics.length) out.push({ el: $('#m-topics input'), text: 'Choose at least one topic.' });
-      else if (c.topics.length === 1 && c.topics[0] === OTHER && !c.details) out.push({ el: fld.details, text: 'Tell us what the topic is.' });
-      return out;
-    }
-    function flag(list) {
-      $$('.invalid', dlg).forEach(el => el.classList.remove('invalid'));
-      list.forEach(p => { const box = p.el.closest('.field, .field-set'); if (box) box.classList.add('invalid'); });
-    }
-    const say = (text, ok) => { msg.textContent = text; msg.classList.toggle('ok', !!ok); };
-
-    function update() {
-      composed = compose();
-      const c = composed, to = D.contact.email;
-      $('#meet-to').textContent = to;
-      $('#meet-subject').textContent = c.subject;
-      $('#meet-preview').textContent = c.body;
-      const full = `mailto:${to}?subject=${enc(c.subject)}&body=${enc(crlf(c.body))}`;
-      long = full.length > 1900;
-      const body = long ? 'Hello Microsoft healthcare team,\n\nMy full request is on my clipboard. Please paste it here before sending.\n' : c.body;
-      send.href = long ? `mailto:${to}?subject=${enc(c.subject)}&body=${enc(crlf(body))}` : full;
-      $('#meet-outlook').href = `https://outlook.office.com/mail/deeplink/compose?to=${enc(to)}&subject=${enc(c.subject)}&body=${enc(body)}`;
-      $('#meet-gmail').href = `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(to)}&su=${enc(c.subject)}&body=${enc(body)}`;
-      send.setAttribute('aria-disabled', String(problems().length > 0));
-      // the details box becomes required when "something else" is the only topic picked
-      $('#m-details-opt').textContent = (c.topics.length === 1 && c.topics[0] === OTHER) ? 'required' : 'optional';
-    }
-
-    function copyText(text) {
-      const legacyCopy = () => new Promise((resolve, reject) => {
-        const prev = document.activeElement;
-        const ta = h('textarea', { 'aria-hidden': 'true', readonly: true, style: 'position:fixed;left:-9999px;top:0;opacity:0' });
-        ta.value = text;
-        dlg.append(ta); // inside the open modal, so the browser will let it take focus
-        ta.focus({ preventScroll: true });
-        ta.select();
-        ta.setSelectionRange(0, text.length);
-        let ok = false;
-        try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
-        ta.remove();
-        if (prev && prev.focus) prev.focus({ preventScroll: true });
-        if (ok) resolve(); else reject(new Error('copy failed'));
-      });
-      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).catch(legacyCopy);
-      return legacyCopy();
-    }
-    const fullText = () => `To: ${D.contact.email}\nSubject: ${composed.subject}\n\n${composed.body}`;
-
-    // returns true when the draft can open; otherwise shows what is missing
-    function guard(e) {
-      update();
-      const p = problems();
-      flag(p);
-      if (!p.length) return true;
-      e.preventDefault();
-      say(p.map(x => x.text).join(' '), false);
-      p[0].el.focus();
-      return false;
-    }
-    function openedDraft(e) {
-      if (!guard(e)) return;
-      if (long) copyText(fullText()).then(
-        () => say('Your request is long, so the full text is on your clipboard. Paste it into the email that opens.', true),
-        () => say('Your request is long. Use Copy email text, then paste it into the email.', false));
-      else say('Your email app should open with the draft. If nothing happens, use Copy email text or one of the links below.', true);
-    }
-    send.addEventListener('click', openedDraft);
-    $('#meet-outlook').addEventListener('click', openedDraft);
-    $('#meet-gmail').addEventListener('click', openedDraft);
-    copyBtn.addEventListener('click', (e) => {
-      if (!guard(e)) return;
-      copyText(fullText()).then(
-        () => say(`Copied. Paste it into a new email to ${D.contact.email}.`, true),
-        () => say('Could not copy automatically. Select the text in the preview and copy it.', false));
-    });
-
-    const refresh = () => { flag([]); say(''); update(); };
-    form.addEventListener('input', refresh);
-    form.addEventListener('change', refresh);
-    form.addEventListener('submit', (e) => e.preventDefault());
-    $('#meet-close').addEventListener('click', popOverlay);
-    dlgs.wire(dlg, popOverlay);
-    update();
-
-    return {
-      isOpen: () => dlgs.isOpen(dlg),
-      open(opener) {
-        dlgs.show(dlg, opener);
-        update();
-        $('#meet-body').scrollTop = 0;
-        if (matchMedia('(pointer: fine)').matches) fld.name.focus({ preventScroll: true });
-      },
-      close() { dlgs.hide(dlg); }
-    };
-  }
-
-  /* ============================================================
      Boot
      ============================================================ */
   function boot() {
@@ -1438,9 +1292,7 @@
     renderFaq();
     renderMaps();
     maps = createMapViewer();
-    meet = createMeet();
     $('#help-cta').href = `mailto:${D.contact.email}?subject=${encodeURIComponent(D.contact.subject)}`;
-    $('#help-meet').addEventListener('click', (e) => openMeet(e.currentTarget));
     $('#updated').textContent = `${fmtMD(D.updated)}, 2026`;
     route(true);
   }

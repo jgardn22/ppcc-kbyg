@@ -22,7 +22,7 @@
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/montserrat-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=a9571b2be5">
+  <link rel="stylesheet" href="styles.css?v=b04ff63612">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -323,11 +323,10 @@
     <div class="wrap help-row">
       <div>
         <h2 id="help-h">Questions before you go?</h2>
-        <p>Your Microsoft healthcare team can help with introductions and time to meet with Microsoft product group leaders.</p>
+        <p>Your Microsoft healthcare team can help.</p>
       </div>
       <div class="help-actions">
         <a class="btn primary" id="help-cta" href="#">Email your Microsoft team</a>
-        <button class="btn ghost" id="help-meet" type="button">Request a product group meeting</button>
       </div>
     </div>
   </section>
@@ -341,69 +340,6 @@
       <p>An unofficial companion guide from Microsoft Healthcare AI Business Process Solutions for healthcare customers attending PPCC 2026. Details come from powerplatformconf.com, partner invitations and the Power HUG session. Partner events can change, so confirm with each host. Last updated <time id="updated"></time>. Conference questions: <a href="mailto:info@powerplatformconf.com">info@powerplatformconf.com</a>.</p>
     </div>
   </footer>
-
-  <!-- ============ Request a product group meeting ============ -->
-  <dialog id="meet-dialog" class="dlg dlg-form" aria-labelledby="meet-title">
-    <div class="dlg-shell">
-      <header class="dlg-head">
-        <div>
-          <p class="eyebrow"><i class="cross" aria-hidden="true"></i>Request a meeting</p>
-          <h2 id="meet-title">Meet with Microsoft product group leaders</h2>
-        </div>
-        <button class="icon-btn" id="meet-close" type="button" aria-label="Close">
-          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>
-        </button>
-      </header>
-
-      <div class="dlg-body" id="meet-body">
-        <p class="dlg-lede">Tell us what you want to discuss. We’ll draft an email to your Microsoft healthcare team asking them to request time with the product group during the conference. Availability is limited and not guaranteed, so send it early.</p>
-
-        <form id="meet-form" novalidate>
-          <div class="field-row">
-            <label class="field" for="m-name"><span>Your name <i class="req" aria-hidden="true">*</i></span>
-              <input id="m-name" type="text" autocomplete="name" required></label>
-            <label class="field" for="m-org"><span>Organization <i class="req" aria-hidden="true">*</i></span>
-              <input id="m-org" type="text" autocomplete="organization" required></label>
-          </div>
-          <label class="field" for="m-role"><span>Your role <small>optional</small></span>
-            <input id="m-role" type="text" autocomplete="organization-title"></label>
-
-          <fieldset class="field-set">
-            <legend>What would you like to discuss? <i class="req" aria-hidden="true">*</i> <small>Choose all that apply</small></legend>
-            <div class="opts" id="m-topics"></div>
-          </fieldset>
-
-          <label class="field" for="m-details"><span>Anything specific to cover? <small id="m-details-opt">optional</small></span>
-            <textarea id="m-details" rows="4" maxlength="600" placeholder="A challenge you are facing, a decision coming up, or a question you want answered"></textarea></label>
-          <label class="field" for="m-outcome"><span>What would make the meeting worthwhile? <small>optional</small></span>
-            <textarea id="m-outcome" rows="2" maxlength="300" placeholder="For example, a clear next step or a roadmap view for your team"></textarea></label>
-
-          <fieldset class="field-set">
-            <legend>When are you free? <small>optional</small></legend>
-            <div class="opts opts-inline" id="m-days"></div>
-          </fieldset>
-        </form>
-
-        <section class="meet-preview" aria-labelledby="meet-preview-h">
-          <h3 id="meet-preview-h">Your email</h3>
-          <p class="meet-line">To <b id="meet-to"></b></p>
-          <p class="meet-line">Subject <b id="meet-subject"></b></p>
-          <pre class="meet-pre" id="meet-preview" tabindex="0" aria-label="Email preview"></pre>
-        </section>
-      </div>
-
-      <footer class="dlg-foot">
-        <p class="dlg-msg" id="meet-msg" role="status" aria-live="polite"></p>
-        <div class="dlg-actions">
-          <a class="btn primary" id="meet-send" href="#" aria-disabled="true">Open email draft</a>
-          <button class="btn ghost" id="meet-copy" type="button">Copy email text</button>
-        </div>
-        <p class="dlg-alt">No email app set up? Try
-          <a id="meet-outlook" target="_blank" rel="noopener noreferrer">Outlook on the web</a> or
-          <a id="meet-gmail" target="_blank" rel="noopener noreferrer">Gmail</a>.</p>
-      </footer>
-    </div>
-  </dialog>
 
   <!-- ============ Map viewer ============ -->
   <dialog id="map-dialog" class="dlg dlg-map" aria-labelledby="map-title">
@@ -446,7 +382,7 @@
     </div>
   </dialog>
 
-  <script src="data.js?v=48cc04b07b" charset="utf-8"></script>
-  <script src="app.js?v=4f12b0de6a" charset="utf-8"></script>
+  <script src="data.js?v=f38c6cce5a" charset="utf-8"></script>
+  <script src="app.js?v=0b765b57b4" charset="utf-8"></script>
 </body>
 </html>

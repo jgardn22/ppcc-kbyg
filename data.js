@@ -40,23 +40,6 @@ window.KBYG = {
     stoneridge:  { org: "Stoneridge Software", name: "Zarea Barber",       email: "zarea.barber@stoneridgesoftware.com" }
   },
 
-  /* ---------- Product group meeting request (checklist CTA + FAQ) ---------- */
-  meet: {
-    title: "Meet with Microsoft product group leaders",
-    subject: "PPCC 2026: request to meet with Microsoft product group leaders",
-    topics: [
-      "Governing Power Platform apps, automation and Copilot agents at scale",
-      "Roadmap for agents, Copilot Studio and Power Platform",
-      "Security, privacy and compliance for regulated healthcare data",
-      "Moving from pilot to enterprise scale (environments, ALM, Dataverse)",
-      "Managing cost and licensing as usage grows",
-      "Connecting to core healthcare systems and data (EHR, claims, CRM)",
-      "AI agents and automation for clinical, member or provider workflows",
-      "Something else (I will describe it below)"
-    ],
-    days: ["Tuesday, Oct 27", "Wednesday, Oct 28", "Thursday, Oct 29", "Any day works"]
-  },
-
   tabs: [
     { id: "start",    label: "Start Here" },
     { id: "before",   label: "Before You Go" },
@@ -137,8 +120,8 @@ window.KBYG = {
     { id: "video", group: "plan", title: "Watch the Know Before You Go video",
       detail: "41 minutes from the Power HUG team. Use the chapters to jump to what matters most to you.", action: "video" },
 
-    { id: "whova", group: "plan", title: "Get the Whova app and join", due: "2026-10-15", soft: true, dueLabel: "Sessions load mid-October", code: "LasVegas26",
-      detail: "Whova is the conference app, and it is available now. Download it, then join the event with the invitation code below. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda. A login from past years still works, and building your agenda in a browser gives you more screen space.",
+    { id: "whova", group: "plan", title: "Get the Whova app and join", due: "2026-10-15", soft: true, dueLabel: "Sessions load mid-October", code: "5thAnnual2026",
+      detail: "Whova is the conference app, and the organizers have started sending Whova invitations. Download it, then sign up with your work email address (the same one you registered with). Whova uses two-factor sign-in, so it emails you a verification code each time you log in; check your spam folder if it does not show up. You are usually added to the event automatically. If Whova asks for an invitation code, use the one below. Please do not share it with anyone who is not attending. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda. A login from past years still works, and building your agenda in a browser gives you more screen space.",
       links: [{ label: "App Store", href: "https://apps.apple.com/us/app/whova-event-conference-app/id716979741" }, { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.whova.event&hl=en-US&pli=1" }] },
 
     { id: "sessions", group: "plan", title: "Pick sessions, then pick backups",
@@ -150,10 +133,6 @@ window.KBYG = {
 
     { id: "evenings", group: "plan", title: "RSVP for one or two evening events",
       detail: "Most partner events need advance registration and fill quickly. Many check names at the door. It is fine to register for more than one.", action: "tab:evenings" },
-
-    { id: "leaders", group: "plan", title: "Ask about time to meet with Microsoft product group leaders",
-      detail: "Product group leaders are on site, and your Microsoft account team can help request time with them. One-to-one meetings are held Tuesday through Thursday. Tell us what you want to discuss and we will draft the email for you. Governance, scale and roadmap questions are common topics. Availability is limited and not guaranteed, so ask early.",
-      action: "meet" },
 
     { id: "badge", group: "pack", title: "Plan an early badge pickup",
       detail: "Check-in is on the first floor of the MGM Grand Conference Center. Picking up your badge on Monday (7:30 AM to 5:00 PM) keeps Tuesday morning simple. You need your badge to enter the Opening Keynote.", action: ["tab:ground", "maps"] },
@@ -547,14 +526,11 @@ window.KBYG = {
     { q: "Can I bring a guest to the Pitbull concert?",
       a: "Entry requires a PPCC badge, and guests and plus-ones are not allowed." },
     { q: "How do I get the Whova app?",
-      a: "Whova is the conference app, and it is available now on the App Store and Google Play. Download it and join the event with the invitation code LasVegas26. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda.",
-      code: "LasVegas26",
+      a: "Whova is the conference app, and it is available now on the App Store and Google Play. Download it and sign up with the work email address you registered with. Whova sends a verification code to that email each time you log in, so check your spam folder if it does not arrive. You are usually added to the event automatically. If Whova asks for an invitation code, enter 5thAnnual2026, and please keep it to attendees only. The full schedule, with sessions, times and rooms, loads in mid-October, so check back then to build your agenda.",
+      code: "5thAnnual2026",
       links: [{ label: "App Store", href: "https://apps.apple.com/us/app/whova-event-conference-app/id716979741" }, { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.whova.event&hl=en-US&pli=1" }] },
     { q: "Who can I ask for help onsite?",
       a: "Anyone in a Microsoft lanyard. The Microsoft booth is staffed by engineers rather than salespeople, and you can message the Microsoft team in Whova." },
-    { q: "How do I get time to meet with Microsoft product group leaders?",
-      a: "Ask your Microsoft account team. They can help request one-to-one time with Microsoft product group leaders during the conference, based on what you want to discuss. Availability is limited and not guaranteed, so ask early.",
-      action: "meet" },
     { q: "What is Women in Power?",
       a: "Women in Power is a set of four sessions that are open to everyone, allies included, and free with your pass: a networking luncheon on Tuesday (12:30 to 2:00 PM), a Night Market meetup on Tuesday evening, a panel on Wednesday at 2:00 PM, and a small-group roundtable on Thursday (time to be announced). Registration is required, and you sign up in the Whova app." },
     { q: "Where can I find a map of the venue?",
