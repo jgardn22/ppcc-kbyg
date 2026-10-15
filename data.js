@@ -253,7 +253,7 @@ window.KBYG = {
         { time: "8:30 to 10:00 AM", text: "Opening Keynote", who: "Charles Lamanna and Ryan Cunningham", key: true },
         { time: "10:00 AM", text: "Expo Hall and Makers Market open" },
         { time: "11:30 AM to 12:30 PM", text: "What’s New with Power BI & Fabric", who: "Kim Manis" },
-        { time: "12:30 to 2:00 PM", text: "Lunch", note: "Lunch is open until 2:00 PM, so a quick bite fits around a session. The Women in Power Networking Luncheon runs at the same time in its own lunch hall. Sign up in Whova" },
+        { time: "12:30 to 2:00 PM", text: "Lunch", note: "Lunch locations are based on your lanyard color. Lunch is open until 2:00 PM, so a quick bite fits around a session. The Women in Power Networking Luncheon runs at the same time in its own lunch hall. Sign up in Whova" },
         { time: "2:00 to 3:00 PM", text: "What’s New with Copilot Studio", who: "Bryan Goode and Jason Moore" },
         { time: "4:00 to 5:00 PM", text: "What’s New with Power Apps", who: "Leon Welicki and Tiffany Treacy" },
         { time: "5:00 to 7:30 PM", text: "Night Market: Opening Reception", note: "Expo and Makers Market. Women in Power hosts a meetup here too" }
@@ -370,7 +370,7 @@ window.KBYG = {
         { time: "9:00 AM", text: "Expo Hall and Makers Market open" },
         { time: "10:00 to 11:00 AM", text: "The Future of Agentic Apps", who: "Clay Wesener and Emma Cooper" },
         { time: "11:30 AM to 12:30 PM", text: "From Work IQ to Agent 365: Building and Managing the Agentic Enterprise", who: "Nirav Shah" },
-        { time: "12:30 PM", text: "Lunch" },
+        { time: "12:30 PM", text: "Lunch", note: "Lunch locations are based on your lanyard color." },
         { time: "2:00 to 3:00 PM", text: "Women in Power Panel: Owning Your Power, Claiming Your Seat", note: "Boulevard Ballroom 162. Open to everyone; sign up in Whova. Breakout sessions run at the same time" },
         { time: "3:30 to 4:30 PM", text: "Fireside chat with Jeff Teper, EVP, Apps and Agents", note: "Boulevard Ballroom 162. Breakout sessions run at the same time" },
         { time: "4:30 to 6:30 PM", text: "Expo and Makers Market, plus conference T-shirt pick-up" },
@@ -451,7 +451,7 @@ window.KBYG = {
         { time: "10:00 AM", text: "Expo Hall and Makers Market open" },
         { time: "10:45 to 11:45 AM", text: "Breakout sessions", note: "Includes the Women in Power roundtable, Make Your Network Your Net Worth, in Room 351. Open to everyone; sign up in Whova" },
         { time: "12:00 to 1:00 PM", text: "Breakout sessions" },
-        { time: "1:00 to 2:30 PM", text: "Lunch" },
+        { time: "1:00 to 2:30 PM", text: "Lunch", note: "Lunch locations are based on your lanyard color." },
         { time: "2:30 PM", text: "Expo Hall and Makers Market close" },
         { time: "2:30 to 3:30 PM", text: "Breakout sessions" }
       ],
