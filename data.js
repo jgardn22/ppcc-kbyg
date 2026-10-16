@@ -168,6 +168,9 @@ window.KBYG = {
               kind: "key" keynote or headliner, "hls" healthcare session, "rec" recommended session. badge: "Top Pick" for the
               first choice, "Top Alternative" for the second. note is an optional tip.
               Room, time, level and format come from the official session list. App.js works out the floor from the room number.
+              Where it is: a card or row shows its room (checked against the official list, with the floor added by app.js) or, when
+              there is no room to show, a plain where line such as the lanyard color note for meals. A card that is not on the
+              public list yet says to check Whova.
      agenda:  official rows only: check-in, expo hours, meals, Women in Power and evening events. Do not repeat a keynote or session
               that already has a card. A row whose time is exactly a slot’s time shows under that slot; the other rows sit between
               the slots in time order. evening is the closing note for the day.
@@ -220,7 +223,8 @@ window.KBYG = {
             { title: "Your Processes, Now Intelligent: Process Mining and Optimization", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
               note: "Process mining and process intelligence show how work really happens, so you can find the biggest improvement opportunities and build a base for smarter automation and AI. Includes practical scenarios, lessons learned and where Process Intelligence in Power Platform is headed." },
             { title: "Don’t Start Over: Move Copilot Studio Agents to the GitHub Copilot Harness",
-              note: "For teams that already built agents in Copilot Studio: how to move them to the GitHub Copilot harness instead of starting over. It is not on the public session list yet, so check the Whova app for the room and level." },
+              where: "Check Whova for the room",
+              note: "For teams that already built agents in Copilot Studio: how to move them to the GitHub Copilot harness instead of starting over. It is not on the public session list yet, so check the Whova app for the level and the latest details." },
             { title: "Governing Agents at Scale", room: "Premier Ballroom 318", format: "Roundtable", level: "Intermediate",
               note: "How governance and admin duties should span the Power Platform admin center and Agent 365, and how agent centers of excellence partner with IT and security." },
             { title: "Demystifying Copilot Studio Licensing", room: "Grand Ballroom 116", format: "Session", level: "Foundational",
@@ -250,11 +254,11 @@ window.KBYG = {
           ] }
       ],
       agenda: [
-        { time: "6:30 AM", text: "Check-in opens at the Conference Center" },
-        { time: "7:00 to 8:00 AM", text: "Grab-and-go breakfast" },
-        { time: "8:00 to 8:30 AM", text: "Arena doors open, and everyone is seated for the keynote" },
+        { time: "6:30 AM to 5:00 PM", text: "Conference Check-In and badge pickup", where: "1st floor, MGM Grand Conference Center" },
+        { time: "7:00 to 8:00 AM", text: "Grab-and-go breakfast", where: "Based on your lanyard color" },
+        { time: "8:00 to 8:30 AM", text: "Arena doors open, and everyone is seated for the keynote", where: "MGM Grand Garden Arena" },
         { time: "10:00 AM", text: "Expo Hall and Makers Market open" },
-        { time: "12:30 to 2:00 PM", text: "Lunch", note: "Lunch locations are based on your lanyard color. Lunch is open until 2:00 PM, so a quick bite fits around a session. The Women in Power Networking Luncheon runs at the same time in its own lunch hall. Sign up in Whova" },
+        { time: "12:30 to 2:00 PM", text: "Lunch", where: "Based on your lanyard color", note: "Lunch is open until 2:00 PM, so a quick bite fits around a session. The Women in Power Networking Luncheon runs at the same time in its own lunch hall. Sign up in Whova" },
         { time: "5:00 to 7:30 PM", text: "Night Market: Opening Reception", note: "Expo and Makers Market. Women in Power hosts a meetup here too" }
       ],
       evening: "Busiest night for partner events. Hummingbird’s Healthcare & Life Sciences Happy Hour starts at 5:00 PM."
@@ -310,7 +314,8 @@ window.KBYG = {
             { kind: "key", badge: "Featured session",
               title: "From Work IQ to Agent 365: Building and Managing the Agentic Enterprise", format: "Session",
               why: "Nirav Shah, who leads Agent 365 and Agent Cloud, on how Work IQ and Agent 365 fit together for building and managing the agentic enterprise.",
-              note: "It is on the official agenda but not in the session list yet. Check Whova for the room.",
+              where: "Check Whova for the room",
+              note: "It is on the official agenda but not in the session list yet.",
               tags: ["Agent 365", "Work IQ"] },
             { kind: "rec", badge: "Top Alternative",
               title: "Power Apps + Power Automate: Best Practices for Building Production-Ready Solutions", room: "Boulevard Ballroom 163", format: "Session", level: "Advanced",
@@ -365,10 +370,11 @@ window.KBYG = {
           ] }
       ],
       agenda: [
-        { time: "7:00 to 8:00 AM", text: "Breakfast" },
+        { time: "7:00 AM to 4:00 PM", text: "Conference Check-In and badge pickup", where: "1st floor, MGM Grand Conference Center" },
+        { time: "7:00 to 8:00 AM", text: "Breakfast", where: "Based on your lanyard color" },
         { time: "9:00 AM", text: "Expo Hall and Makers Market open" },
-        { time: "12:30 PM", text: "Lunch", note: "Lunch locations are based on your lanyard color." },
-        { time: "2:00 to 3:00 PM", text: "Women in Power Panel: Owning Your Power, Claiming Your Seat", note: "Boulevard Ballroom 162. Open to everyone; sign up in Whova. Breakout sessions run at the same time" },
+        { time: "12:15 to 2:00 PM", text: "Lunch", where: "Based on your lanyard color" },
+        { time: "2:00 to 3:00 PM", text: "Women in Power Panel: Owning Your Power, Claiming Your Seat", room: "Boulevard Ballroom 162", note: "Open to everyone; sign up in Whova. Breakout sessions run at the same time" },
         { time: "4:30 to 6:30 PM", text: "Expo and Makers Market, plus conference T-shirt pick-up" },
         { time: "8:00 to 10:00 PM", text: "Pitbull live in the MGM Grand Garden Arena", key: true }
       ],
@@ -429,7 +435,8 @@ window.KBYG = {
             { kind: "rec", badge: "Top Pick",
               title: "Getting to Know Cowork - Admin and User Overview",
               why: "A 25-minute introduction to Cowork, with an overview for both admins and users.",
-              note: "It falls during lunch (open 1:00 to 2:30 PM), so you can eat before or after. It is not on the public session list yet, so check the Whova app for the room.",
+              where: "Check Whova for the room",
+              note: "It falls during lunch (open 1:00 to 2:30 PM), so you can eat before or after. It is not on the public session list yet.",
               tags: ["Cowork", "Admin"] }
           ] },
         { time: "2:30 to 3:30 PM",
@@ -455,11 +462,12 @@ window.KBYG = {
           ] }
       ],
       agenda: [
-        { time: "7:30 to 8:45 AM", text: "Breakfast" },
-        { time: "8:45 to 9:00 AM", text: "Everyone is seated for the keynote" },
+        { time: "7:00 AM to 4:00 PM", text: "Conference Check-In and badge pickup", where: "1st floor, MGM Grand Conference Center" },
+        { time: "7:30 to 8:45 AM", text: "Breakfast", where: "Based on your lanyard color" },
+        { time: "8:45 to 9:00 AM", text: "Everyone is seated for the keynote", where: "MGM Grand Garden Arena" },
         { time: "10:00 AM", text: "Expo Hall and Makers Market open" },
-        { time: "10:45 to 11:45 AM", text: "Women in Power roundtable: Make Your Network Your Net Worth", note: "Room 351. Open to everyone; sign up in Whova" },
-        { time: "1:00 to 2:30 PM", text: "Lunch", note: "Lunch locations are based on your lanyard color." },
+        { time: "10:45 to 11:45 AM", text: "Women in Power roundtable: Make Your Network Your Net Worth", room: "Room 351", note: "Open to everyone; sign up in Whova" },
+        { time: "1:00 to 2:30 PM", text: "Lunch", where: "Based on your lanyard color" },
         { time: "2:30 PM", text: "Expo Hall and Makers Market close" }
       ],
       evening: "The conference wraps mid-afternoon, so there are no evening events listed."

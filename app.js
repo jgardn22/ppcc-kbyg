@@ -999,13 +999,21 @@
   };
   const roomLine = (x) => [x.room, floorOf(x.room)].filter(Boolean).join(', ');
 
-  const metaOf = (x) => [x.time, roomLine(x), x.format, x.level].filter(Boolean).join(' \u00b7 ');
+  /* Where it is: the room with its floor for a session, or plain text such as the lanyard color note for a meal. */
+  const whereEl = (x) => {
+    const loc = roomLine(x) || x.where;
+    return loc ? h('p', { class: 'where' }, icon('pin', 13), h('span', { class: 'sr-only' }, 'Location: '), loc) : null;
+  };
+
+  const metaOf = (x) => [x.time, x.format, x.level].filter(Boolean).join(' \u00b7 ');
 
   function optionEl(o, slotTime) {
+    const meta = metaOf({ time: o.time !== slotTime ? o.time : null, format: o.format, level: o.level });
     return h('div', { class: 'pick' + (o.kind ? ' ' + o.kind : '') },
       o.badge ? h('span', { class: 'pick-badge' }, o.badge) : null,
       h('b', { class: 'pick-title' }, o.title),
-      h('small', { class: 'pick-meta' }, [o.time !== slotTime ? o.time : null, roomLine(o), o.format, o.level].filter(Boolean).join(' \u00b7 ')),
+      whereEl(o),
+      meta ? h('small', { class: 'pick-meta' }, meta) : null,
       h('p', { class: 'pick-why' }, o.why),
       o.note ? h('p', { class: 'pick-note' }, o.note) : null,
       o.tags ? h('div', { class: 'pick-tags' }, o.tags.map(t => h('span', {}, t))) : null);
@@ -1020,6 +1028,7 @@
         h('summary', {}, `Also at this time (${alts.length})`, icon('chev', 14)),
         h('ul', {}, alts.map(x => h('li', {},
           h('b', {}, x.title),
+          whereEl(x),
           metaOf(x) ? h('small', {}, metaOf(x)) : null,
           h('span', {}, x.note))))) : null);
   }
@@ -1051,6 +1060,7 @@
 
   const rowEl = (r) => h('div', { class: 'orow' + (r.key ? ' key' : '') },
     h('b', {}, r.text),
+    whereEl(r),
     r.who ? h('small', {}, r.who) : null,
     r.note ? h('small', {}, r.note) : null);
 
