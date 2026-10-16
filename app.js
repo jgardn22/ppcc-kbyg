@@ -1014,9 +1014,6 @@
   function slotEl(s) {
     const opts = s.options, alts = s.alts || [];
     return h('div', { class: 'slot' + (opts.length > 1 ? ' pair' : '') },
-      h('div', { class: 'slot-head' },
-        h('time', {}, s.time),
-        opts.length > 1 ? h('span', { class: 'slot-hint' }, 'Choose one') : null),
       h('div', { class: 'options' },
         opts.map((o, i) => [i ? h('span', { class: 'or', 'aria-hidden': 'true' }, 'or') : null, optionEl(o, s.time)])),
       alts.length ? h('details', { class: 'pick-alts' },
@@ -1025,6 +1022,51 @@
           h('b', {}, x.title),
           metaOf(x) ? h('small', {}, metaOf(x)) : null,
           h('span', {}, x.note))))) : null);
+  }
+
+  /* "8:30 to 10:00 AM", "12:30 PM" and "11:30 AM to 12:30 PM" become start and end minutes. */
+  const parseTimes = (txt) => {
+    const m = /^(\d{1,2}):(\d{2})(?: (AM|PM))?(?: to (\d{1,2}):(\d{2}) (AM|PM))?$/.exec(String(txt).trim());
+    if (!m) return { start: 24 * 60, end: null };
+    const mins = (hh, mm, ap) => (hh % 12 + (ap === 'PM' ? 12 : 0)) * 60 + mm;
+    let start = mins(+m[1], +m[2], m[3] || m[6]);
+    const end = m[4] ? mins(+m[4], +m[5], m[6]) : null;
+    if (end !== null && !m[3] && start > end) start -= 12 * 60;
+    return { start, end };
+  };
+  const clock = (t) => `${Math.floor(t / 60) % 12 || 12}:${String(t % 60).padStart(2, '0')} ${t < 720 ? 'AM' : 'PM'}`;
+
+  /* One timeline per day: our slots and the official agenda rows in time order. A row whose time is exactly a slot's
+     time shows under that slot, and the evening note closes the day. */
+  function dayBlocks(d) {
+    const blocks = d.picks.map(s => ({ kind: 'rec', rank: 1, key: s.time, t: parseTimes(s.time), slot: s, rows: [] }));
+    d.agenda.forEach(row => {
+      const host = blocks.find(b => b.kind === 'rec' && b.key === row.time) || blocks.find(b => b.kind === 'row' && b.key === row.time);
+      if (host) host.rows.push(row);
+      else blocks.push({ kind: 'row', rank: 0, key: row.time, t: parseTimes(row.time), rows: [row] });
+    });
+    blocks.push({ kind: 'eve', rank: 2, t: { start: 17 * 60, end: null }, text: d.evening });
+    return blocks.sort((x, y) => x.t.start - y.t.start || x.rank - y.rank);
+  }
+
+  const rowEl = (r) => h('div', { class: 'orow' + (r.key ? ' key' : '') },
+    h('b', {}, r.text),
+    r.who ? h('small', {}, r.who) : null,
+    r.note ? h('small', {}, r.note) : null);
+
+  function blockEl(b) {
+    const eve = b.kind === 'eve';
+    return h('li', { class: `tb tb-${b.kind}` },
+      h('div', { class: 'tb-time' },
+        eve ? h('b', {}, 'Evening')
+          : h('time', {}, h('b', {}, clock(b.t.start)), b.t.end != null ? h('small', {}, `to ${clock(b.t.end)}`) : null),
+        b.kind === 'rec' && b.slot.options.length > 1 ? h('span', { class: 'slot-hint' }, 'Choose one') : null),
+      h('div', { class: 'tb-body' },
+        b.kind === 'rec' ? slotEl(b.slot) : null,
+        b.kind === 'rec' && b.rows.length
+          ? h('div', { class: 'tb-extra' }, h('span', { class: 'tb-extra-h' }, 'Also on the official agenda'), b.rows.map(rowEl)) : null,
+        b.kind === 'row' ? b.rows.map(rowEl) : null,
+        eve ? h('p', { class: 'orow-eve' }, b.text) : null));
   }
 
   function renderDays() {
@@ -1036,15 +1078,7 @@
           h('h3', { class: 'day-theme' }, d.theme),
           h('p', { class: 'day-date' }, `${d.label}, ${d.short}`),
           h('p', { class: 'day-line' }, d.line)),
-        h('div', { class: 'picks' },
-          h('h4', {}, 'Recommended sessions', h('span', {}, 'Keynotes + picks')),
-          d.picks.map(slotEl)),
-        h('div', { class: 'agenda' },
-          h('h4', {}, 'On the official agenda'),
-          d.agenda.map(a => h('div', { class: 'ag' + (a.key ? ' key' : '') },
-            h('time', {}, a.time),
-            h('div', {}, h('b', {}, a.text), a.who ? h('small', {}, a.who) : null, a.note ? h('small', {}, a.note) : null)))),
-        h('p', { class: 'day-evening' }, h('b', {}, 'Evening. '), d.evening)));
+        h('ol', { class: 'dtl', 'aria-label': `${d.label} schedule` }, dayBlocks(d).map(blockEl))));
     });
     $('#days-updated').textContent = `${fmtMD(D.updated)}, 2026`;
     const whova = D.whovaCta;

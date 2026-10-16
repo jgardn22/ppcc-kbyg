@@ -168,7 +168,9 @@ window.KBYG = {
               kind: "key" keynote or headliner, "hls" healthcare session, "rec" recommended session. badge: "Top Pick" for the
               first choice, "Top Alternative" for the second. note is an optional tip.
               Room, time, level and format come from the official session list. App.js works out the floor from the room number.
-     agenda:  the official anchors (keynotes, expo hours, meals, evening events).
+     agenda:  official rows only: check-in, expo hours, meals, Women in Power and evening events. Do not repeat a keynote or session
+              that already has a card. A row whose time is exactly a slot’s time shows under that slot; the other rows sit between
+              the slots in time order. evening is the closing note for the day.
      ------------------------------------------------------------ */
   days: [
     {
@@ -250,12 +252,8 @@ window.KBYG = {
       agenda: [
         { time: "6:30 AM", text: "Check-in opens at the Conference Center" },
         { time: "8:00 AM", text: "Arena doors open" },
-        { time: "8:30 to 10:00 AM", text: "Opening Keynote", who: "Charles Lamanna and Ryan Cunningham", key: true },
         { time: "10:00 AM", text: "Expo Hall and Makers Market open" },
-        { time: "11:30 AM to 12:30 PM", text: "What’s New with Power BI & Fabric", who: "Kim Manis" },
         { time: "12:30 to 2:00 PM", text: "Lunch", note: "Lunch locations are based on your lanyard color. Lunch is open until 2:00 PM, so a quick bite fits around a session. The Women in Power Networking Luncheon runs at the same time in its own lunch hall. Sign up in Whova" },
-        { time: "2:00 to 3:00 PM", text: "What’s New with Copilot Studio", who: "Bryan Goode and Jason Moore" },
-        { time: "4:00 to 5:00 PM", text: "What’s New with Power Apps", who: "Leon Welicki and Tiffany Treacy" },
         { time: "5:00 to 7:30 PM", text: "Night Market: Opening Reception", note: "Expo and Makers Market. Women in Power hosts a meetup here too" }
       ],
       evening: "Busiest night for partner events. Hummingbird’s Healthcare & Life Sciences Happy Hour starts at 5:00 PM."
@@ -272,7 +270,7 @@ window.KBYG = {
               tags: ["Healthcare", "Customer stories"] },
             { kind: "key", badge: "Keynote",
               title: "Innovation Session: Building End-to-End Agents with Copilot Studio", room: "MGM Grand Garden Arena", format: "Keynote",
-              why: "Jason Moore takes an agent from design to production, with live demos of grounding it in business data, then testing, monitoring and running it securely at enterprise scale.",
+              why: "Jason Moore and Soufiane Loukili take an agent from design to production, with live demos of grounding it in business data, then testing, monitoring and running it securely at enterprise scale.",
               note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
               tags: ["Copilot Studio", "Agents"] }
           ],
@@ -366,13 +364,9 @@ window.KBYG = {
           ] }
       ],
       agenda: [
-        { time: "8:00 to 9:00 AM", text: "Building End to End Agents with Copilot Studio", who: "Jason Moore and Soufiane Loukili", note: "Runs at the same time as the healthcare panel" },
         { time: "9:00 AM", text: "Expo Hall and Makers Market open" },
-        { time: "10:00 to 11:00 AM", text: "The Future of Agentic Apps", who: "Clay Wesener and Emma Cooper" },
-        { time: "11:30 AM to 12:30 PM", text: "From Work IQ to Agent 365: Building and Managing the Agentic Enterprise", who: "Nirav Shah" },
         { time: "12:30 PM", text: "Lunch", note: "Lunch locations are based on your lanyard color." },
         { time: "2:00 to 3:00 PM", text: "Women in Power Panel: Owning Your Power, Claiming Your Seat", note: "Boulevard Ballroom 162. Open to everyone; sign up in Whova. Breakout sessions run at the same time" },
-        { time: "3:30 to 4:30 PM", text: "Fireside chat with Jeff Teper, EVP, Apps and Agents", note: "Boulevard Ballroom 162. Breakout sessions run at the same time" },
         { time: "4:30 to 6:30 PM", text: "Expo and Makers Market, plus conference T-shirt pick-up" },
         { time: "8:00 to 10:00 PM", text: "Pitbull live in the MGM Grand Garden Arena", key: true }
       ],
@@ -459,13 +453,10 @@ window.KBYG = {
           ] }
       ],
       agenda: [
-        { time: "9:00 to 10:00 AM", text: "Closing Keynote", who: "Charles Lamanna in conversation with Chris Paul", key: true },
         { time: "10:00 AM", text: "Expo Hall and Makers Market open" },
-        { time: "10:45 to 11:45 AM", text: "Breakout sessions", note: "Includes the Women in Power roundtable, Make Your Network Your Net Worth, in Room 351. Open to everyone; sign up in Whova" },
-        { time: "12:00 to 1:00 PM", text: "Breakout sessions" },
+        { time: "10:45 to 11:45 AM", text: "Women in Power roundtable: Make Your Network Your Net Worth", note: "Room 351. Open to everyone; sign up in Whova" },
         { time: "1:00 to 2:30 PM", text: "Lunch", note: "Lunch locations are based on your lanyard color." },
-        { time: "2:30 PM", text: "Expo Hall and Makers Market close" },
-        { time: "2:30 to 3:30 PM", text: "Breakout sessions" }
+        { time: "2:30 PM", text: "Expo Hall and Makers Market close" }
       ],
       evening: "The conference wraps mid-afternoon, so there are no evening events listed."
     }
