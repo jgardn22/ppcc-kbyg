@@ -352,15 +352,15 @@ window.KBYG = {
               why: "A candid conversation with Jeff Teper, EVP of Apps and Agents, about AI, community and where technology is heading.",
               tags: ["Leadership", "Roadmap"] },
             { kind: "rec", badge: "Top Alternative",
-              title: "How Production GenAI Agents Get Built, Deployed, Funded & Cost-Optimized", room: "Chairman’s Ballroom 368", format: "Session", level: "Foundational",
-              why: "Skips the polished demo. Teams from EY, PwC, RSM and Accenture show how real agents get specified, built, tested, deployed and funded, and how to keep costs down.",
-              tags: ["Cost and ROI", "Production"] }
+              title: "How Microsoft Does IT: Managing and Governing Agents - Empower with Risk Aligned Oversight", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
+              why: "Microsoft’s own IT team shows how it empowers employees to build, deploy and manage agents: governing them in Copilot Studio, managing them with Agent 365, securing the environment with Defender and managing the productivity estate with Purview. A look at how Microsoft uses its own technology to speed up agentic work while keeping risk in check.",
+              tags: ["Governance", "Agent 365", "Copilot Studio"] }
           ],
           alts: [
+            { title: "How Production GenAI Agents Get Built, Deployed, Funded & Cost-Optimized", room: "Chairman’s Ballroom 368", format: "Session", level: "Foundational",
+              note: "Skips the polished demo. Teams from EY, PwC, RSM and Accenture show how real agents get specified, built, tested, deployed and funded, and how to keep costs down." },
             { title: "Managed Apps Built with Cowork, Copilot Studio and the SDK", room: "Premier Ballroom 310", format: "Session", level: "Advanced",
               note: "How managed apps get built with Cowork, Copilot Studio and the SDK, including architecture, governance and licensing choices." },
-            { title: "How Microsoft Does IT: Managing and Governing Agents - Empower with Risk Aligned Oversight", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
-              note: "How Microsoft’s own IT team governs agents with Copilot Studio, Agent 365, Defender and Purview." },
             { title: "From Agent Pilots to Business Value: Proving ROI at Scale", room: "Room 352", format: "Roundtable", level: "Foundational",
               note: "The Power CAT team shares patterns for measuring the business impact of agents, from pilots to scaled deployments." }
           ] }
@@ -425,8 +425,16 @@ window.KBYG = {
               note: "Takes what made OpenClaw go viral and rebuilds it as an enterprise assistant with Copilot, Power Platform and Foundry: multi-agent orchestration, persistent memory and MCP tool-calling, secured with Entra identity and Purview data protection." },
             { title: "From Shadow AI to Tightly Managed Agentic Tools", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
               note: "How Agent 365 helps teams discover every agent, enforce identity and least-privilege access, and defend against agentic threats." },
-            { title: "Build Fast, Govern Better: The Latest in Power Apps code apps and Copilot Managed Runtime for devs", room: "Boulevard Ballroom 163", format: "Session", level: "Advanced",
-              note: "The newest Power Apps code apps enhancements and an introduction to Copilot Managed Runtime, for developers who want speed without giving up control." }
+            { title: "Migrate RPA from Other Vendors to Power Automate & Copilot Studio", room: "Room 352", format: "Roundtable",
+              note: "For organizations running other RPA platforms: how to assess your RPA estate, choose what to migrate, and extend traditional automation with agents and Copilot." }
+          ] },
+        { time: "1:25 to 1:50 PM",
+          options: [
+            { kind: "rec", badge: "Top Pick",
+              title: "Getting to Know Cowork - Admin and User Overview",
+              why: "A 25-minute introduction to Cowork, with an overview for both admins and users.",
+              note: "It falls during lunch (open 1:00 to 2:30 PM), so you can eat before or after. It is not on the public session list yet, so check the Whova app for the room.",
+              tags: ["Cowork", "Admin"] }
           ] },
         { time: "2:30 to 3:30 PM",
           options: [
@@ -440,6 +448,10 @@ window.KBYG = {
               tags: ["Cost and ROI", "Governance", "Dynamics 365"] }
           ],
           alts: [
+            { title: "Apps, Agents, or Both? Where Should Work Happen in the Agentic Era?", room: "Premier Ballroom 317", format: "Session", level: "Intermediate",
+              note: "When should people work in an app, talk to an agent or use both? Covers generative pages, embedded copilots and human-in-the-loop workflows, and you can bring your own scenarios." },
+            { title: "Beyond Time Savings: Rethinking ROI and Value for Persistent AI Agents", room: "Room 353", format: "Roundtable", level: "Foundational",
+              note: "A roundtable on judging the value of always-on AI agents beyond hours saved, including better decisions, scaled expertise and consumption costs." },
             { title: "Governance of All Your Agents at Scale", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
               note: "Agent 365 governance from admin-led to autonomous: the signals that keep agent risk, approvals, usage, cost and health under control." },
             { title: "Extending Copilot Cowork with Custom Plugins and Workflows with Real-World Customer Use Cases", room: "Premier Ballroom 316", format: "Session", level: "Advanced",
