@@ -5,7 +5,7 @@
    Times are Pacific (Las Vegas). Dates are ISO (YYYY-MM-DD).
    ============================================================ */
 window.KBYG = {
-  updated: "2026-10-15",
+  updated: "2026-10-16",
 
   conference: {
     name: "Power Platform Community Conference",
@@ -588,19 +588,22 @@ window.KBYG = {
       summary: "The conference’s official opening reception in the Expo and Makers Market. A natural first stop before a partner event." },
 
     /* ---- Wednesday ---- */
-    /* Featured Wednesday: 5:30 to 7:30 PM Pacific (PDT), confirmed by the host on Oct 12. Their invite shows 6:30 to 8:30 PM Mountain. */
+    /* Featured Wednesday: 5:30 to 7:30 PM Pacific (PDT). The host confirmed it on Oct 12 and the host's flyer (Oct 16) shows the same time and place.
+       Their calendar invite shows 6:30 to 8:30 PM Mountain, which is the same moment. RSVP is the flyer's "Scan to RSVP" form.
+       The tip repeats MGM's own directions from the front desk. */
     { id: "brooksource-wed", featured: true, day: "2026-10-28", start: "17:30", end: "19:30",
       title: "Lobby Bar Social Reception", host: "Brooksource", hostUrl: "https://www.brooksource.com",
-      venue: "Lobby Bar, MGM Grand", address: "3799 S Las Vegas Blvd, Las Vegas, NV 89109", kind: "Social reception", audience: "hls", access: "ask",
+      venue: "Lobby Bar, MGM Grand", address: "3799 S Las Vegas Blvd, Las Vegas, NV 89109", kind: "Social reception", audience: "hls", access: "register",
       limit: "Limited to 30 guests",
       blurb: "Bring your team to a relaxed social reception with Brooksource’s healthcare specialists and your Microsoft team, right inside the MGM Grand.",
       summary: "A relaxed social reception hosted by Brooksource at the Lobby Bar, inside the MGM Grand. Bring your team and connect with Brooksource’s healthcare and life sciences specialists and your Microsoft healthcare team.",
-      tip: "The Lobby Bar is inside the MGM Grand, on the walk from the hotel front desk into the casino.",
+      tip: "The Lobby Bar is on the casino floor. From the hotel front desk, walk into the casino and it is on your right.",
       tipMap: "resort",
-      ask: { partner: "brooksource", label: "Reserve a spot", action: "reserve a spot or ask to meet with the Brooksource team",
-             subject: "PPCC 2026: reserve a spot at the Brooksource Lobby Bar Social Reception (Oct 28)",
-             sentence: "Please reserve a spot for me at the Lobby Bar Social Reception with Brooksource on Wednesday, Oct 28, from 5:30 to 7:30 PM." },
-      regNote: "Space is limited to 30 guests. Brooksource will share a flyer with final details soon." },
+      reg: { url: "https://hov.to/823a189f", label: "RSVP" },
+      ask: { partner: "brooksource", action: "ask a question",
+             subject: "PPCC 2026: question about the Brooksource Lobby Bar Social Reception (Oct 28)",
+             body: "Hi Annie - I have a question about the Lobby Bar Social Reception with Brooksource on Wednesday, Oct 28.\n\nThanks.\n" },
+      regNote: "Please RSVP so Brooksource can plan. Space is limited to 30 guests." },
 
     { id: "quisitive-hls", day: "2026-10-28", start: "11:30", end: "13:30",
       title: "Healthcare & Life Sciences Lunch", host: "Quisitive", hostUrl: "https://quisitive.com",
