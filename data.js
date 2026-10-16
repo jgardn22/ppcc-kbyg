@@ -251,7 +251,8 @@ window.KBYG = {
       ],
       agenda: [
         { time: "6:30 AM", text: "Check-in opens at the Conference Center" },
-        { time: "8:00 AM", text: "Arena doors open" },
+        { time: "7:00 to 8:00 AM", text: "Grab-and-go breakfast" },
+        { time: "8:00 to 8:30 AM", text: "Arena doors open, and everyone is seated for the keynote" },
         { time: "10:00 AM", text: "Expo Hall and Makers Market open" },
         { time: "12:30 to 2:00 PM", text: "Lunch", note: "Lunch locations are based on your lanyard color. Lunch is open until 2:00 PM, so a quick bite fits around a session. The Women in Power Networking Luncheon runs at the same time in its own lunch hall. Sign up in Whova" },
         { time: "5:00 to 7:30 PM", text: "Night Market: Opening Reception", note: "Expo and Makers Market. Women in Power hosts a meetup here too" }
@@ -364,6 +365,7 @@ window.KBYG = {
           ] }
       ],
       agenda: [
+        { time: "7:00 to 8:00 AM", text: "Breakfast" },
         { time: "9:00 AM", text: "Expo Hall and Makers Market open" },
         { time: "12:30 PM", text: "Lunch", note: "Lunch locations are based on your lanyard color." },
         { time: "2:00 to 3:00 PM", text: "Women in Power Panel: Owning Your Power, Claiming Your Seat", note: "Boulevard Ballroom 162. Open to everyone; sign up in Whova. Breakout sessions run at the same time" },
@@ -453,6 +455,8 @@ window.KBYG = {
           ] }
       ],
       agenda: [
+        { time: "7:30 to 8:45 AM", text: "Breakfast" },
+        { time: "8:45 to 9:00 AM", text: "Everyone is seated for the keynote" },
         { time: "10:00 AM", text: "Expo Hall and Makers Market open" },
         { time: "10:45 to 11:45 AM", text: "Women in Power roundtable: Make Your Network Your Net Worth", note: "Room 351. Open to everyone; sign up in Whova" },
         { time: "1:00 to 2:30 PM", text: "Lunch", note: "Lunch locations are based on your lanyard color." },
