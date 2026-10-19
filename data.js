@@ -502,7 +502,6 @@ window.KBYG = {
                An "ask" event with no partner (and no ask.to) shows no request button.
      Healthcare & Life Sciences events and industry-agnostic events only.
      featured: true makes the event a big card on Evening Events and a highlight on Start Here.
-     under:    the id of another featured event. The card joins that card's column and sits directly below it.
      dayPart:  "lunch" changes "night" in a featured card's label. hostNote replaces "Hosted by" when there is no host site.
      endNote:  shown where the end time would be when none is posted (a missing end time counts as two hours for the plan and overlaps).
      ------------------------------------------------------------ */
@@ -540,8 +539,8 @@ window.KBYG = {
       tip: "Losers Bar is one of the first spots you see as you walk out of the conference at the MGM Grand." },
 
     /* From the Whova app, Community tab, Meet-up Details (read Oct 19): Tue Oct 27 at 6:30 PM local time at the MGM Grand, bar or lounge still to be announced.
-       No host company, end time or description is posted, so none is shown. It sits under the Brooksource card on Evening Events (under). */
-    { id: "hls-meetup", featured: true, under: "brooksource-wed", day: "2026-10-27", start: "18:30", end: null, endNote: "End time not posted",
+       No host company, end time or description is posted, so none is shown. */
+    { id: "hls-meetup", featured: true, day: "2026-10-27", start: "18:30", end: null, endNote: "End time not posted",
       heading: "Healthcare Networking & Ideas Exchange",
       title: "Healthcare Networking & Ideas Exchange", host: "Whova meet-up", hostNote: "Posted in the Community tab of the Whova app",
       venue: "MGM Grand, bar or lounge to be announced", kind: "Networking meet-up", audience: "hls", access: "app",
@@ -623,7 +622,7 @@ window.KBYG = {
 
     /* Quisitive's page and its account executive (Oct 19): Wed Oct 28, 11:30 AM to 1:30 PM at the SKYLOFTS at MGM Grand, a small group of healthcare peers, space limited.
        The page gives no seat count and no directions to the SKYLOFTS, so none are shown. Its form asks for first and last name, email, company and dietary needs. */
-    { id: "quisitive-hls", featured: true, under: "hummingbird-hls", dayPart: "lunch", day: "2026-10-28", start: "11:30", end: "13:30",
+    { id: "quisitive-hls", featured: true, dayPart: "lunch", day: "2026-10-28", start: "11:30", end: "13:30",
       title: "Healthcare Lunch", host: "Quisitive", hostUrl: "https://quisitive.com",
       venue: "SKYLOFTS at MGM Grand", address: "3799 S Las Vegas Blvd, Las Vegas, NV 89109", kind: "Lunch", audience: "hls", access: "register",
       limit: "Limited space",

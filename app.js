@@ -709,14 +709,7 @@
     const root = $('#featured-event');
     root.textContent = '';
     if (!list.length) return;
-    // a card with "under" joins the column of the card it names and sits directly below it
-    const cols = list.filter(e => !e.under).map(e => [e]);
-    list.filter(e => e.under).forEach(e => {
-      const col = cols.find(c => c[0].id === e.under);
-      if (col) col.push(e); else cols.push([e]);
-    });
-    root.append(h('div', { class: 'featured-row' + (cols.length > 1 ? ' multi' : '') + (cols.length > 2 ? ' multi-3' : '') + (cols.some(c => c.length > 1) ? ' has-stacks' : '') },
-      cols.map(c => c.length > 1 ? h('div', { class: 'featured-stack' }, c.map(featuredCard)) : featuredCard(c[0]))));
+    root.append(h('div', { class: 'featured-row' + (list.length > 1 ? ' multi' : '') + (list.length > 2 ? ' multi-3' : '') }, list.map(featuredCard)));
   }
 
   /* ----- controls ----- */
