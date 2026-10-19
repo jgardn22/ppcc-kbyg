@@ -200,8 +200,8 @@ window.KBYG = {
               note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes." }
           ],
           alts: [
-            { title: "Beyond theLAKE", room: "Premier Ballroom 311", time: "11:45 AM to 12:45 PM", format: "Session",
-              note: "Formerly titled Beyond the CRM Screen: Headless CRM in the Age of Copilot. Dynamics 365 as the platform behind agents and Copilot, following one customer journey from frontline staff to compliance reviewers. The example is a bank, and the same pattern applies to member and patient service. It starts at 11:45 AM and runs 15 minutes into lunch." },
+            { title: "Beyond the CRM Screen: Headless CRM in the Age of Copilot", room: "Premier Ballroom 311", time: "11:45 AM to 12:45 PM", format: "Session",
+              note: "Dynamics 365 as the platform behind agents and Copilot, following one customer journey from frontline staff to compliance reviewers. The example is a bank, and the same pattern applies to member and patient service. It starts at 11:45 AM and runs 15 minutes into lunch." },
             { title: "Getting Started with Agent 365", room: "Premier Ballroom 319", format: "Session", level: "Foundational",
               note: "Core concepts, deployment, governance, security and adoption for agents across your organization." },
             { title: "Work, Reimagined: Copilot, Cowork & the Power Platform", room: "Boulevard Ballroom 163", format: "Session", level: "Intermediate",
@@ -502,6 +502,8 @@ window.KBYG = {
                An "ask" event with no partner (and no ask.to) shows no request button.
      Healthcare & Life Sciences events and industry-agnostic events only.
      featured: true makes the event a big card on Evening Events and a highlight on Start Here.
+     tab:      "days" puts a daytime event in its day's plan on 3 Perfect Days instead of Evening Events: no card, timeline bar, plan button or
+               calendar export there. It can still be featured on Start Here. dayBadge is the pill on that 3 Perfect Days card.
      dayPart:  "lunch" changes "night" in a featured card's label. hostNote replaces "Hosted by" when there is no host site.
      endNote:  shown where the end time would be when none is posted (a missing end time counts as two hours for the plan and overlaps).
      ------------------------------------------------------------ */
@@ -621,8 +623,9 @@ window.KBYG = {
       regNote: "Please RSVP so Brooksource can plan. Space is limited to 30 guests." },
 
     /* Quisitive's page and its account executive (Oct 19): Wed Oct 28, 11:30 AM to 1:30 PM at the SKYLOFTS at MGM Grand, a small group of healthcare peers, space limited.
-       The page gives no seat count and no directions to the SKYLOFTS, so none are shown. Its form asks for first and last name, email, company and dietary needs. */
-    { id: "quisitive-hls", featured: true, dayPart: "lunch", day: "2026-10-28", start: "11:30", end: "13:30",
+       The page gives no seat count and no directions to the SKYLOFTS, so none are shown. Its form asks for first and last name, email, company and dietary needs.
+       It is a daytime event, so tab "days" shows it in the Wednesday plan on 3 Perfect Days at 11:30 AM, not on Evening Events. It stays a Start Here highlight. */
+    { id: "quisitive-hls", featured: true, tab: "days", dayBadge: "Healthcare lunch", dayPart: "lunch", day: "2026-10-28", start: "11:30", end: "13:30",
       title: "Healthcare Lunch", host: "Quisitive", hostUrl: "https://quisitive.com",
       venue: "SKYLOFTS at MGM Grand", address: "3799 S Las Vegas Blvd, Las Vegas, NV 89109", kind: "Lunch", audience: "hls", access: "register",
       limit: "Limited space",

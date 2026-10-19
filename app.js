@@ -359,6 +359,8 @@
   /* ----- feature cards ----- */
   const featuredEvents = () => D.events.filter(e => e.featured)
     .sort((a, b) => a.day.localeCompare(b.day) || mins(a.start) - mins(b.start));
+  // an event with tab "days" lives in the 3 Perfect Days plan, so every Evening Events surface skips it
+  const onEvenings = (e) => e.tab !== 'days';
 
   function renderFeatures() {
     const r = D.roundtable;
@@ -517,9 +519,9 @@
   const state = { day: 'all', aud: 'all', reg: false, view: 'list' };
   let plan = store.get('plan', []);
 
-  const canPlan = (e) => !e.noPlan && !!e.day && !!e.start;
+  const canPlan = (e) => !e.noPlan && !!e.day && !!e.start && onEvenings(e);
   const span = (e) => { const s = mins(e.start); return [s, e.end ? mins(e.end) : s + 120]; };
-  const timed = (e) => !!(e.day && e.start && e.group !== 'exec');
+  const timed = (e) => !!(e.day && e.start && e.group !== 'exec') && onEvenings(e);
   const cmp = (a, b) => (a.start || a.sortAt ? mins(a.start || a.sortAt) : 9999) - (b.start || b.sortAt ? mins(b.start || b.sortAt) : 9999) || a.host.localeCompare(b.host);
 
   function passes(e) {
@@ -616,7 +618,7 @@
   function renderList() {
     const root = $('#events-list');
     root.textContent = '';
-    const evs = D.events.filter(e => !e.featured && passes(e));
+    const evs = D.events.filter(e => onEvenings(e) && !e.featured && passes(e));
     const busy = busiestDay();
     let any = false;
     D.eventDays.forEach(d => {
@@ -705,11 +707,11 @@
   }
 
   function renderFeatured() {
-    const list = featuredEvents();
+    const list = featuredEvents().filter(onEvenings);
     const root = $('#featured-event');
     root.textContent = '';
     if (!list.length) return;
-    root.append(h('div', { class: 'featured-row' + (list.length > 1 ? ' multi' : '') + (list.length > 2 ? ' multi-3' : '') }, list.map(featuredCard)));
+    root.append(h('div', { class: 'featured-row' + (list.length > 1 ? ' multi' : '') + (list.length === 3 ? ' multi-3' : '') }, list.map(featuredCard)));
   }
 
   /* ----- controls ----- */
@@ -1055,6 +1057,9 @@
       if (host) host.rows.push(row);
       else blocks.push({ kind: 'row', rank: 0, key: row.time, t: parseTimes(row.time), rows: [row] });
     });
+    // a daytime partner event (tab "days") sits in its day at its own time, just after a session slot that starts at the same time
+    D.events.filter(e => e.tab === 'days' && e.day === d.date && e.start).forEach(e =>
+      blocks.push({ kind: 'ptn', rank: 1.5, key: e.id, t: { start: mins(e.start), end: e.end ? mins(e.end) : null }, event: e }));
     blocks.push({ kind: 'eve', rank: 2, t: { start: 17 * 60, end: null }, text: d.evening });
     return blocks.sort((x, y) => x.t.start - y.t.start || x.rank - y.rank);
   }
@@ -1065,6 +1070,22 @@
     r.who ? h('small', {}, r.who) : null,
     r.note ? h('small', {}, r.note) : null);
 
+  // A daytime partner event (tab "days") as a healthcare card in its day's plan, with the registration button and the host contact
+  function partnerEl(e) {
+    const rsvp = regButton(e, 'btn primary sm');
+    const cn = contactNote(e);
+    return h('div', { class: 'slot' },
+      h('div', { class: 'options' },
+        h('div', { class: 'pick hls' },
+          h('span', { class: 'pick-badge' }, e.dayBadge || e.kind),
+          h('b', { class: 'pick-title' }, e.heading || `${e.host} ${e.title}`),
+          whereEl({ where: e.venue }),
+          h('small', { class: 'pick-meta' }, [`Hosted by ${e.host}`, e.limit, D.accessLabels[e.access]].filter(Boolean).join(' · ')),
+          h('p', { class: 'pick-why' }, e.blurb || e.summary),
+          rsvp ? h('div', { class: 'pick-actions' }, rsvp) : null,
+          e.regNote || cn ? h('p', { class: 'pick-note' }, e.regNote, cn) : null)));
+  }
+
   function blockEl(b) {
     const eve = b.kind === 'eve';
     return h('li', { class: `tb tb-${b.kind}` },
@@ -1074,6 +1095,7 @@
         b.kind === 'rec' && b.slot.options.length > 1 ? h('span', { class: 'slot-hint' }, 'Choose one') : null),
       h('div', { class: 'tb-body' },
         b.kind === 'rec' ? slotEl(b.slot) : null,
+        b.kind === 'ptn' ? partnerEl(b.event) : null,
         b.kind === 'rec' && b.rows.length
           ? h('div', { class: 'tb-extra' }, h('span', { class: 'tb-extra-h' }, 'Also on the official agenda'), b.rows.map(rowEl)) : null,
         b.kind === 'row' ? b.rows.map(rowEl) : null,
