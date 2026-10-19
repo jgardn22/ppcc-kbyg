@@ -106,6 +106,7 @@
     H = H % 12 || 12;
     return `${H}:${String(M).padStart(2, '0')} ${ap}`;
   };
+  const timeRange = (e) => e.end ? `${fmtTime(e.start)} to ${fmtTime(e.end)}` : fmtTime(e.start);
   const mins = (t) => { const [H, M] = t.split(':').map(Number); return H * 60 + M; };
   const fmtMins = (m) => fmtTime(`${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`);
   const dayLabel = (iso) => (D.eventDays.find(d => d.date === iso) || {}).label || fmtDate(iso);
@@ -374,16 +375,16 @@
     const hi = $('#highlights');
     evs.forEach((e, i) => hi.append(
       h('article', { class: 'feature feature-eve', id: 'feature-' + e.id },
-        h('span', { class: 'kicker' }, `${dayLabel(e.day)} night`),
+        h('span', { class: 'kicker' }, `${dayLabel(e.day)} ${e.dayPart || 'night'}`),
         h('h3', {}, e.heading || `${e.host} ${e.title}`),
         h('div', { class: 'meta' },
-          h('span', { class: 'chip' }, `${fmtTime(e.start)} to ${fmtTime(e.end)}`),
+          h('span', { class: 'chip' }, timeRange(e)),
           h('span', { class: 'chip' }, e.venue),
           e.limit ? h('span', { class: 'chip' }, e.limit) : null),
         e.blurb ? h('p', {}, e.blurb) : null,
         h('div', { class: 'feature-links' },
-          // events without a registration link point to their map instead
-          regButton(e, 'btn primary sm') || (e.tipMap ? h('a', { class: 'btn ghost sm', href: '#ground/map-' + e.tipMap }, (e.tipMapLabel || 'See it on the map').replace(/\.$/, '')) : null),
+          // events without a registration link point to their map, or to their card on Evening Events
+          regButton(e, 'btn primary sm') || (e.tipMap ? h('a', { class: 'btn ghost sm', href: '#ground/map-' + e.tipMap }, (e.tipMapLabel || 'See it on the map').replace(/\.$/, '')) : h('a', { class: 'btn ghost sm', href: '#evenings' }, 'See the details')),
           i === evs.length - 1 ? h('a', { class: 'textlink', href: '#evenings' }, 'All evening events') : null))));
     hi.classList.toggle('split-3', evs.length === 2);
     hi.classList.toggle('split-4', evs.length > 2);
@@ -588,13 +589,13 @@
 
   function evRow(e) {
     const cn = contactNote(e);
-    const accessText = e.access === 'badge' ? D.accessLabels.badge : e.access === 'open' ? D.accessLabels.open : (e.reg ? D.accessLabels.register : null);
+    const accessText = e.access === 'badge' ? D.accessLabels.badge : e.access === 'open' ? D.accessLabels.open : e.access === 'app' ? D.accessLabels.app : (e.reg ? D.accessLabels.register : null);
     return h('article', { class: 'ev', id: 'ev-' + e.id },
       h('div', { class: 'ev-time' }, timeBlock(e)),
       h('div', { class: 'ev-main' },
         h('div', { class: 'ev-tags' }, tagEl(e.audience), accessText ? h('span', { class: 'tag tbd' }, accessText) : null),
         h('h4', {}, e.title),
-        h('p', { class: 'ev-host' }, 'Hosted by ', extLink(e.host, e.hostUrl)),
+        h('p', { class: 'ev-host' }, e.hostNote || ['Hosted by ', extLink(e.host, e.hostUrl)]),
         h('div', { class: 'ev-meta' }, h('span', {}, e.venue), h('span', {}, e.kind), e.duration ? h('span', {}, e.duration) : null),
         h('p', { class: 'ev-sum' }, e.summary),
         e.regNote || cn ? h('p', { class: 'ev-note' }, e.regNote, cn) : null,
@@ -685,11 +686,11 @@
     const big = `${hh % 12 || 12}${mm ? ':' + String(mm).padStart(2, '0') : ''}`;
     return h('article', { class: 'featured', id: 'ev-' + e.id },
       h('div', { class: 'featured-body' },
-        h('div', { class: 'featured-kick' }, tagEl(e.audience), h('span', {}, `Featured ${dayLabel(e.day)} night`)),
+        h('div', { class: 'featured-kick' }, tagEl(e.audience), h('span', {}, `Featured ${dayLabel(e.day)} ${e.dayPart || 'night'}`)),
         h('h3', {}, e.heading || `${e.host} ${e.title}`),
-        h('p', { class: 'hostline' }, 'Hosted by ', extLink(e.host, e.hostUrl)),
+        h('p', { class: 'hostline' }, e.hostNote || ['Hosted by ', extLink(e.host, e.hostUrl)]),
         h('div', { class: 'kv' },
-          h('span', {}, icon('clock', 16), `${fmtDate(e.day)} · ${fmtTime(e.start)} to ${fmtTime(e.end)}`),
+          h('span', {}, icon('clock', 16), `${fmtDate(e.day)} · ${timeRange(e)}`),
           h('span', {}, icon('pin', 16), e.venue),
           e.limit ? h('span', {}, icon('users', 16), e.limit) : null),
         h('p', {}, e.summary),
@@ -699,7 +700,7 @@
       h('div', { class: 'featured-time', 'aria-hidden': 'true' },
         h('span', { class: 'ft-day' }, fmtDate(e.day)),
         h('span', { class: 'ft-big' }, big, h('small', {}, hh >= 12 ? 'PM' : 'AM')),
-        h('span', { class: 'ft-end' }, `to ${fmtTime(e.end)}`),
+        h('span', { class: 'ft-end' }, e.end ? `to ${fmtTime(e.end)}` : (e.endNote || '')),
         h('span', { class: 'ft-cap' }, 'Pacific time')));
   }
 
@@ -708,7 +709,14 @@
     const root = $('#featured-event');
     root.textContent = '';
     if (!list.length) return;
-    root.append(h('div', { class: 'featured-row' + (list.length > 1 ? ' multi' : '') + (list.length > 2 ? ' multi-3' : '') }, list.map(featuredCard)));
+    // a card with "under" joins the column of the card it names and sits directly below it
+    const cols = list.filter(e => !e.under).map(e => [e]);
+    list.filter(e => e.under).forEach(e => {
+      const col = cols.find(c => c[0].id === e.under);
+      if (col) col.push(e); else cols.push([e]);
+    });
+    root.append(h('div', { class: 'featured-row' + (cols.length > 1 ? ' multi' : '') + (cols.length > 2 ? ' multi-3' : '') + (cols.some(c => c.length > 1) ? ' has-stacks' : '') },
+      cols.map(c => c.length > 1 ? h('div', { class: 'featured-stack' }, c.map(featuredCard)) : featuredCard(c[0]))));
   }
 
   /* ----- controls ----- */
@@ -886,7 +894,7 @@
     const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//PPCC 2026 Know Before You Go//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:PPCC 2026 evenings'];
     items.forEach(e => {
       const end = e.end || addMin(e.start, 120);
-      const note = e.audience === 'official' ? 'Details can change. Check the Whova app for the latest.' : 'Partner event details can change. Confirm with the host.';
+      const note = e.audience === 'official' || e.access === 'app' ? 'Details can change. Check the Whova app for the latest.' : 'Partner event details can change. Confirm with the host.';
       const desc = [e.summary, e.reg && e.reg.url ? 'Register: ' + e.reg.url : null, e.endNote ? e.endNote + '.' : null, note].filter(Boolean).join('\n');
       lines.push('BEGIN:VEVENT', `UID:${e.id}@ppcc26-kbyg`, `DTSTAMP:${now}`, `DTSTART:${stamp(e.day, e.start)}`, `DTEND:${stamp(e.day, end)}`,
         `SUMMARY:${icsText(e.host + ': ' + e.title)}`, `LOCATION:${icsText(e.address ? e.venue + ', ' + e.address : e.venue + (/MGM Grand/.test(e.venue) ? ', Las Vegas' : ', MGM Grand area, Las Vegas'))}`, `DESCRIPTION:${icsText(desc)}`, 'END:VEVENT');

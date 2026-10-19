@@ -5,7 +5,7 @@
    Times are Pacific (Las Vegas). Dates are ISO (YYYY-MM-DD).
    ============================================================ */
 window.KBYG = {
-  updated: "2026-10-16",
+  updated: "2026-10-19",
 
   conference: {
     name: "Power Platform Community Conference",
@@ -165,7 +165,7 @@ window.KBYG = {
   /* ---------- 3 Perfect Days ----------
      picks:   one entry per time slot. options are shown together as cards, best choice first; two options in a slot appear
               side by side so people can choose. alts are the collapsible "Also at this time" list.
-              kind: "key" keynote or headliner, "hls" healthcare session, "rec" recommended session. badge: "Top Pick" for the
+              kind: "key" main-stage keynote or talk, or headliner, "hls" healthcare session, "rec" recommended session. badge: "Top Pick" for the
               first choice, "Top Alternative" for the second. note is an optional tip.
               Room, time, level and format come from the official session list. App.js works out the floor from the room number.
               Where it is: a card or row shows its room (checked against the official list, with the floor added by app.js) or, when
@@ -178,7 +178,7 @@ window.KBYG = {
   days: [
     {
       id: "tue", date: "2026-10-27", label: "Tuesday", short: "Oct 27", n: 1, theme: "Learn",
-      line: "The big announcements land first thing, then the Copilot Studio and Power Apps keynotes.",
+      line: "The big announcements land first thing, then the Copilot Studio and Power Apps product talks.",
       picks: [
         { time: "8:30 to 10:00 AM",
           options: [
@@ -194,14 +194,14 @@ window.KBYG = {
               title: "Roundtable: Apps, Agents & AI: Strategy at Scale", room: "Premier Ballroom 318", format: "Roundtable", level: "Intermediate",
               why: "How do you go from a handful of successful apps and agents to enterprise-wide adoption without a large center of excellence? This interactive roundtable compares what is working on governance guardrails, maker enablement and measuring ROI on agents that reach production. It is a discussion, not a lecture, and you leave with a checklist of guardrails to set before you scale.",
               tags: ["Copilot Studio", "Governance", "Makers and adoption"] },
-            { kind: "key", badge: "Keynote",
-              title: "Product Talk: What’s Next in Microsoft Fabric & Power BI: The Data Foundation for AI", room: "MGM Grand Garden Arena", format: "Keynote",
+            { kind: "key", badge: "Product Talk",
+              title: "Product Talk: What’s Next in Microsoft Fabric & Power BI: The Data Foundation for AI", room: "MGM Grand Garden Arena", format: "Product Talk", level: "Intermediate",
               why: "Kim Manis, CVP of Product for Microsoft Fabric, on how Fabric, OneLake and Power BI give agents a trusted data foundation.",
               note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes." }
           ],
           alts: [
-            { title: "Beyond the CRM Screen: Headless CRM in the Age of Copilot", room: "Premier Ballroom 311", time: "11:45 AM to 12:45 PM", format: "Session",
-              note: "Dynamics 365 as the platform behind agents and Copilot, following one customer journey from frontline staff to compliance reviewers. The example is a bank, and the same pattern applies to member and patient service. It starts at 11:45 AM and runs 15 minutes into lunch." },
+            { title: "Beyond theLAKE", room: "Premier Ballroom 311", time: "11:45 AM to 12:45 PM", format: "Session",
+              note: "Formerly titled Beyond the CRM Screen: Headless CRM in the Age of Copilot. Dynamics 365 as the platform behind agents and Copilot, following one customer journey from frontline staff to compliance reviewers. The example is a bank, and the same pattern applies to member and patient service. It starts at 11:45 AM and runs 15 minutes into lunch." },
             { title: "Getting Started with Agent 365", room: "Premier Ballroom 319", format: "Session", level: "Foundational",
               note: "Core concepts, deployment, governance, security and adoption for agents across your organization." },
             { title: "Work, Reimagined: Copilot, Cowork & the Power Platform", room: "Boulevard Ballroom 163", format: "Session", level: "Intermediate",
@@ -209,8 +209,8 @@ window.KBYG = {
           ] },
         { time: "2:00 to 3:00 PM",
           options: [
-            { kind: "key", badge: "Keynote",
-              title: "Product Talk: What’s New with Copilot Studio", room: "MGM Grand Garden Arena", format: "Keynote",
+            { kind: "key", badge: "Product Talk",
+              title: "Product Talk: What’s New with Copilot Studio", room: "MGM Grand Garden Arena", format: "Product Talk",
               why: "Bryan Goode and Jason Moore on what is new and next in Copilot Studio, with demos of building agents, connecting them to business processes and data, and moving from experiments to real impact.",
               note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
               tags: ["Copilot Studio", "Roadmap"] },
@@ -234,8 +234,8 @@ window.KBYG = {
           ] },
         { time: "4:00 to 5:00 PM",
           options: [
-            { kind: "key", badge: "Keynote",
-              title: "Product Talk: What’s New with Power Apps", room: "MGM Grand Garden Arena", format: "Keynote",
+            { kind: "key", badge: "Product Talk",
+              title: "Product Talk: What’s New with Power Apps", room: "MGM Grand Garden Arena", format: "Product Talk",
               why: "Leon Welicki and Tiffany Treacy on what is new in Power Apps and how makers turn ideas into intelligent, enterprise-ready apps faster.",
               note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
               tags: ["Power Apps", "Roadmap"] },
@@ -273,8 +273,8 @@ window.KBYG = {
               title: "Reimagine Healthcare and Life Sciences with Low Code & AI Agents", room: "Room 353", format: "Roundtable", level: "Foundational",
               why: "The one session built for healthcare and life sciences. Innovators from across the industry share how low code and agents are cutting friction and improving health outcomes, with audience Q&A. Arrive early; it is often standing room only.",
               tags: ["Healthcare", "Customer stories"] },
-            { kind: "key", badge: "Keynote",
-              title: "Innovation Session: Building End-to-End Agents with Copilot Studio", room: "MGM Grand Garden Arena", format: "Keynote",
+            { kind: "key", badge: "Innovation Talk",
+              title: "Innovation Session: Building End-to-End Agents with Copilot Studio", room: "MGM Grand Garden Arena", format: "Innovation Talk",
               why: "Jason Moore and Soufiane Loukili take an agent from design to production, with live demos of grounding it in business data, then testing, monitoring and running it securely at enterprise scale.",
               note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
               tags: ["Copilot Studio", "Agents"] }
@@ -291,15 +291,15 @@ window.KBYG = {
           ] },
         { time: "10:00 to 11:00 AM",
           options: [
-            { kind: "key", badge: "Keynote",
-              title: "Innovation Session: The Future of Agentic Apps", room: "MGM Grand Garden Arena", format: "Keynote",
+            { kind: "key", badge: "Innovation Talk",
+              title: "Innovation Session: The Future of Agentic Apps", room: "MGM Grand Garden Arena", format: "Innovation Talk",
               why: "Clay Wesener and Emma Cooper show three live demos of building agentic apps with Power Apps, plus practical patterns for bringing that intelligence into the apps your organization already relies on.",
               note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
               tags: ["Power Apps", "Agents"] },
             { kind: "rec", badge: "Top Alternative",
-              title: "Microsoft Copilot Managed Runtime: AI-Powered Development with Built-In Governance", room: "Boulevard Ballroom 163", format: "Session", level: "Intermediate",
-              why: "Build internal business apps with AI-assisted development and Git-based workflows, with Microsoft Entra sign-in, 1,400+ connectors, Work IQ and Cowork built in. IT gets governance, usage analytics and policy enforcement in the admin center.",
-              tags: ["Power Apps", "Cowork", "Governance"] }
+              title: "Managed Apps Built with Cowork, Copilot Studio and the SDK", room: "Grand Ballroom 119", format: "Session", level: "Advanced",
+              why: "How to build task-focused, AI-powered business apps that go beyond chat, and when to use Cowork, Copilot Studio or the SDK. Covers architecture choices, governance, security, licensing and the maker and developer experience, with practical examples and demos.",
+              tags: ["Copilot Studio", "Cowork", "Governance"] }
           ],
           alts: [
             { title: "AI Agents Meet Dataverse: Building Intelligent Automations with Microsoft Agent Framework", room: "Grand Ballroom 114", format: "Session", level: "Advanced",
@@ -363,8 +363,8 @@ window.KBYG = {
           alts: [
             { title: "How Production GenAI Agents Get Built, Deployed, Funded & Cost-Optimized", room: "Chairman’s Ballroom 368", format: "Session", level: "Foundational",
               note: "Skips the polished demo. Teams from EY, PwC, RSM and Accenture show how real agents get specified, built, tested, deployed and funded, and how to keep costs down." },
-            { title: "Managed Apps Built with Cowork, Copilot Studio and the SDK", room: "Premier Ballroom 310", format: "Session", level: "Advanced",
-              note: "How managed apps get built with Cowork, Copilot Studio and the SDK, including architecture, governance and licensing choices." },
+            { title: "Why Enterprise Agents Fail; and the Microsoft IQ Answer", room: "Premier Ballroom 310", format: "Session", level: "Foundational",
+              note: "Why enterprise agents fail in production, and how Dataverse, Microsoft IQ and Agent 365 supply the business context, organizational awareness and governance guardrails they lack." },
             { title: "From Agent Pilots to Business Value: Proving ROI at Scale", room: "Room 352", format: "Roundtable", level: "Foundational",
               note: "The Power CAT team shares patterns for measuring the business impact of agents, from pilots to scaled deployments." }
           ] }
@@ -442,7 +442,7 @@ window.KBYG = {
         { time: "2:30 to 3:30 PM",
           options: [
             { kind: "rec", badge: "Top Pick",
-              title: "Copilot credits at scale: governing consumption, empowering everyone", room: "Chairman’s Ballroom 368", format: "Session", level: "Intermediate",
+              title: "Copilot Credits at Scale: Governing Consumption, Empowering Everyone", room: "Chairman’s Ballroom 368", format: "Session", level: "Intermediate",
               why: "Credits are now a line item. Admins, CoE leads and business owners compare how they budget, monitor and allocate Copilot credits while still empowering everyone to use agents.",
               tags: ["Cost and ROI", "Governance", "Copilot Studio"] },
             { kind: "rec", badge: "Top Alternative",
@@ -497,10 +497,14 @@ window.KBYG = {
 
   /* ---------- Evening events ----------
      audience: hls | open | exec | official | tbd
-     access:   register | ask | badge | open
+     access:   register | ask | badge | open | app (joined through the Whova app)
      ask:      for "ask" events: { partner, label?, action?, subject?, sentence? } emails partners[partner].
                An "ask" event with no partner (and no ask.to) shows no request button.
      Healthcare & Life Sciences events and industry-agnostic events only.
+     featured: true makes the event a big card on Evening Events and a highlight on Start Here.
+     under:    the id of another featured event. The card joins that card's column and sits directly below it.
+     dayPart:  "lunch" changes "night" in a featured card's label. hostNote replaces "Hosted by" when there is no host site.
+     endNote:  shown where the end time would be when none is posted (a missing end time counts as two hours for the plan and overlaps).
      ------------------------------------------------------------ */
   audiences: {
     hls:      "Healthcare & Life Sciences",
@@ -513,7 +517,8 @@ window.KBYG = {
     register: "Registration required",
     ask:      "Email the host to request an invitation",
     badge:    "Included with your badge",
-    open:     "Open: just show up"
+    open:     "Open: just show up",
+    app:      "Join in the Whova app"
   },
   eventDays: [
     { date: "2026-10-26", label: "Monday",    short: "Mon", n: "Oct 26" },
@@ -533,6 +538,17 @@ window.KBYG = {
       reg: { url: "https://hummingbirdworks.ai/events/hummingbird-hls-happy-hour-ppcc", label: "Request to attend" },
       regNote: "Hummingbird confirms your request by email, then sends the calendar invite and full details once approved.",
       tip: "Losers Bar is one of the first spots you see as you walk out of the conference at the MGM Grand." },
+
+    /* From the Whova app, Community tab, Meet-up Details (read Oct 19): Tue Oct 27 at 6:30 PM local time at the MGM Grand, bar or lounge still to be announced.
+       No host company, end time or description is posted, so none is shown. It sits under the Brooksource card on Evening Events (under). */
+    { id: "hls-meetup", featured: true, under: "brooksource-wed", day: "2026-10-27", start: "18:30", end: null, endNote: "End time not posted",
+      heading: "Healthcare Networking & Ideas Exchange",
+      title: "Healthcare Networking & Ideas Exchange", host: "Whova meet-up", hostNote: "Posted in the Community tab of the Whova app",
+      venue: "MGM Grand, bar or lounge to be announced", kind: "Networking meet-up", audience: "hls", access: "app",
+      blurb: "A healthcare networking and ideas exchange posted as a meet-up in the Whova app. The exact bar or lounge is still to be announced, so check the app before you go.",
+      summary: "A healthcare networking and ideas exchange at the MGM Grand, posted as a meet-up in the Whova app. The exact bar or lounge is still to be announced.",
+      tip: "To find it, open the Whova app, go to the Community tab and look for Meet-up Details. Check there for the bar or lounge once it is announced.",
+      regNote: "Join through the Whova app." },
 
     { id: "brooksource", day: "2026-10-27", start: "17:00", end: "19:30",
       title: "Brooksource & Microsoft at Craftsteak", host: "Brooksource", hostUrl: "https://www.brooksource.com",
@@ -605,12 +621,19 @@ window.KBYG = {
              body: "Hi Annie - I have a question about the Lobby Bar Social Reception with Brooksource on Wednesday, Oct 28.\n\nThanks.\n" },
       regNote: "Please RSVP so Brooksource can plan. Space is limited to 30 guests." },
 
-    { id: "quisitive-hls", day: "2026-10-28", start: "11:30", end: "13:30",
-      title: "Healthcare & Life Sciences Lunch", host: "Quisitive", hostUrl: "https://quisitive.com",
-      venue: "Quisitive suite", kind: "Lunch", audience: "hls", access: "ask",
-      summary: "A catered, healthcare-focused lunch hosted with Microsoft in the Quisitive suite. Come and go during the window, and take a quiet break from the crowds.",
-      ask: { partner: "quisitive" },
-      regNote: "Space is limited." },
+    /* Quisitive's page and its account executive (Oct 19): Wed Oct 28, 11:30 AM to 1:30 PM at the SKYLOFTS at MGM Grand, a small group of healthcare peers, space limited.
+       The page gives no seat count and no directions to the SKYLOFTS, so none are shown. Its form asks for first and last name, email, company and dietary needs. */
+    { id: "quisitive-hls", featured: true, under: "hummingbird-hls", dayPart: "lunch", day: "2026-10-28", start: "11:30", end: "13:30",
+      title: "Healthcare Lunch", host: "Quisitive", hostUrl: "https://quisitive.com",
+      venue: "SKYLOFTS at MGM Grand", address: "3799 S Las Vegas Blvd, Las Vegas, NV 89109", kind: "Lunch", audience: "hls", access: "register",
+      limit: "Limited space",
+      blurb: "Pull up a seat with your healthcare peers for lunch and conversation at the SKYLOFTS at MGM Grand, hosted by Quisitive. It is a small group, and space is limited.",
+      summary: "Quisitive hosts a small group of healthcare peers for lunch and conversation at the SKYLOFTS at MGM Grand, away from the conference floor. Expect an informal talk about the priorities shaping healthcare, from AI and automation to data, digital transformation and connected experiences. Quisitive says it is aimed at healthcare decision makers.",
+      reg: { url: "https://info.quisitive.com/ppcc-healthcare-lunch/", label: "RSVP" },
+      ask: { partner: "quisitive", action: "ask a question",
+             subject: "PPCC 2026: question about the Quisitive Healthcare Lunch (Oct 28)",
+             body: "Hi Avi - I have a question about the Healthcare Lunch with Quisitive on Wednesday, Oct 28.\n\nThanks.\n" },
+      regNote: "Please RSVP, because space is limited. The form asks for your name, email, company and any dietary needs." },
 
     { id: "root16-lounge", day: "2026-10-28", start: "09:00", end: "16:00",
       title: "Hospitality Lounge at Emeril’s", host: "Root16 (a Reply company)", hostUrl: "https://www.reply.com/root16-reply/en",

@@ -357,6 +357,10 @@ h1 em { font-style: normal; color: var(--teal); }
   .featured-row.multi-3 .featured-time { padding: 16px 26px; }
 }
 
+/* a featured card with "under" shares a column with the card above it. Cards keep their own height, so a short column ends early */
+.featured-stack { display: grid; gap: inherit; align-content: start; }
+.featured-row.has-stacks > .featured { align-self: start; }
+
 .events-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 44px; padding-block: 26px 36px; align-items: start; }
 .controls { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; padding: 10px 0 6px; }
 .chipgroup { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
