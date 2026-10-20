@@ -5,7 +5,7 @@
    Times are Pacific (Las Vegas). Dates are ISO (YYYY-MM-DD).
    ============================================================ */
 window.KBYG = {
-  updated: "2026-10-19",
+  updated: "2026-10-20",
 
   conference: {
     name: "Power Platform Community Conference",
@@ -228,9 +228,7 @@ window.KBYG = {
             { title: "Governing Agents at Scale", room: "Premier Ballroom 318", format: "Roundtable", level: "Intermediate",
               note: "How governance and admin duties should span the Power Platform admin center and Agent 365, and how agent centers of excellence partner with IT and security." },
             { title: "Demystifying Copilot Studio Licensing", room: "Grand Ballroom 116", format: "Session", level: "Foundational",
-              note: "License types, where they overlap and how to save on cost without breaking the rules." },
-            { title: "Building on Power Platform: Choosing the Right Tool for the Job", room: "Premier Ballroom 316", format: "Session", level: "Intermediate",
-              note: "A practical guide to choosing the right tool, from Code Apps and Generative Pages to vibe apps, and moving between AI-assisted creation and pro-code precision." }
+              note: "License types, where they overlap and how to save on cost without breaking the rules." }
           ] },
         { time: "4:00 to 5:00 PM",
           options: [
@@ -311,11 +309,10 @@ window.KBYG = {
           ] },
         { time: "11:30 AM to 12:30 PM",
           options: [
-            { kind: "key", badge: "Featured session",
-              title: "From Work IQ to Agent 365: Building and Managing the Agentic Enterprise", format: "Session",
-              why: "Nirav Shah, who leads Agent 365 and Agent Cloud, on how Work IQ and Agent 365 fit together for building and managing the agentic enterprise.",
-              where: "Check Whova for the room",
-              note: "It is on the official agenda but not in the session list yet.",
+            { kind: "key", badge: "Innovation Talk",
+              title: "Innovation Session: Transforming the way your business operates: Agents, Data, Work IQ, and Agent 365", room: "MGM Grand Garden Arena", format: "Innovation Talk",
+              why: "Nirav Shah, who leads Agent 365 and Agent Cloud, lays out the operating model of a Frontier Firm. It starts with Dataverse and Power Platform, then adds Work IQ for business context, Copilot Studio for building agents and Agent 365 for visibility and control. You see agents take the next approved step in a real business process, live, with governance built in.",
+              note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
               tags: ["Agent 365", "Work IQ"] },
             { kind: "rec", badge: "Top Alternative",
               title: "Power Apps + Power Automate: Best Practices for Building Production-Ready Solutions", room: "Boulevard Ballroom 163", format: "Session", level: "Advanced",
@@ -455,6 +452,8 @@ window.KBYG = {
               note: "When should people work in an app, talk to an agent or use both? Covers generative pages, embedded copilots and human-in-the-loop workflows, and you can bring your own scenarios." },
             { title: "Beyond Time Savings: Rethinking ROI and Value for Persistent AI Agents", room: "Room 353", format: "Roundtable", level: "Foundational",
               note: "A roundtable on judging the value of always-on AI agents beyond hours saved, including better decisions, scaled expertise and consumption costs." },
+            { title: "Building on Power Platform: Choosing the Right Tool for the Job", room: "Boulevard Ballroom 163", format: "Session", level: "Intermediate",
+              note: "A practical guide to choosing the right tool, from Code Apps and Generative Pages to vibe apps, and moving between AI-assisted creation and pro-code precision." },
             { title: "Governance of All Your Agents at Scale", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
               note: "Agent 365 governance from admin-led to autonomous: the signals that keep agent risk, approvals, usage, cost and health under control." },
             { title: "Extending Copilot Cowork with Custom Plugins and Workflows with Real-World Customer Use Cases", room: "Premier Ballroom 316", format: "Session", level: "Advanced",
@@ -591,6 +590,17 @@ window.KBYG = {
       summary: "A relaxed client reception for PPCC customers, prospects and Microsoft teams.",
       ask: { partner: "alithya" },
       regNote: "No public link yet." },
+
+    /* HCLTech's own registration form (Microsoft Forms, read Oct 20): "HCLTech presents an exclusive evening to unwind and network", Tue Oct 27, 6.30 - 8.30 PM,
+       Topgolf Las Vegas, 4627 Koval Lane. The form says "Inside MGM Grand"; Topgolf's own page gives the Koval Lane address and the guide calls Topgolf next to MGM Grand elsewhere,
+       so the address and "next to" are used. The form asks for full name, company, job title, work email and contact number (all required).
+       The sponsors page lists HCLTech at Booth #109. No audience, food, limit or Microsoft involvement is stated, so none is shown. */
+    { id: "hcltech", day: "2026-10-27", start: "18:30", end: "20:30",
+      title: "An Exclusive Evening to Unwind and Network", host: "HCLTech", hostUrl: "https://www.hcltech.com/events/microsoft-power-platform",
+      venue: "Topgolf Las Vegas, next to MGM Grand", address: "4627 Koval Lane, Las Vegas, NV 89109", kind: "Networking", audience: "open", access: "register",
+      summary: "HCLTech hosts an evening to unwind and network at Topgolf Las Vegas, 4627 Koval Lane, next to the MGM Grand. HCLTech is also exhibiting at Booth #109.",
+      reg: { url: "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=N-edGDrJWk-LaG9MqZQZEr7hnDANKhtNhnUFiDlC195URUFTQlNIV1FTTjVGTlc2QVA1Qk1KRTFBUi4u", label: "Register" },
+      regNote: "HCLTech’s form asks for your full name, company, job title, work email and contact number, and all five are required." },
 
     { id: "engineerup-tue", day: "2026-10-27", start: "18:00", end: "20:00",
       title: "Customer Dinner at Craftsteak", host: "Engineer Up", hostUrl: "https://www.engineerup.com",
