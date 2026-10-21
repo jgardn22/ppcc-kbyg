@@ -721,6 +721,16 @@ window.KBYG = {
       tipMap: "walkway", tipMapLabel: "See the walk to the arena.",
       regNote: "Included with a full conference pass. Your PPCC badge is required for entry, guests and plus-ones are not allowed, and security will be tightly monitored." },
 
+    /* ---- Monday: official evening activity ---- */
+    /* Official PPCC build-a-thon. Sources: the Whova app listing and the Oct 20 conference team briefing (6:30 to 9:30 PM, doors open at 6:00 PM, bring a solution you
+       want to build and get help from experts, with a DJ, games, prizes and food). The room is posted in the Whova app only, so none is shown here. */
+    { id: "buildathon", day: "2026-10-26", start: "18:30", end: "21:30",
+      title: "Feel the Power Build-a-thon", host: "Power Platform Community Conference", hostUrl: "https://powerplatformconf.com",
+      venue: "Posted in the Whova app", kind: "Build-a-thon", audience: "official", access: "app",
+      summary: "An official Monday evening build-a-thon. Bring a solution you want to build and get hands-on help from experts, with a DJ, games, prizes and food. Doors open at 6:00 PM.",
+      tip: "Find it in the Whova app and add it to your agenda. Monday badge pickup runs until 5:00 PM, so you can collect your badge before the doors open.",
+      regNote: "Find it in the Whova app and add it to your agenda." },
+
     /* ---- Monday: hosted dinners ---- */
     { id: "root16-dinner-mon", day: "2026-10-26", start: "19:00", end: "21:00",
       title: "Hosted Customer Dinner", host: "Root16 (a Reply company)", hostUrl: "https://www.reply.com/root16-reply/en",
