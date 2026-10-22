@@ -5,7 +5,7 @@
    Times are Pacific (Las Vegas). Dates are ISO (YYYY-MM-DD).
    ============================================================ */
 window.KBYG = {
-  updated: "2026-10-21",
+  updated: "2026-10-22",
 
   conference: {
     name: "Power Platform Community Conference",
@@ -135,7 +135,7 @@ window.KBYG = {
       detail: "Most partner events need advance registration and fill quickly. Many check names at the door. It is fine to register for more than one.", action: "tab:evenings" },
 
     { id: "badge", group: "pack", title: "Plan an early badge pickup",
-      detail: "Check-in is on the first floor of the MGM Grand Conference Center. Picking up your badge on Monday (7:30 AM to 5:00 PM) keeps Tuesday morning simple. You need your badge to enter the Opening Keynote.", action: ["tab:ground", "maps"] },
+      detail: "Check-in is in the Grand Pre-Function on the first floor of the MGM Grand Conference Center. Picking up your badge on Monday (7:30 AM to 5:00 PM) keeps Tuesday morning simple. You need your badge to enter the Opening Keynote.", action: ["tab:ground", "maps"] },
 
     { id: "shoes", group: "pack", title: "Pack comfortable shoes and layers",
       detail: "Expect 10,000+ steps a day. The casino and session rooms run cold, so bring something light you can take on and off." },
@@ -150,7 +150,7 @@ window.KBYG = {
     { day: "Monday, Oct 26",     date: "2026-10-26", hours: "7:30 AM to 5:00 PM", tip: "Best day to pick up" },
     { day: "Tuesday, Oct 27",    date: "2026-10-27", hours: "6:30 AM to 5:00 PM", tip: "Keynote rush" },
     { day: "Wednesday, Oct 28",  date: "2026-10-28", hours: "7:00 AM to 4:00 PM" },
-    { day: "Thursday, Oct 29",   date: "2026-10-29", hours: "7:00 AM to 4:00 PM" }
+    { day: "Thursday, Oct 29",   date: "2026-10-29", hours: "7:30 AM to 4:00 PM" }
   ],
 
   /* ---------- 3 Perfect Days: Whova call to action (top of the tab, under the Picks are live badge) ---------- */
@@ -222,9 +222,8 @@ window.KBYG = {
           alts: [
             { title: "Your Processes, Now Intelligent: Process Mining and Optimization", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
               note: "Process mining and process intelligence show how work really happens, so you can find the biggest improvement opportunities and build a base for smarter automation and AI. Includes practical scenarios, lessons learned and where Process Intelligence in Power Platform is headed." },
-            { title: "Don’t Start Over: Move Copilot Studio Agents to the GitHub Copilot Harness",
-              where: "Check Whova for the room",
-              note: "For teams that already built agents in Copilot Studio: how to move them to the GitHub Copilot harness instead of starting over. It is not on the public session list yet, so check the Whova app for the level and the latest details." },
+            { title: "Don’t Start Over: Move Copilot Studio Agents to the GitHub Copilot Harness", room: "Microsoft Theater, Expo Hall", time: "2:00 to 2:25 PM",
+              note: "A 25-minute talk for teams that already built agents in Copilot Studio: how to move them to the GitHub Copilot harness instead of starting over. It is in the Expo Hall theater and is not on the public session list, so check the Whova app for the latest details." },
             { title: "Governing Agents at Scale", room: "Premier Ballroom 318", format: "Roundtable", level: "Intermediate",
               note: "How governance and admin duties should span the Power Platform admin center and Agent 365, and how agent centers of excellence partner with IT and security." },
             { title: "Demystifying Copilot Studio Licensing", room: "Grand Ballroom 116", format: "Session", level: "Foundational",
@@ -252,12 +251,12 @@ window.KBYG = {
           ] }
       ],
       agenda: [
-        { time: "6:30 AM to 5:00 PM", text: "Conference Check-In and badge pickup", where: "1st floor, MGM Grand Conference Center" },
-        { time: "7:00 to 8:00 AM", text: "Grab-and-go breakfast", where: "Based on your lanyard color" },
+        { time: "6:30 AM to 5:00 PM", text: "Conference Check-In and badge pickup", where: "Grand Pre-Function, 1st floor, MGM Grand Conference Center" },
+        { time: "7:00 to 8:00 AM", text: "Grab-and-go breakfast", where: "MGM Grand Garden Arena" },
         { time: "8:00 to 8:30 AM", text: "Arena doors open, and everyone is seated for the keynote", where: "MGM Grand Garden Arena" },
-        { time: "10:00 AM", text: "Expo Hall and Makers Market open" },
-        { time: "12:30 to 2:00 PM", text: "Lunch", where: "Based on your lanyard color", note: "Lunch is open until 2:00 PM, so a quick bite fits around a session. The Women in Power Networking Luncheon runs at the same time in its own lunch hall. Sign up in Whova" },
-        { time: "5:00 to 7:30 PM", text: "Night Market: Opening Reception", note: "Expo and Makers Market. Women in Power hosts a meetup here too" }
+        { time: "10:00 AM", text: "Expo Hall and Makers Market open", where: "Expo Hall in the Marquee Ballroom, level 1. The Makers Market is just outside, behind it" },
+        { time: "12:30 to 2:00 PM", text: "Lunch", where: "Based on your lanyard color", note: "Lunch is open until 2:00 PM, so a quick bite fits around a session. The Women in Power Networking Luncheon runs at the same time in the Studio Ballroom at the MGM Grand Garden Arena. Sign up in Whova" },
+        { time: "5:00 to 7:30 PM", text: "Conference Opening Reception and Night Market", where: "Expo Hall (Marquee Ballroom), level 1, and just outside behind it", note: "Your badge has a complimentary drink ticket. Women in Power hosts a meetup here too" }
       ],
       evening: "Busiest night for partner events. Hummingbird’s Healthcare & Life Sciences Happy Hour starts at 5:00 PM."
     },
@@ -278,6 +277,8 @@ window.KBYG = {
               tags: ["Copilot Studio", "Agents"] }
           ],
           alts: [
+            { title: "The Meter Is Running: FinOps for Agents in a Consumption World", room: "Room 354", format: "Roundtable", level: "Intermediate",
+              note: "In the same block of rooms, so an easy switch if the panel is full. Bring one real agentic workflow and run a quick FinOps loop: attribute the cost, optimize, quantify the return and decide who owns the number." },
             { title: "Meet Microsoft Autopilot: A Personal, Persistent, Proactive AI Agent for Work", room: "Boulevard Ballroom 163", format: "Session", level: "Foundational",
               note: "Where Microsoft Autopilot fits in the Microsoft AI portfolio, with its capabilities, use cases and demos." },
             { title: "RPA at Scale: What’s New, What’s Next, and What’s Driving Rapid Enterprise Adoption", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
@@ -300,7 +301,7 @@ window.KBYG = {
           alts: [
             { title: "AI Agents Meet Dataverse: Building Intelligent Automations with Microsoft Agent Framework", room: "Grand Ballroom 114", format: "Session", level: "Advanced",
               note: "Watch an agent get built live that queries Dataverse, analyzes customer data and recommends next best actions." },
-            { title: "Governing with Stifling Innovation", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
+            { title: "Governing without Stifling Innovation", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
               note: "Governance signals move earlier into the maker experience, so makers hit fewer blockers late." },
             { title: "The Copilot Compass: Finding True North Across Copilot, Cowork, Scout, and Agents", room: "Chairman’s Ballroom 368", format: "Session", level: "Intermediate",
               note: "A demo-driven guide to choosing the right tool across Copilot, Cowork, Scout and agents." }
@@ -365,12 +366,13 @@ window.KBYG = {
           ] }
       ],
       agenda: [
-        { time: "7:00 AM to 4:00 PM", text: "Conference Check-In and badge pickup", where: "1st floor, MGM Grand Conference Center" },
+        { time: "7:00 AM to 4:00 PM", text: "Conference Check-In and badge pickup", where: "Grand Pre-Function, 1st floor, MGM Grand Conference Center" },
         { time: "7:00 to 8:00 AM", text: "Breakfast", where: "Based on your lanyard color" },
-        { time: "9:00 AM", text: "Expo Hall and Makers Market open" },
+        { time: "9:00 AM", text: "Expo Hall and Makers Market open", where: "Expo Hall in the Marquee Ballroom, level 1. The Makers Market is just outside, behind it" },
         { time: "12:15 to 2:00 PM", text: "Lunch", where: "Based on your lanyard color" },
         { time: "2:00 to 3:00 PM", text: "Women in Power Panel: Owning Your Power, Claiming Your Seat", room: "Boulevard Ballroom 162", note: "Open to everyone; sign up in Whova. Breakout sessions run at the same time" },
-        { time: "4:30 to 6:30 PM", text: "Expo and Makers Market, plus conference T-shirt pick-up" },
+        { time: "4:30 to 5:30 PM", text: "Conference T-shirt pick-up", where: "Expo Hall (Marquee Ballroom), level 1", note: "Your T-shirt ticket is on the back of your badge" },
+        { time: "6:30 PM", text: "Expo Hall and Makers Market close" },
         { time: "8:00 to 10:00 PM", text: "Pitbull live in the MGM Grand Garden Arena", key: true }
       ],
       evening: "Brooksource hosts a healthcare social reception at the Lobby Bar from 5:30 to 7:30 PM. Partner dinners wrap up around the time Pitbull starts, and the arena line is long. Plan your timing."
@@ -428,10 +430,9 @@ window.KBYG = {
         { time: "1:25 to 1:50 PM",
           options: [
             { kind: "rec", badge: "Top Pick",
-              title: "Getting to Know Cowork - Admin and User Overview",
+              title: "Getting to know Cowork - an admin and user overview", room: "Microsoft Theater, Expo Hall",
               why: "A 25-minute introduction to Cowork, with an overview for both admins and users.",
-              where: "Check Whova for the room",
-              note: "It falls during lunch (open 1:00 to 2:30 PM), so you can eat before or after. It is not on the public session list yet.",
+              note: "It is a short talk in the Expo Hall theater, and it falls during lunch (open 1:00 to 2:30 PM), so you can eat before or after. It is not on the public session list, so check the Whova app for the latest details.",
               tags: ["Cowork", "Admin"] }
           ] },
         { time: "2:30 to 3:30 PM",
@@ -450,7 +451,7 @@ window.KBYG = {
               note: "When should people work in an app, talk to an agent or use both? Covers generative pages, embedded copilots and human-in-the-loop workflows, and you can bring your own scenarios." },
             { title: "Beyond Time Savings: Rethinking ROI and Value for Persistent AI Agents", room: "Room 353", format: "Roundtable", level: "Foundational",
               note: "A roundtable on judging the value of always-on AI agents beyond hours saved, including better decisions, scaled expertise and consumption costs." },
-            { title: "Building on Power Platform: Choosing the Right Tool for the Job", room: "Boulevard Ballroom 163", format: "Session", level: "Intermediate",
+            { title: "Building on Power Platform: Choosing the Right Tool for the Job", room: "Premier Ballroom 318", format: "Session", level: "Intermediate",
               note: "A practical guide to choosing the right tool, from Code Apps and Generative Pages to vibe apps, and moving between AI-assisted creation and pro-code precision." },
             { title: "Governance of All Your Agents at Scale", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
               note: "Agent 365 governance from admin-led to autonomous: the signals that keep agent risk, approvals, usage, cost and health under control." },
@@ -459,10 +460,10 @@ window.KBYG = {
           ] }
       ],
       agenda: [
-        { time: "7:00 AM to 4:00 PM", text: "Conference Check-In and badge pickup", where: "1st floor, MGM Grand Conference Center" },
+        { time: "7:30 AM to 4:00 PM", text: "Conference Check-In and badge pickup", where: "Grand Pre-Function, 1st floor, MGM Grand Conference Center" },
         { time: "7:30 to 8:45 AM", text: "Breakfast", where: "Based on your lanyard color" },
         { time: "8:45 to 9:00 AM", text: "Everyone is seated for the keynote", where: "MGM Grand Garden Arena" },
-        { time: "10:00 AM", text: "Expo Hall and Makers Market open" },
+        { time: "10:00 AM", text: "Expo Hall and Makers Market open", where: "Expo Hall in the Marquee Ballroom, level 1. The Makers Market is just outside, behind it" },
         { time: "10:45 to 11:45 AM", text: "Women in Power roundtable: Make Your Network Your Net Worth", room: "Room 351", note: "Open to everyone; sign up in Whova" },
         { time: "1:00 to 2:30 PM", text: "Lunch", where: "Based on your lanyard color" },
         { time: "2:30 PM", text: "Expo Hall and Makers Market close" }
@@ -608,9 +609,9 @@ window.KBYG = {
       regNote: "No public link yet." },
 
     { id: "night-market", day: "2026-10-27", start: "17:00", end: "19:30",
-      title: "Night Market: Opening Reception", host: "Power Platform Community Conference", hostUrl: "https://powerplatformconf.com",
-      venue: "Expo and Makers Market", kind: "Reception", audience: "official", access: "badge",
-      summary: "The conference’s official opening reception in the Expo and Makers Market. A natural first stop before a partner event." },
+      title: "Conference Opening Reception and Night Market", host: "Power Platform Community Conference", hostUrl: "https://powerplatformconf.com",
+      venue: "Expo Hall (Marquee Ballroom), level 1, plus the Night Market just outside", kind: "Reception", audience: "official", access: "badge",
+      summary: "The official opening reception, sponsored by AvePoint, EY and HCLTech, with time to meet sponsors and exhibitors and a complimentary drink (the ticket is behind your badge). The Night Market runs at the same time just outside, with food, drinks, games and music. A natural first stop before a partner event." },
 
     /* ---- Wednesday ---- */
     /* Featured Wednesday: 5:30 to 7:30 PM Pacific (PDT). The host confirmed it on Oct 12 and the host's flyer (Oct 16) shows the same time and place.
@@ -704,8 +705,8 @@ window.KBYG = {
 
     { id: "wed-expo", day: "2026-10-28", start: "16:30", end: "18:30",
       title: "Expo and Makers Market, plus T-shirt pick-up", host: "Power Platform Community Conference", hostUrl: "https://powerplatformconf.com",
-      venue: "Expo and Makers Market", kind: "Expo", audience: "official", access: "badge",
-      summary: "The last evening window to browse partner booths and collect your conference T-shirt." },
+      venue: "Expo Hall (Marquee Ballroom), level 1", kind: "Expo", audience: "official", access: "badge",
+      summary: "The last evening window to browse partner booths, open until 6:30 PM. Conference T-shirt pick-up runs 4:30 to 5:30 PM, and your ticket is on the back of your badge." },
 
     /* Official headliner. The start time and venue are listed on powerplatformconf.com. */
     { id: "pitbull", featured: true, day: "2026-10-28", start: "20:00", end: "22:00",
@@ -720,14 +721,14 @@ window.KBYG = {
       regNote: "Included with a full conference pass. Your PPCC badge is required for entry, guests and plus-ones are not allowed, and security will be tightly monitored." },
 
     /* ---- Monday: official evening activity ---- */
-    /* Official PPCC build-a-thon. Sources: the Whova app listing and the Oct 20 conference team briefing (6:30 to 9:30 PM, doors open at 6:00 PM, bring a solution you
-       want to build and get help from experts, with a DJ, games, prizes and food). The room is posted in the Whova app only, so none is shown here. */
+    /* Official PPCC build-a-thon. Sources: the Whova app listing (6:30 to 9:30 PM, Rooms 350 to 352, space limited to registered participants, bring a laptop, heavy appetizers)
+       and the Oct 20 conference team briefing (doors open at 6:00 PM). Oct 22: synced with Whova, which now posts the rooms and the attendance rule. */
     { id: "buildathon", day: "2026-10-26", start: "18:30", end: "21:30",
       title: "Feel the Power Build-a-thon", host: "Power Platform Community Conference", hostUrl: "https://powerplatformconf.com",
-      venue: "Posted in the Whova app", kind: "Build-a-thon", audience: "official", access: "app",
-      summary: "An official Monday evening build-a-thon. Bring a solution you want to build and get hands-on help from experts, with a DJ, games, prizes and food. Doors open at 6:00 PM.",
-      tip: "Find it in the Whova app and add it to your agenda. Monday badge pickup runs until 5:00 PM, so you can collect your badge before the doors open.",
-      regNote: "Find it in the Whova app and add it to your agenda." },
+      venue: "Rooms 350 to 352", kind: "Build-a-thon", audience: "official", access: "app", limit: "Registered participants only",
+      summary: "An official Monday evening build-a-thon with Microsoft AI experts. Build apps, spin up agents and automate the boring stuff, with no slides and no scripted labs. Bring your laptop, and use a personal device if you can, especially in regulated industries. Heavy appetizers are provided, and doors open at 6:00 PM.",
+      tip: "Space is limited to registered participants, so register in the Whova app. Monday badge pickup runs until 5:00 PM, so you can collect your badge before the doors open.",
+      regNote: "Space is limited to registered participants. Register in the Whova app." },
 
     /* ---- Monday: hosted dinners ---- */
     { id: "root16-dinner-mon", day: "2026-10-26", start: "19:00", end: "21:00",
@@ -876,7 +877,7 @@ window.KBYG = {
     { q: "How early should I get to the Opening Keynote?",
       a: "Plan to be seated 30 to 45 minutes before the 8:30 AM start. Doors open at 8:00 AM, and once the arena fills they do not allow standing in the corridors. You need your badge to enter." },
     { q: "Where is lunch?",
-      a: "Lunch is included Tuesday through Thursday. In past years, lanyard color pointed to your lunch location, so ask at check-in. On workshop days, lunch is included only with a full-day workshop." },
+      a: "Lunch is included Tuesday through Thursday. Your lanyard color shows where to eat: purple, Marquee Ballroom (the Expo Hall), level 1; brown, Terrace Ballroom, level 1; teal, North Pavilion, outside, level 1; white, Chairman’s Ballroom, level 3; red, the Studio at the Grand Garden Arena. Wednesday and Thursday breakfast works the same way, and Tuesday breakfast is grab-and-go at the Grand Garden Arena. On workshop days, lunch is included only with a full-day workshop." },
     { q: "What is the dress code?",
       a: "Business casual at most, and plenty of people dress casually. Comfortable shoes matter more than anything else." },
     { q: "Can I bring a guest to the Pitbull concert?",
