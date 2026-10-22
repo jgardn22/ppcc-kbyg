@@ -396,7 +396,7 @@
     before: 'A checklist with live deadlines. Your progress saves on this device.',
     ground: 'Venue maps you can zoom, badge pickup, the keynote-morning route, tips for getting around the MGM Grand and optional partner sessions.',
     evenings: 'Healthcare happy hours first, then every open event, with a Tuesday overlap timeline.',
-    exec: 'Optional VIP experiences for senior leaders and how to register. Official track details are coming soon.',
+    exec: 'The official Executive Experience agenda, plus separate optional VIP experiences with Lateetud and how to register.',
     days: 'Our healthcare session picks, one day at a time, with two options for most time slots.',
     faq: 'Official answers and the links worth bookmarking.'
   };
@@ -634,7 +634,7 @@
       any = true;
       root.append(h('section', { class: 'day-group', 'aria-label': 'Executive experiences' },
         h('h3', { class: 'day-title' }, 'Executive experiences', h('small', {}, 'VP and C-suite · access code')),
-        h('p', { class: 'day-pointer' }, `The access code, how to register and the ${fmtMD(D.exec.lateetud.deadline)} deadline are on the `, h('a', { href: '#exec' }, 'Executive Experience tab'), '.'),
+        h('p', { class: 'day-pointer' }, `These are separate from the official Executive Experience track. The access code, how to register and the ${fmtMD(D.exec.lateetud.deadline)} deadline are on the `, h('a', { href: '#exec' }, 'Executive Experience tab'), '.'),
         exec.map(evRow)));
     }
     const pend = evs.filter(e => e.group === 'pending');
@@ -958,16 +958,37 @@
         h('p', {}, e.summary)));
   }
 
+  // who is one name or a list of names, shown on separate lines
+  function execTrackRow(r) {
+    const who = r.who == null ? [] : [].concat(r.who);
+    return h('li', { class: 'xt-row' + (r.soft ? ' soft' : '') },
+      h('span', { class: 'xt-time' }, r.time),
+      h('div', { class: 'xt-what' },
+        h('b', { class: 'xt-title' }, r.title),
+        who.length ? h('span', { class: 'xt-who' }, who.map(w => h('span', {}, w))) : null,
+        r.where ? h('span', { class: 'xt-where' }, icon('pin', 13), h('span', { class: 'sr-only' }, 'Location: '), r.where) : null));
+  }
+
+  function execTrack(o) {
+    return h('section', { class: 'xtrack', 'aria-labelledby': 'exec-official-h' },
+      h('div', { class: 'xhead' },
+        h('h3', { id: 'exec-official-h' }, o.title),
+        h('span', { class: 'tag exec' }, o.badge)),
+      h('p', { class: 'xintro' }, o.intro),
+      h('div', { class: 'xt-days' }, o.days.map(d =>
+        h('section', { class: 'xt-day ' + d.id, 'aria-labelledby': 'xt-' + d.id + '-h' },
+          h('div', { class: 'xt-day-top' },
+            h('h4', { id: 'xt-' + d.id + '-h' }, d.label),
+            h('span', { class: 'xday' }, d.date)),
+          h('ol', { class: 'xt-rows' }, d.rows.map(execTrackRow))))),
+      h('p', { class: 'xt-note' }, o.note, ' ', o.tz));
+  }
+
   function renderExec() {
     const x = D.exec, o = x.official, lat = x.lateetud;
     const dl = execDeadline(lat.deadline);
 
-    $('#exec-official').append(
-      h('section', { class: 'xsoon', 'aria-labelledby': 'exec-official-h' },
-        h('p', { class: 'soon-badge' }, h('span', { class: 'dot', 'aria-hidden': 'true' }), 'Coming soon'),
-        h('h3', { id: 'exec-official-h' }, o.title),
-        h('p', {}, o.text),
-        o.note ? h('p', { class: 'xsoon-note' }, o.note) : null));
+    $('#exec-official').append(execTrack(o));
 
     $('#exec-lateetud').append(
       h('div', { class: 'xhead' },

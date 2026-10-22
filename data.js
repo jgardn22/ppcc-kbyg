@@ -5,7 +5,7 @@
    Times are Pacific (Las Vegas). Dates are ISO (YYYY-MM-DD).
    ============================================================ */
 window.KBYG = {
-  updated: "2026-10-20",
+  updated: "2026-10-21",
 
   conference: {
     name: "Power Platform Community Conference",
@@ -278,8 +278,6 @@ window.KBYG = {
               tags: ["Copilot Studio", "Agents"] }
           ],
           alts: [
-            { title: "The Meter Is Running: FinOps for Agents in a Consumption World", room: "Room 354", format: "Roundtable", level: "Intermediate",
-              note: "In the same block of rooms, so an easy switch if the panel is full. Bring one real agentic workflow and run a quick FinOps loop: attribute the cost, optimize, quantify the return and decide who owns the number." },
             { title: "Meet Microsoft Autopilot: A Personal, Persistent, Proactive AI Agent for Work", room: "Boulevard Ballroom 163", format: "Session", level: "Foundational",
               note: "Where Microsoft Autopilot fits in the Microsoft AI portfolio, with its capabilities, use cases and demos." },
             { title: "RPA at Scale: What’s New, What’s Next, and What’s Driving Rapid Enterprise Adoption", room: "Grand Ballroom 119", format: "Session", level: "Intermediate",
@@ -302,7 +300,7 @@ window.KBYG = {
           alts: [
             { title: "AI Agents Meet Dataverse: Building Intelligent Automations with Microsoft Agent Framework", room: "Grand Ballroom 114", format: "Session", level: "Advanced",
               note: "Watch an agent get built live that queries Dataverse, analyzes customer data and recommends next best actions." },
-            { title: "Managed Governance: Governing Copilot Studio Without Killing Innovation", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
+            { title: "Governing with Stifling Innovation", room: "Boulevard Ballroom 162", format: "Session", level: "Intermediate",
               note: "Governance signals move earlier into the maker experience, so makers hit fewer blockers late." },
             { title: "The Copilot Compass: Finding True North Across Copilot, Cowork, Scout, and Agents", room: "Chairman’s Ballroom 368", format: "Session", level: "Intermediate",
               note: "A demo-driven guide to choosing the right tool across Copilot, Cowork, Scout and agents." }
@@ -310,7 +308,7 @@ window.KBYG = {
         { time: "11:30 AM to 12:30 PM",
           options: [
             { kind: "key", badge: "Innovation Talk",
-              title: "Innovation Session: Transforming the way your business operates: Agents, Data, Work IQ, and Agent 365", room: "MGM Grand Garden Arena", format: "Innovation Talk",
+              title: "Innovation Session: Transforming the Way Your Business Operates: Agents, Data, Work IQ, and Agent 365", room: "MGM Grand Garden Arena", format: "Innovation Talk",
               why: "Nirav Shah, who leads Agent 365 and Agent Cloud, lays out the operating model of a Frontier Firm. It starts with Dataverse and Power Platform, then adds Work IQ for business context, Copilot Studio for building agents and Agent 365 for visibility and control. You see agents take the next approved step in a real business process, live, with governance built in.",
               note: "In the Garden Arena, a walk from the Conference Center, so leave a few extra minutes.",
               tags: ["Agent 365", "Work IQ"] },
@@ -349,7 +347,7 @@ window.KBYG = {
         { time: "3:30 to 4:30 PM",
           options: [
             { kind: "key", badge: "Fireside chat",
-              title: "Building What’s Next: A Fireside Chat with Jeff Teper, EVP, Apps and Agents", room: "Boulevard Ballroom 162", format: "Session", level: "Foundational",
+              title: "Building What’s Next: A Fireside Chat with Jeff Teper, EVP, Apps and Agents", room: "Boulevard Ballroom 163", format: "Session", level: "Foundational",
               why: "A candid conversation with Jeff Teper, EVP of Apps and Agents, about AI, community and where technology is heading.",
               tags: ["Leadership", "Roadmap"] },
             { kind: "rec", badge: "Top Alternative",
@@ -788,12 +786,53 @@ window.KBYG = {
   exec: {
     official: {
       title: "Official PPCC Executive Experience track",
-      text: "The official PPCC Executive Experience is an invitation-only track for senior leaders. Its agenda and details are coming soon, and we will add them here as soon as they are confirmed.",
-      note: "Already invited? Watch your email for calendar invitations and programming details from the Executive Experience team."
+      badge: "Invitation only",
+      intro: "The official PPCC Executive Experience is an invitation-only track for senior leaders. Information on the Executive Experience track has been sent out to the executives who were accepted into that program. The agenda is shown here for reference.",
+      note: "Already invited? Watch your email for calendar invitations and programming details from the Executive Experience team, and follow their updates, because times and details can change.",
+      tz: "Times are Pacific (Las Vegas).",
+      days: [
+        { id: "mon", label: "Monday", date: "Oct 26", rows: [
+          { time: "7:00 to 9:00 PM", title: "Welcome Reception", where: "Morimoto" }
+        ] },
+        { id: "tue", label: "Tuesday", date: "Oct 27", rows: [
+          { time: "7:00 to 8:00 AM", title: "Breakfast", where: "District Commons" },
+          { time: "8:30 to 10:00 AM", title: "Conference Keynote", who: "Charles Lamanna & Ryan Cunningham", where: "Grand Garden Arena" },
+          { time: "10:00 to 10:45 AM", title: "Break", where: "Executive Lounge", soft: true },
+          { time: "10:45 to 10:55 AM", title: "Executive Experience Welcome", who: "Executive Experience host" },
+          { time: "10:55 to 11:10 AM", title: "Welcome to the Next Frontier", who: "Executive Experience host" },
+          { time: "11:10 to 11:30 AM", title: "Markel’s Journey to Frontier", who: "Maureen Tomlinson, Markel" },
+          { time: "11:30 AM to 12:00 PM", title: "Innovation Strategy", who: "Dave Milton" },
+          { time: "12:00 to 1:00 PM", title: "Lunch", where: "Executive Lounge" },
+          { time: "1:15 to 1:45 PM", title: "Managing an Agentic Workforce", who: ["Nirav Shah, CVP A365", "Kendra Springer"] },
+          { time: "1:45 to 2:15 PM", title: "The Currency of Intelligence: Tokens, Costs & Controls", who: "Eric Simonson" },
+          { time: "2:15 to 2:45 PM", title: "Break", where: "Executive Lounge", soft: true },
+          { time: "2:45 to 3:15 PM", title: "Transforming Work with Copilot Cowork", who: "Bas Brekelmans" },
+          { time: "3:15 to 4:00 PM", title: "Fireside Chat", who: "Ryan Cunningham" },
+          { time: "4:00 to 4:15 PM", title: "Closing", who: "Executive Experience host" },
+          { time: "4:15 to 5:00 PM", title: "Lounge Open", where: "Executive Lounge", soft: true },
+          { time: "4:55 to 9:45 PM", title: "Choose your own Adventure", where: "Location & time based on selection" }
+        ] },
+        { id: "wed", label: "Wednesday", date: "Oct 28", rows: [
+          { time: "7:00 to 8:00 AM", title: "Breakfast", where: "District Commons" },
+          { time: "8:00 to 9:00 AM", title: "Select your Track: Industry Sessions or Roundtables" },
+          { time: "9:00 to 10:00 AM", title: "Break", where: "Executive Lounge, Expo or Makers Market", soft: true },
+          { time: "10:00 to 11:00 AM", title: "Select your Track: Industry Sessions & Roundtables" },
+          { time: "11:00 to 11:30 AM", title: "Break", where: "Executive Lounge, Expo or Makers Market", soft: true },
+          { time: "11:30 AM to 12:30 PM", title: "Select your Track: Industry Sessions & Roundtables" },
+          { time: "12:45 to 2:00 PM", title: "Lunch", where: "Luchini" },
+          { time: "2:15 to 3:00 PM", title: "Engineering Panel", who: "Tiffany Treacy, Srini Raghavan, Jason Moore" },
+          { time: "3:00 to 3:45 PM", title: "Ready, Set, Scale: Lessons Learned & Best Practices", who: "David Sarjantson & Customer Panel" },
+          { time: "3:45 to 4:15 PM", title: "Break", where: "Executive Lounge", soft: true },
+          { time: "4:15 to 4:45 PM", title: "Becoming Firms of the Future", who: "Phil Topness & Executive Experience host" },
+          { time: "4:45 to 5:00 PM", title: "Executive Experience Closing" },
+          { time: "6:30 to 8:15 PM", title: "Dinner", where: "The Mansion" },
+          { time: "8:30 to 10:00 PM", title: "Closing Event Experience: Pitbull Concert", where: "Grand Garden Arena" }
+        ] }
+      ]
     },
     lateetud: {
       title: "Executive experiences with Lateetud",
-      intro: "Hosted by Microsoft and Lateetud for a small group of VP and C-suite leaders. There is no presentation and no formal agenda. Each experience is a memorable way to step away from the conference floor and exchange ideas with fellow leaders. Space is limited.",
+      intro: "These experiences are separate from the official PPCC Executive Experience track above and are not part of it. You must register with Lateetud in advance. Hosted by Microsoft and Lateetud for a small group of VP and C-suite leaders. There is no presentation and no formal agenda. Each experience is a memorable way to step away from the conference floor and exchange ideas with fellow leaders. Space is limited.",
       registerUrl: "https://mppcc2026.lateetud.com/",
       registerLabel: "Open the VIP registration page",
       code: "3UPQV",
@@ -809,7 +848,7 @@ window.KBYG = {
     notesTitle: "Good to know",
     notes: [
       "Full details for each experience are on the registration page once you enter your code.",
-      "Also invited to the official Executive Experience track? Compare its agenda with these dates before you choose. We will post it here when it is ready.",
+      "Also invited to the official Executive Experience track? Compare the agenda above with these dates before you choose.",
       "Times are Pacific (Las Vegas)."
     ],
     fineprint: "Details come from Lateetud and Microsoft and can change. Confirm with your Microsoft account team before you go."
